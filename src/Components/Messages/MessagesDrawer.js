@@ -42,7 +42,12 @@ export function MessagesDrawer() {
 }
 export function MessagesDrawerResponsive() {
   return (
-    <DialogDrawer buttonName="MESSAGES" dialogTitle="Messages"></DialogDrawer>
+    <DialogDrawer buttonName="MESSAGES" dialogTitle="Messages">
+      <MessageItem avatar="FB" name="Fhillip Bagsic" />
+      <MessageItem avatar="AM" name="Amiel Morilla" />
+      <MessageItem avatar="KD" name="Kenneth Dela Cruz" />
+      <MessageItem avatar="CP" name="Carl Daniel Patio" />
+    </DialogDrawer>
   );
 }
 // returns the title of the left drawer

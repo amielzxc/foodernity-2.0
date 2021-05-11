@@ -128,11 +128,20 @@ export function RequestDrawer() {
   );
 }
 export function RequestDrawerResponsive() {
+  const classes = useStyles();
   return (
-    <DialogDrawer
-      buttonName="DONATION REQUEST"
-      dialogTitle="Donation Request"
-    ></DialogDrawer>
+    <DialogDrawer buttonName="DONATION REQUEST" dialogTitle="Donation Request">
+      <DonationName />
+      <DistanceFromDonee />
+      <ChipCategory />
+      <DonationQuantity />
+      <DonationExpiry />
+      <DonationNotes />
+      <DonationPickupDetails />
+      <Divider className={classes.divider_margin} />
+      <DeclineButton />
+      <ApproveButton />
+    </DialogDrawer>
   );
 }
 // returns the title of the right drawer
