@@ -137,7 +137,18 @@ function ReportButton() {
 // returns the photos of the donation
 function DonationImages(props) {
   const classes = useStyles();
-  //const [image, setimage] = useState(0);
+  const image = [
+    "http://cdn.shopify.com/s/files/1/2713/3026/products/lucky-me-pancit-canton-chilli-mansi-instant-noodles-60g-65-p_600x.jpg?v=1545281033",
+    "https://www.sarisaristore.se/637-large_default/lucky-me-pancit-canton.jpg",
+    "https://cdn.shopify.com/s/files/1/0338/0694/2253/products/LuckyMePancitCantonSweetSpicy2.12oz_Front_ade288b8-bf42-4de6-ae27-e794a40b6b8a_758x659.jpg?v=1585674364",
+    "https://i.imgur.com/4UuWKk4.png",
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  const handleChangeImage = (index) => {
+    setIndex(index);
+  };
 
   return (
     <Grid
@@ -151,7 +162,63 @@ function DonationImages(props) {
       <Typography variant="h6" className={classes.container__title}>
         Donation Images
       </Typography>
-      <Paper className={classes.container__paper}></Paper>
+      <Paper className={classes.container__paper}>
+        <img
+          src={image[index]}
+          alt="pancit canton"
+          className={classes.image__mainPreview}
+        />
+        <div className={classes.container__subImages}>
+          <div
+            className={classes.image__subImage}
+            onClick={() => {
+              handleChangeImage(0);
+            }}
+          >
+            <img
+              src={image[0]}
+              alt="donation-image1"
+              className={classes.image__sub}
+            />
+          </div>
+          <div
+            className={classes.image__subImage}
+            onClick={() => {
+              handleChangeImage(1);
+            }}
+          >
+            <img
+              src={image[1]}
+              alt="donation-image2"
+              className={classes.image__sub}
+            />
+          </div>
+          <div
+            className={classes.image__subImage}
+            onClick={() => {
+              handleChangeImage(2);
+            }}
+          >
+            <img
+              src={image[2]}
+              alt="donation-image3"
+              className={classes.image__sub}
+            />
+          </div>
+          <div
+            className={classes.image__subImage}
+            onClick={() => {
+              handleChangeImage(3);
+            }}
+          >
+            <img
+              src={image[3]}
+              alt="donation-image4"
+              className={classes.image__sub}
+            />
+          </div>
+        </div>
+      </Paper>
     </Grid>
   );
 }
@@ -264,8 +331,7 @@ function Pickup() {
     <>
       <div className={classes.container__pickup}>
         <LocationOnIcon
-          className={`${classes.icon_pickup} `}
-          style={{ color: "#66BB6A" }}
+          className={`${classes.icon_pickup} ${classes.icon__location_green}`}
         />
         <Typography>
           Pick up location is around{" "}
@@ -336,6 +402,26 @@ const useStyles = makeStyles((theme) => ({
   avatar__color: {
     backgroundColor: deepOrange[500],
     marginRight: "10px",
+  },
+  image__mainPreview: {
+    width: "100%",
+    height: "450px",
+  },
+  container__subImages: {
+    display: "flex",
+    justifyContent: "flex-start",
+    width: "100%",
+    height: "100px",
+  },
+  image__subImage: {
+    width: "25%",
+    padding: "3px",
+    cursor: "pointer",
+  },
+  image__sub: {
+    width: "100%",
+    height: "100%",
+    borderRadius: theme.spacing(0.5),
   },
   container__distanceAway: {
     display: "flex",

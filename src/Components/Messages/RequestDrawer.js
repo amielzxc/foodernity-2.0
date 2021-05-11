@@ -43,33 +43,46 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: "bold",
-    margin: "5px 0",
+    margin: theme.spacing(0.5, 0),
+  },
+  container__donationDetails: {
+    height: "70%",
+    overflowY: "auto",
   },
   container__distance: {
     display: "flex",
-    margin: "5px 0",
+    margin: theme.spacing(0.5, 0),
   },
   container__category: {
     display: "flex",
-    margin: "10px 0",
+    margin: theme.spacing(1, 0),
     overflowX: "auto",
+  },
+  container__quantity: {
+    margin: theme.spacing(0.5, 0),
+  },
+  container__expiry: {
+    margin: theme.spacing(0.5, 0),
+  },
+  container__notes: {
+    margin: theme.spacing(0.6, 0),
   },
   container__pickup: {
     display: "flex",
     alignItems: "center",
-    margin: "10px 0",
+    margin: theme.spacing(1, 0),
   },
   icon__location: {
     color: "#66BB6A",
-    marginRight: "3px",
+    marginRight: theme.spacing(0.5),
   },
   icon__date: {
     color: "#FFA726",
-    marginRight: "3px",
+    marginRight: theme.spacing(0.5),
   },
   icon__time: {
     color: "#AB47BC",
-    marginRight: "3px",
+    marginRight: theme.spacing(0.5),
   },
 }));
 //returns a drawer that is placed on the left side of the website.
@@ -89,17 +102,27 @@ export function RequestDrawer() {
       <div className={classes.drawer__container}>
         <Title />
         <Divider className={classes.divider_margin} />
-        <DonationName />
-        <DistanceFromDonee />
-        <ChipCategory />
-        <DonationQuantity />
-        <DonationExpiry />
-        <DonationNotes />
-        <DonationPickupDetails />
-        <Divider className={classes.divider_margin} />
+        <div className={classes.container__donationDetails}>
+          <DonationName />
+          <DistanceFromDonee />
+          <ChipCategory />
+          <DonationQuantity />
+          <DonationExpiry />
+          <DonationNotes />
+          <DonationPickupDetails />
+        </div>
         {/* <CancelButton /> */}
-        <DeclineButton />
-        <ApproveButton />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <Divider className={classes.divider_margin} />
+          <DeclineButton />
+          <ApproveButton />
+        </div>
       </div>
     </Drawer>
   );
@@ -163,29 +186,33 @@ function ChipCategory() {
 function DonationQuantity() {
   const classes = useStyles();
   return (
-    <Typography>
-      <span className={classes.text_bold}>Quantity:</span> 5 pieces
-    </Typography>
+    <div className={classes.container__quantity}>
+      <Typography>
+        <span className={classes.text_bold}>Quantity:</span> 5 pieces
+      </Typography>
+    </div>
   );
 }
 function DonationExpiry() {
   const classes = useStyles();
   return (
-    <Typography>
-      <span className={classes.text_bold}>Expiry date:</span> June 07, 2021
-    </Typography>
+    <div className={classes.container__expiry}>
+      <Typography>
+        <span className={classes.text_bold}>Expiry date:</span> June 07, 2021
+      </Typography>
+    </div>
   );
 }
 function DonationNotes() {
   const classes = useStyles();
   return (
-    <>
+    <div className={classes.container__notes}>
       <Typography className={classes.text_bold}>Donation Notes</Typography>
       <Typography>
         If you are interested, text me on my number 09123456789 or message me
         instead here.
       </Typography>
-    </>
+    </div>
   );
 }
 

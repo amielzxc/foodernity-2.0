@@ -11,7 +11,34 @@ import MainContainer from "../Common/MainContainer";
 import { MessagesDrawerResponsive } from "./MessagesDrawer";
 import { RequestDrawerResponsive } from "./RequestDrawer";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  container__responsive: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  container__sender: {
+    maxWidth: "400px",
+    backgroundColor: "#42A5F5",
+    padding: "10px",
+    margin: "1px",
+    borderRadius: "2px 10px 10px 10px",
+  },
+  text__sender: {
+    margin: "0",
+    color: "white",
+  },
+  container__receiver: {
+    maxWidth: "400px",
+    backgroundColor: "white",
+    padding: "10px",
+    margin: "1px",
+    borderRadius: "10px 2px 10px 10px",
+  },
+  text__receiver: {
+    margin: "0",
+    color: "black",
+  },
+}));
 
 function MessageContainer() {
   const receivermessage1 = "Hello!";
@@ -26,67 +53,72 @@ function MessageContainer() {
     "Sige. I-text mo nalang ako 09123456789 number ko globe yan";
   const receivermessage6 = "Ok salamat";
 
+  const classes = useStyles();
   const theme = useTheme();
   const responsiveLayout = useMediaQuery(theme.breakpoints.down("sm"));
   const responsiveLayout2 = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    //<div style={{ height: "100vh", width: "100%" }}>
     <MainContainer>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "10px",
-        }}
-      >
+      <div className={classes.container__responsive}>
         {responsiveLayout ? <MessagesDrawerResponsive /> : null}
         {responsiveLayout2 ? <RequestDrawerResponsive /> : null}
       </div>
-      <ReceiverMessage message={receivermessage1} />
-      <ReceiverMessage message={receivermessage2} />
-      <SenderMessage message={sendermessage1} />
-      <SenderMessage message={sendermessage2} />
-      <ReceiverMessage message={receivermessage3} />
-      <SenderMessage message={sendermessage3} />
-      <ReceiverMessage message={receivermessage4} />
-      <ReceiverMessage message={receivermessage5} />
-      <SenderMessage message={sendermessage4} />
-      <ReceiverMessage message={receivermessage6} />
-      <MessageInput />
-    </MainContainer>
-    //</div>
-  );
-}
-function ReceiverMessage(props) {
-  return (
-    <Grid container justify="flex-start">
       <div
         style={{
-          maxWidth: "400px",
-          backgroundColor: "white",
-          padding: "10px",
-          margin: "1px",
-          borderRadius: "10px 2px 10px 10px",
+          height: "82%",
+          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column-reverse",
         }}
       >
-        <p style={{ margin: "0", color: "black" }}>{props.message}</p>
+        <ReceiverMessage message={receivermessage1} />
+        <ReceiverMessage message={receivermessage2} />
+        <SenderMessage message={sendermessage1} />
+        <SenderMessage message={sendermessage2} />
+        <ReceiverMessage message={receivermessage3} />
+        <SenderMessage message={sendermessage3} />
+        <ReceiverMessage message={receivermessage4} />
+        <ReceiverMessage message={receivermessage5} />
+        <SenderMessage message={sendermessage4} />
+        <ReceiverMessage message={receivermessage6} />
+        <ReceiverMessage message={receivermessage1} />
+        <ReceiverMessage message={receivermessage2} />
+        <ReceiverMessage message={receivermessage1} />
+        <ReceiverMessage message={receivermessage2} />
+        <SenderMessage message={sendermessage1} />
+        <SenderMessage message={sendermessage2} />
+        <ReceiverMessage message={receivermessage3} />
+        <SenderMessage message={sendermessage3} />
+        <ReceiverMessage message={receivermessage4} />
+        <ReceiverMessage message={receivermessage5} />
+        <SenderMessage message={sendermessage4} />
+        <ReceiverMessage message={receivermessage6} />
+        <ReceiverMessage message={receivermessage1} />
+        <ReceiverMessage message={receivermessage2} />
+      </div>
+      <div style={{ height: "8%", marginTop: "15px" }}>
+        <MessageInput />
+      </div>
+    </MainContainer>
+  );
+}
+
+function ReceiverMessage(props) {
+  const classes = useStyles();
+  return (
+    <Grid container justify="flex-start">
+      <div className={classes.container__receiver}>
+        <p className={classes.text__receiver}>{props.message}</p>
       </div>
     </Grid>
   );
 }
 function SenderMessage(props) {
+  const classes = useStyles();
   return (
     <Grid container justify="flex-end">
-      <div
-        style={{
-          maxWidth: "400px",
-          backgroundColor: "#42A5F5",
-          padding: "10px",
-          margin: "1px",
-          borderRadius: "2px 10px 10px 10px",
-        }}
-      >
-        <p style={{ margin: "0", color: "white" }}>{props.message}</p>
+      <div className={classes.container__sender}>
+        <p className={classes.text__sender}>{props.message}</p>
       </div>
     </Grid>
   );
@@ -94,10 +126,10 @@ function SenderMessage(props) {
 
 function MessageInput() {
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
       <TextField label="Send message..." variant="outlined" fullWidth />
       <IconButton>
-        <SendIcon />
+        <SendIcon color="primary" />
       </IconButton>
     </div>
   );

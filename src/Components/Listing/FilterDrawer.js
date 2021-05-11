@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   title: {
-    marginTop: "5px",
+    margin: theme.spacing(0.5, 0),
   },
   container__location: {
     display: "flex",

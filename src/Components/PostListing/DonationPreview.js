@@ -6,36 +6,96 @@ import ScheduleIcon from "@material-ui/icons/Schedule";
 import MapImage from "../Listing/pickup_map.png";
 
 const useStyles = makeStyles((theme) => ({
-  details: {
+  container: {
     maxWidth: "700px",
     height: "100%",
     padding: theme.spacing(1, 3),
   },
-  paper: {
+  container__paper: {
     padding: theme.spacing(2.5),
+  },
+  text_bold: {
+    fontWeight: "bold",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: "10px",
+  },
+  image__mainPreview: {
+    width: "100%",
+    height: "450px",
+  },
+  container__subImages: {
+    display: "flex",
+    justifyContent: "flex-start",
+    width: "100%",
+    height: "100px",
+  },
+  image__subImage: {
+    width: "25%",
+    padding: "3px",
+    cursor: "pointer",
+  },
+  image__sub: {
+    width: "100%",
+    height: "100%",
+    borderRadius: theme.spacing(0.5),
+  },
+  container__distanceAway: {
+    display: "flex",
+    margin: "5px 0",
+  },
+  container__chipCategory: {
+    display: "flex",
+    margin: "10px 0",
+  },
+  image__map: {
+    height: "200px",
+    width: "100%",
+  },
+  container__pickup: {
+    display: "flex",
+    alignItems: "center",
+    margin: "10px 0",
+  },
+  icon_pickup: {
+    marginRight: theme.spacing(0.5),
+  },
+  icon__location_green: {
+    color: "#66BB6A",
+  },
+  text__address_highlighted: {
+    fontWeight: "bold",
+    color: "#2196F3",
+  },
+  icon__date_orange: {
+    color: "#FFA726",
+  },
+  icon__time_purple: {
+    color: "#AB47BC",
   },
 }));
 // returns the donation's photos and details
 function DonationPreview() {
-  const classes = useStyles();
-
   return (
     <Grid container justify="center">
-      <DonationImages className={classes.details} paper={classes.paper} />
-      <DonationDetails className={classes.details} paper={classes.paper} />
+      <DonationImages />
+      <DonationDetails />
     </Grid>
   );
 }
 // returns the photos of the donation
 function DonationImages(props) {
-  const [image, setImage] = useState([
+  const classes = useStyles();
+  const image = [
     "http://cdn.shopify.com/s/files/1/2713/3026/products/lucky-me-pancit-canton-chilli-mansi-instant-noodles-60g-65-p_600x.jpg?v=1545281033",
     "https://www.sarisaristore.se/637-large_default/lucky-me-pancit-canton.jpg",
     "https://cdn.shopify.com/s/files/1/0338/0694/2253/products/LuckyMePancitCantonSweetSpicy2.12oz_Front_ade288b8-bf42-4de6-ae27-e794a40b6b8a_758x659.jpg?v=1585674364",
     "https://i.imgur.com/4UuWKk4.png",
-  ]);
+  ];
 
   const [index, setIndex] = useState(0);
+
   const handleChangeImage = (index) => {
     setIndex(index);
   };
@@ -47,63 +107,32 @@ function DonationImages(props) {
       xs={12}
       lg={6}
       direction="column"
-      className={props.className}
+      className={classes.container}
     >
-      <Typography
-        variant="h6"
-        style={{ fontWeight: "bold", marginBottom: "10px" }}
-      >
+      <Typography variant="h6" className={classes.title}>
         Donation Images
       </Typography>
-      <Paper className={props.paper}>
+      <Paper className={classes.container__paper}>
         <img
           src={image[index]}
           alt="pancit canton"
-          style={{
-            width: "100%",
-            height: "450px",
-          }}
+          className={classes.image__mainPreview}
         />
-        <div
-          style={{
-            display: "flex",
-            // flexWrap: "wrap",
-            // flexDirection: "row",
-            justifyContent: "flex-start",
-            width: "100%",
-            height: "100px",
-          }}
-        >
+        <div className={classes.container__subImages}>
           <div
+            className={classes.image__subImage}
             onClick={() => {
               handleChangeImage(0);
-            }}
-            style={{
-              width: "25%",
-              backgroundColor: "red",
-              padding: "3px",
-              borderRadius: "5px",
-              cursor: "pointer",
             }}
           >
             <img
               src={image[0]}
               alt="donation-image1"
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "5px",
-              }}
+              className={classes.image__sub}
             />
           </div>
           <div
-            style={{
-              width: "25%",
-              backgroundColor: "red",
-              padding: "3px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
+            className={classes.image__subImage}
             onClick={() => {
               handleChangeImage(1);
             }}
@@ -111,20 +140,11 @@ function DonationImages(props) {
             <img
               src={image[1]}
               alt="donation-image2"
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
+              className={classes.image__sub}
             />
           </div>
           <div
-            style={{
-              width: "25%",
-              backgroundColor: "red",
-              padding: "3px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
+            className={classes.image__subImage}
             onClick={() => {
               handleChangeImage(2);
             }}
@@ -132,20 +152,11 @@ function DonationImages(props) {
             <img
               src={image[2]}
               alt="donation-image3"
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
+              className={classes.image__sub}
             />
           </div>
           <div
-            style={{
-              width: "25%",
-              backgroundColor: "red",
-              padding: "3px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
+            className={classes.image__subImage}
             onClick={() => {
               handleChangeImage(3);
             }}
@@ -153,24 +164,9 @@ function DonationImages(props) {
             <img
               src={image[3]}
               alt="donation-image4"
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
+              className={classes.image__sub}
             />
           </div>
-          {/* <div style={{ width: "25%", height: "100px" }}>
-                  <img src={image[0]} alt="donation-image1" />
-               </div>
-               <div style={{ width: "25%" }}>
-                  <img src={image[1]} alt="donation-image2" />
-               </div>
-               <div style={{ width: "25%" }}>
-                  <img src={image[2]} alt="donation-image3" />
-               </div>
-               <div style={{ width: "25%" }}>
-                  <img src={image[3]} alt="donation-image4" />
-               </div> */}
         </div>
       </Paper>
     </Grid>
@@ -179,6 +175,7 @@ function DonationImages(props) {
 
 // returns the details of the donation, has multiple child components
 function DonationDetails(props) {
+  const classes = useStyles();
   return (
     <Grid
       container
@@ -186,25 +183,22 @@ function DonationDetails(props) {
       xs={12}
       lg={6}
       direction="column"
-      className={props.className}
+      className={classes.container}
     >
-      <Typography
-        variant="h6"
-        style={{ fontWeight: "bold", marginBottom: "10px" }}
-      >
+      <Typography variant="h6" className={classes.title}>
         Item Details
       </Typography>
-      <Paper className={props.paper}>
-        <Typography variant="h6" style={{ fontWeight: "bold" }}>
+      <Paper className={classes.container__paper}>
+        <Typography variant="h6" className={classes.text_bold}>
           Lucky Me Pancit Canton Noodles
         </Typography>
         <DistanceFromDonee />
         <ChipCategory />
         <Typography>
-          <span style={{ fontWeight: "bold" }}>Quantity:</span> 5 pieces
+          <span className={classes.text_bold}>Quantity:</span> 5 pieces
         </Typography>
         <ExpiryDate />
-        <Typography style={{ fontWeight: "bold" }}>Donation Notes</Typography>
+        <Typography className={classes.text_bold}>Donation Notes</Typography>
         <Typography>
           If you are interested, text me on my number 09123456789 or message me
           instead here.
@@ -217,8 +211,9 @@ function DonationDetails(props) {
 }
 
 function DistanceFromDonee() {
+  const classes = useStyles();
   return (
-    <div style={{ display: "flex", margin: "5px 0" }}>
+    <div className={classes.container__distanceAway}>
       <LocationOnIcon color="secondary" />
       <Typography>3 kilometers away</Typography>
     </div>
@@ -226,8 +221,9 @@ function DistanceFromDonee() {
 }
 // returns the food category of the donation
 function ChipCategory() {
+  const classes = useStyles();
   return (
-    <div style={{ display: "flex", margin: "10px 0" }}>
+    <div className={classes.container__chipCategory}>
       <Chip label="Instant Noodles" color="primary" />
       <div style={{ width: "5px" }} />
       <Chip label="Canned Goods" color="primary" />
@@ -236,11 +232,12 @@ function ChipCategory() {
 }
 // returns the expiry date of the donation
 function ExpiryDate() {
+  const classes = useStyles();
   return (
     <div style={{ margin: "5px 0" }}>
       <Typography>
         The expiry date is on{" "}
-        <span style={{ fontWeight: "bold" }}>June 07, 2021</span>. Exactly 2
+        <span className={classes.text_bold}>June 07, 2021</span>. Exactly 2
         weeks and 3 days from now.
       </Typography>
     </div>
@@ -248,39 +245,44 @@ function ExpiryDate() {
 }
 // returns a map that shows approximate pickup location
 function Map() {
-  return (
-    //<div style={{width: '100%', height: '150px'}}>
-    <img style={{ height: "200px", width: "100%" }} src={MapImage} alt="map" />
-    //</div>
-  );
+  const classes = useStyles();
+  return <img className={classes.image__map} src={MapImage} alt="map" />;
 }
 // returns pickup details - the pickup location, date, and time
 function Pickup() {
+  const classes = useStyles();
+  //const {donationName, donationQuantity, donationExpiry, dontationNotes, pickupLocation, pickupDate, pickupTime} = props
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
-        <LocationOnIcon style={{ color: "#66BB6A" }} />
+      <div className={classes.container__pickup}>
+        <LocationOnIcon
+          className={`${classes.icon_pickup} ${classes.icon__location_green}`}
+        />
         <Typography>
           Pick up location is around{" "}
-          <span style={{ fontWeight: "bold", color: "#2196F3" }}>
+          <span className={classes.text__address_highlighted}>
             {" "}
             Jhocson St., Sampaloc, Manila
           </span>
           .
         </Typography>
       </div>
-      <div style={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
-        <EventAvailableIcon style={{ color: "#FFA726" }} />
+      <div className={classes.container__pickup}>
+        <EventAvailableIcon
+          className={`${classes.icon_pickup} ${classes.icon__date_orange}`}
+        />
         <Typography>
           Pick up date is on{" "}
-          <span style={{ fontWeight: "bold" }}> June 06, 2021</span>.
+          <span className={classes.text_bold}> June 06, 2021</span>.
         </Typography>
       </div>
-      <div style={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
-        <ScheduleIcon style={{ color: "#AB47BC" }} />
+      <div className={classes.container__pickup}>
+        <ScheduleIcon
+          className={`${classes.icon_pickup} ${classes.icon__time_purple}`}
+        />
         <Typography>
           Pick up time is in the afternoon,{" "}
-          <span style={{ fontWeight: "bold" }}> between 12pm to 5pm</span>.
+          <span className={classes.text_bold}> between 12pm to 5pm</span>.
         </Typography>
       </div>
     </>

@@ -20,7 +20,6 @@ import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-  DatePicker,
 } from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,8 +28,42 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     padding: theme.spacing(1, 3),
   },
-  paper: {
+  container: {
     padding: theme.spacing(2.5),
+  },
+  text_bold: {
+    fontWeight: "bold",
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: "10px",
+  },
+  divider_margin: {
+    margin: "20px 0",
+  },
+  image__map: {
+    height: "170px",
+    width: "100%",
+    marginBottom: "10px",
+  },
+  container__location: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "20px",
+  },
+  container__time: {
+    marginTop: "15px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  text__or: {
+    color: "#8B8B8B",
+  },
+  icon__helper: {
+    width: "17px",
+    color: "#ACACAC",
+    marginLeft: "5px",
   },
 }));
 // returns pickup details to be filled up by the user
@@ -48,43 +81,30 @@ function PickupDetails() {
       lg={6}
       direction="column"
     >
-      <Typography
-        variant="h6"
-        style={{ fontWeight: "bold", marginBottom: "10px" }}
-      >
+      <Typography variant="h6" className={classes.title}>
         Pickup Details
       </Typography>
-      <Paper className={classes.paper}>
+      <Paper className={classes.container}>
         <Map />
         <PickupLocation control={control} />
-        <Divider style={{ margin: "20px 0" }} />
+        <Divider className={classes.divider_margin} />
         <PickupDate />
-        <Divider style={{ margin: "20px 0" }} />
+        <Divider className={classes.divider_margin} />
         <PickupTime />
       </Paper>
     </Grid>
   );
 }
 function Map() {
-  return (
-    <img
-      style={{ height: "170px", width: "100%", marginBottom: "10px" }}
-      src={MapImage}
-      alt="map"
-    />
-  );
+  const classes = useStyles();
+  return <img className={classes.image__map} src={MapImage} alt="map" />;
 }
 // returns input field for the pickup location
 function PickupLocation(props) {
+  const classes = useStyles();
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "20px",
-        }}
-      >
+      <div className={classes.container__location}>
         <div>
           <Typography variant="body1" style={{ fontWeight: "bold" }}>
             Pick up location
@@ -123,10 +143,11 @@ function PickupLocation(props) {
 }
 // return input field for the pickup date
 function PickupDate() {
+  const classes = useStyles();
   const [selectedDate, handleDateChange] = useState(new Date());
   return (
     <>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+      <Typography variant="body1" className={classes.text_bold}>
         Pick up date
       </Typography>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -134,7 +155,6 @@ function PickupDate() {
           margin="normal"
           autoOk
           fullWidth
-          variant="inline"
           inputVariant="outlined"
           format="MM/dd/yyyy"
           value={selectedDate}
@@ -147,33 +167,30 @@ function PickupDate() {
 }
 // returns input field for the pickup time
 function PickupTime() {
+  const classes = useStyles();
   const [selectedDate, handleDateChange] = useState(new Date());
-
+  const helperMessage = "helperMessage";
   return (
     <>
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+      <Typography variant="body1" className={classes.text_bold}>
         Pick up time
       </Typography>
-      <div
-        style={{
-          marginTop: "15px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <ButtonGroup>
-          <Button variant="contained" color="primary" disableElevation>
-            Morning
-          </Button>
-          <Button variant="outlined" color="primary">
-            Afternoon
-          </Button>
-          <Button variant="outlined" color="primary">
-            Evening
-          </Button>
-        </ButtonGroup>
-        <p>or</p>
+      <div className={classes.container__time}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <ButtonGroup>
+            <Button variant="contained" color="primary" disableElevation>
+              Morning
+            </Button>
+            <Button variant="outlined" color="primary">
+              Afternoon
+            </Button>
+            <Button variant="outlined" color="primary">
+              Evening
+            </Button>
+          </ButtonGroup>
+          <Helper message={helperMessage} />
+        </div>
+        <p className={classes.text__or}>or</p>
       </div>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardTimePicker
@@ -191,12 +208,11 @@ function PickupTime() {
 }
 // returns a tooltip that helps user understand what the context is all about
 function Helper(props) {
+  const classes = useStyles();
   const message = props.message;
   return (
     <Tooltip title={message} arrow placement="right">
-      <InfoIcon
-        style={{ width: "17px", color: "#ACACAC", marginLeft: "5px" }}
-      />
+      <InfoIcon className={classes.icon__helper} />
     </Tooltip>
   );
 }

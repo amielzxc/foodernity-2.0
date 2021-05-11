@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: "bold",
-    marginTop: "5px",
+    marginTop: theme.spacing(0.6),
   },
   container__messageItem: {
     display: "flex",
-    margin: "20px 0",
+    margin: theme.spacing(3.5, 0),
     alignItems: "center",
   },
   avatar__message: {
@@ -33,10 +33,10 @@ export function MessagesDrawer() {
     <LeftDrawer>
       <Title />
       <Divider className={classes.divider_margin} />
-      <MessageItem />
-      <MessageItem />
-      <MessageItem />
-      <MessageItem />
+      <MessageItem avatar="FB" name="Fhillip Bagsic" />
+      <MessageItem avatar="AM" name="Amiel Morilla" />
+      <MessageItem avatar="KD" name="Kenneth Dela Cruz" />
+      <MessageItem avatar="CP" name="Carl Daniel Patio" />
     </LeftDrawer>
   );
 }
@@ -62,15 +62,16 @@ function Title() {
   );
 }
 
-function MessageItem() {
+function MessageItem(props) {
+  const { avatar, name } = props;
   const classes = useStyles();
   return (
     <div className={classes.container__messageItem}>
-      <Avatar className={classes.avatar__message}>FB</Avatar>
+      <Avatar className={classes.avatar__message}>{avatar}</Avatar>
       <div style={{ width: "10px" }} />
       <div className={classes.container__messageNameDesc}>
         <Typography variant="body1" className={classes.text_bold}>
-          Fhillip Bagsic
+          {name}
         </Typography>
         <Typography variant="body2">New Message</Typography>
       </div>

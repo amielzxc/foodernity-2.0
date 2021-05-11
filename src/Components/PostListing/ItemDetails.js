@@ -14,6 +14,8 @@ import {
   Tooltip,
   Input,
   Chip,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 import InfoIcon from "@material-ui/icons/Info";
@@ -169,7 +171,7 @@ function DonationQuantity(props) {
       defaultValue=""
       rules={{ required: "Quantity required" }}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <FormControl variant="outlined" fullWidth required>
+        <FormControl variant="outlined" fullWidth required margin="normal">
           <InputLabel id="donationQuantity">Quantity</InputLabel>
           <Select
             labelId="donationQuantity"
@@ -206,6 +208,10 @@ function DonationRecipientHelper(props) {
 
 // returns select field for the recipient of the donation
 function DonationRecipient(props) {
+  const theme = useTheme();
+  //  used to determine whether the page should use components intended for responsive layout
+  const responsiveLayout = useMediaQuery(theme.breakpoints.down("xs"));
+
   return (
     <Controller
       name="donationRecipient"
@@ -213,7 +219,12 @@ function DonationRecipient(props) {
       defaultValue=""
       rules={{ required: "Recipient required" }}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <FormControl variant="outlined" fullWidth required>
+        <FormControl
+          variant="outlined"
+          fullWidth
+          required
+          margin={responsiveLayout ? "none" : "normal"}
+        >
           <InputLabel id="donationRecipient">Recipient</InputLabel>
           <Select
             labelId="donationRecipient"
@@ -245,40 +256,44 @@ function DonationCategory() {
   };
 
   return (
-    <FormControl fullWidth>
-      <InputLabel id="donationCategory">Category(s)</InputLabel>
-      <Select
-        labelId="donationCategory"
-        //id="demo-mutiple-chip"
-        multiple
-        value={personName}
-        onChange={handleChange}
-        input={<Input id="category" />}
-        renderValue={(selected) => (
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-            }}
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ width: "95%" }}>
+        <FormControl fullWidth>
+          <InputLabel id="donationCategory">Category(s)</InputLabel>
+          <Select
+            labelId="donationCategory"
+            //id="demo-mutiple-chip"
+            multiple
+            value={personName}
+            onChange={handleChange}
+            input={<Input id="category" />}
+            renderValue={(selected) => (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                }}
+              >
+                {selected.map((value) => (
+                  <Chip
+                    key={value}
+                    label={value}
+                    color="primary"
+                    style={{ margin: "2px" }}
+                  />
+                ))}
+              </div>
+            )}
           >
-            {selected.map((value) => (
-              <Chip
-                key={value}
-                label={value}
-                color="primary"
-                style={{ margin: "2px" }}
-              />
+            {categories.map((category) => (
+              <MenuItem key={category} value={category}>
+                {category}
+              </MenuItem>
             ))}
-          </div>
-        )}
-      >
-        {categories.map((category) => (
-          <MenuItem key={category} value={category}>
-            {category}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+          </Select>
+        </FormControl>
+      </div>
+    </div>
   );
 }
 
@@ -293,14 +308,17 @@ function DonationExpiryHelper(props) {
 }
 // returns input field for expiry date of the donation
 function DonationExpiry() {
+  const theme = useTheme();
+  //  used to determine whether the page should use components intended for responsive layout
+  const responsiveLayout = useMediaQuery(theme.breakpoints.down("xs"));
   const [selectedDate, handleDateChange] = useState(new Date());
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
+        margin={responsiveLayout ? "normal" : "none"}
         autoOk
         fullWidth
-        variant="inline"
         inputVariant="outlined"
         label="Expiry Date"
         format="MM/dd/yyyy"
@@ -315,13 +333,13 @@ function DonationExpiry() {
 function DonationNotes() {
   return (
     <TextField
+      margin="normal"
       fullWidth
       id="donationNotes"
       label="Donation Notes"
       multiline
       rows={4}
       variant="outlined"
-      margin="normal"
     />
   );
 }
