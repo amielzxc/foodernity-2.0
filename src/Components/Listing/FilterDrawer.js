@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     backgroundColor: "white",
     alignItems: "center",
-    marginTop: "20px",
+    marginTop: theme.spacing(1),
   },
   icon__location: {
     marginRight: theme.spacing(1),
@@ -76,8 +76,9 @@ export function FilterDrawer() {
   return (
     <LeftDrawer>
       <Title />
-      <CurrentLocation />
       <FilterButtons />
+      <Divider className={classes.divider_margin} />
+      <CurrentLocation />
       <Divider className={classes.divider_margin} />
       <DistanceFilter />
       <Divider className={classes.divider_margin} />
@@ -92,10 +93,10 @@ export function FilterDrawerResponsive() {
   return (
     <div className={classes.drawer__container_responsive}>
       <Title />
-      <DialogDrawer buttonName="FILTER" dialogTitle="Filter">
-        <CurrentLocation />
-        <Divider className={classes.divider_margin} />
+      <DialogDrawer buttonName="FILTER" dialogTitle="Listings Filter">
         <FilterButtons />
+        <Divider className={classes.divider_margin} />
+        <CurrentLocation />
         <Divider className={classes.divider_margin} />
         <DistanceFilter />
         <Divider className={classes.divider_margin} />
@@ -124,16 +125,21 @@ function Title() {
 function CurrentLocation() {
   const classes = useStyles();
   return (
-    <div className={classes.container__location}>
-      <LocationOnIcon className={classes.icon__location} color="primary" />
-      <Typography variant="body1">Bali Oasis, Pasig</Typography>
-      <IconButton size="small">
-        <EditIcon
-          className={classes.icon__editLocation}
-          color="primary"
-          fontSize="small"
-        />
-      </IconButton>
+    <div>
+      <Typography variant="h6" className={classes.text_bold}>
+        My Location
+      </Typography>
+      <div className={classes.container__location}>
+        <LocationOnIcon className={classes.icon__location} color="primary" />
+        <Typography variant="body1">Bali Oasis, Pasig</Typography>
+        <IconButton size="small">
+          <EditIcon
+            className={classes.icon__editLocation}
+            color="primary"
+            fontSize="small"
+          />
+        </IconButton>
+      </div>
     </div>
   );
 }

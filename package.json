@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@iconify-icons/flat-color-icons": "^1.1.0",
+    "@iconify/icons-wpf": "^1.1.0",
     "@iconify/react": "^1.1.4"
   }
 }
