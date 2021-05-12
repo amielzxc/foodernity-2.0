@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   makeStyles,
   Typography,
@@ -35,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: "bold",
     marginTop: "5px",
+  },
+  button__green: {
+    backgroundColor: "#66BB6A",
   },
 }));
 // returns a left drawer that is used to display the stepper

@@ -62,7 +62,6 @@ function Guidelines() {
   );
 }
 function AccordionItem(props) {
-  console.log(props.guideline.label);
   return (
     <Accordion>
       <AccordionSummary
