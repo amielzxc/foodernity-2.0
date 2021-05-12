@@ -12,6 +12,7 @@ import Post from "./Components/PostListing/Post";
 import ListingDetail from "./Components/Listing/ListingDetail";
 import Messages from "./Components/Messages/Messages";
 import FAQs from "./Components/FAQs&Guidelines/FAQs";
+import Admin from "./Components/Admin/Admin";
 
 const theme = createMuiTheme({
   palette: {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/" exact component={Signin} />
           <Route path="/signup" component={Signup} />
           <Route path="/forgotpassword" component={ForgotPassword} />
+          <Route path="/admin/dashboard" component={Admin} />
           <ProtectedRoute
             path="/listings"
             exact

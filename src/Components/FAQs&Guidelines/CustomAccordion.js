@@ -16,45 +16,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomAccordion() {
+export default function CustomAccordion(props) {
   const classes = useStyles();
+  const data = props.guidelines;
+  const guidelinesArray = data.map((guideline) => (
+    <AccordionItem key={guideline.key} guideline={guideline} />
+  ));
 
-  return (
-    <div className={classes.root}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Accordion 1</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography className={classes.heading}>Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
-  );
+  return <div className={classes.root}>{guidelinesArray}</div>;
 }
 
 function AccordionItem(props) {
-  return <div>a</div>;
+  const classes = useStyles();
+  const { summary, description } = props.guideline;
+  return (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography className={classes.heading}>{summary}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography variant="body2">{description}</Typography>
+      </AccordionDetails>
+    </Accordion>
+  );
 }
