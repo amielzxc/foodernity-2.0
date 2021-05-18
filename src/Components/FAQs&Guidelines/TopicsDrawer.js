@@ -40,7 +40,7 @@ export function TopicsDrawer() {
       <TitleFaq />
       <Subtitle subtitle="How to upload a donation?" />
       <Subtitle subtitle="How to request for a donation?" />
-      <Subtitle subtitle="How can i claim the donation?" />
+      <Subtitle subtitle="How can I claim the donation?" />
       <Subtitle subtitle="What items can I post?" />
       <TitleGuidelines />
       <Subtitle subtitle="Donor Guidelines" />

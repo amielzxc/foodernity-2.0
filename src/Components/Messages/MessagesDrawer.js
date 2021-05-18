@@ -28,25 +28,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export function MessagesDrawer() {
+  const image = [
+    "https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg",
+    "https://cf.shopee.com.my/file/090a18a75c04ad1d4e0f63421a5c8651",
+    "https://media.karousell.com/media/photos/products/2020/8/7/oishi_japanese_rice_1_sack_25k_1596774674_9992bf29_progressive.jpg",
+    "https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg",
+  ];
   const classes = useStyles();
   return (
     <LeftDrawer>
       <Title />
       <Divider className={classes.divider_margin} />
-      <MessageItem avatar="FB" name="Fhillip Bagsic" />
-      <MessageItem avatar="AM" name="Amiel Morilla" />
-      <MessageItem avatar="KD" name="Kenneth Dela Cruz" />
-      <MessageItem avatar="CP" name="Carl Daniel Patio" />
+      <MessageItem image={image[0]} name="Pancit Canton Noodles" />
+      <MessageItem image={image[1]} name="Argetina Canned Goods" />
+      <MessageItem image={image[2]} name="1 sack rice" />
+      <MessageItem image={image[3]} name="Pancit Canton" />
     </LeftDrawer>
   );
 }
 export function MessagesDrawerResponsive() {
+  const image = [
+    "https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg",
+    "https://cf.shopee.com.my/file/090a18a75c04ad1d4e0f63421a5c8651",
+    "https://media.karousell.com/media/photos/products/2020/8/7/oishi_japanese_rice_1_sack_25k_1596774674_9992bf29_progressive.jpg",
+    "https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg",
+  ];
+
   return (
     <DialogDrawer buttonName="MESSAGES" dialogTitle="Messages">
-      <MessageItem avatar="FB" name="Fhillip Bagsic" />
-      <MessageItem avatar="AM" name="Amiel Morilla" />
-      <MessageItem avatar="KD" name="Kenneth Dela Cruz" />
-      <MessageItem avatar="CP" name="Carl Daniel Patio" />
+      <MessageItem image={image[0]} name="Pancit Canton Noodles" />
+      <MessageItem image={image[1]} name="Argetina Canned Goods" />
+      <MessageItem image={image[2]} name="1 sack rice" />
+      <MessageItem image={image[3]} name="Pancit Canton" />
     </DialogDrawer>
   );
 }
@@ -68,11 +81,11 @@ function Title() {
 }
 
 function MessageItem(props) {
-  const { avatar, name } = props;
+  const { image, name } = props;
   const classes = useStyles();
   return (
     <div className={classes.container__messageItem}>
-      <Avatar className={classes.avatar__message}>{avatar}</Avatar>
+      <Avatar className={classes.avatar__message} src={image} />
       <div style={{ width: "10px" }} />
       <div className={classes.container__messageNameDesc}>
         <Typography variant="body1" className={classes.text_bold}>

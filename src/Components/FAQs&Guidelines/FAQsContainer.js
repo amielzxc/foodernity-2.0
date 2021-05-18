@@ -36,9 +36,7 @@ function FAQsContainer() {
     <MainContainer>
       {/* displays whether the topics drawer dialog should be displayed or not depending on the variable */}
       {responsiveLayout ? <TopicsDrawerResponsive /> : null}
-      {/* <DonorGuidelines /> */}
-      {/* <DoneeGuidelines /> */}
-      <UploadProcess />
+      <DonorGuidelines />
     </MainContainer>
   );
 }

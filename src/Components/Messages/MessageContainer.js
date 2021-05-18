@@ -71,30 +71,26 @@ function MessageContainer() {
           flexDirection: "column-reverse",
         }}
       >
-        <ReceiverMessage message={receivermessage1} />
-        <ReceiverMessage message={receivermessage2} />
-        <SenderMessage message={sendermessage1} />
-        <SenderMessage message={sendermessage2} />
-        <ReceiverMessage message={receivermessage3} />
-        <SenderMessage message={sendermessage3} />
-        <ReceiverMessage message={receivermessage4} />
+        <ReceiverMessage message={receivermessage6} />
         <ReceiverMessage message={receivermessage5} />
         <SenderMessage message={sendermessage4} />
-        <ReceiverMessage message={receivermessage6} />
-        <ReceiverMessage message={receivermessage1} />
-        <ReceiverMessage message={receivermessage2} />
-        <ReceiverMessage message={receivermessage1} />
-        <ReceiverMessage message={receivermessage2} />
-        <SenderMessage message={sendermessage1} />
-        <SenderMessage message={sendermessage2} />
-        <ReceiverMessage message={receivermessage3} />
         <SenderMessage message={sendermessage3} />
         <ReceiverMessage message={receivermessage4} />
+        <SenderMessage message={sendermessage2} />
+        <ReceiverMessage message={receivermessage3} />
+        <ReceiverMessage message={receivermessage2} />
+        <SenderMessage message={sendermessage1} />
+        <ReceiverMessage message={receivermessage1} />
+        <ReceiverMessage message={receivermessage6} />
         <ReceiverMessage message={receivermessage5} />
         <SenderMessage message={sendermessage4} />
-        <ReceiverMessage message={receivermessage6} />
-        <ReceiverMessage message={receivermessage1} />
+        <SenderMessage message={sendermessage3} />
+        <ReceiverMessage message={receivermessage4} />
+        <SenderMessage message={sendermessage2} />
+        <ReceiverMessage message={receivermessage3} />
         <ReceiverMessage message={receivermessage2} />
+        <SenderMessage message={sendermessage1} />
+        <ReceiverMessage message={receivermessage1} />
       </div>
       <div style={{ height: "8%", marginTop: "15px" }}>
         <MessageInput />
