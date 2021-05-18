@@ -218,7 +218,7 @@ function SignInButton(props) {
       fullWidth
       size="large"
     >
-      LOGIN
+      SIGN IN
     </Button>
   );
 }

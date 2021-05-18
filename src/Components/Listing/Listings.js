@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { FilterDrawer } from "./FilterDrawer";
 import StyledAppBar from "../Common/StyledAppBar";
 import {
@@ -38,12 +39,17 @@ export default function Listings() {
   const responsiveLayout = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <StyledAppBar />
-      {/* displays whether the left drawer should be displayed or not depending on the variable */}
-      {responsiveLayout ? null : <FilterDrawer />}
-      <ListingContainer />
-    </div>
+    <>
+      <Helmet>
+        <title>Listings | Foodernity</title>
+      </Helmet>
+      <div className={classes.root}>
+        <CssBaseline />
+        <StyledAppBar />
+        {/* displays whether the left drawer should be displayed or not depending on the variable */}
+        {responsiveLayout ? null : <FilterDrawer />}
+        <ListingContainer />
+      </div>
+    </>
   );
 }

@@ -296,19 +296,19 @@ function FoodCategory() {
       </div>
       <div className={classes.container__checkbox}>
         <CategoryCheckBox
-          label="Categ 1"
+          label="Canned Goods"
           name="test1"
           checked={isChecked.test1}
           handleChange={handleSingleCheck}
         />
         <CategoryCheckBox
-          label="Categ 2"
+          label="Instant Noodles"
           name="test2"
           checked={isChecked["test2"]}
           handleChange={handleSingleCheck}
         />
         <CategoryCheckBox
-          label="Categ 3"
+          label="Beverages"
           name="test3"
           checked={isChecked["test3"]}
           handleChange={handleSingleCheck}

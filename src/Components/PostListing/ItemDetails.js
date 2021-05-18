@@ -108,6 +108,13 @@ function ItemDetails() {
 // returns component that allows user to add photos
 function Photos() {
   const classes = useStyles();
+  const image = [
+    "https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg",
+    "https://www.newsgra.ph/wp-content/uploads/2016/07/Pancit-Canton.jpg",
+    "https://cf.shopee.ph/file/43293b7a4630b8d2332ed4c2a8d9e9fd",
+    "https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg",
+  ];
+
   return (
     <>
       <div className={classes.container__inputHelper}>
@@ -120,16 +127,16 @@ function Photos() {
       </div>
       <Grid container>
         <Grid xs={6} md={3}>
-          <img className={classes.image__donation} src={image} alt="map" />
+          <img className={classes.image__donation} src={image[0]} alt="map" />
         </Grid>
         <Grid xs={6} md={3}>
-          <img className={classes.image__donation} src={image} alt="map" />
+          <img className={classes.image__donation} src={image[1]} alt="map" />
         </Grid>
         <Grid xs={6} md={3}>
-          <img className={classes.image__donation} src={image} alt="map" />
+          <img className={classes.image__donation} src={image[2]} alt="map" />
         </Grid>
         <Grid xs={6} md={3}>
-          <img className={classes.image__donation} src={image} alt="map" />
+          <img className={classes.image__donation} src={image[3]} alt="map" />
         </Grid>
       </Grid>
     </>
@@ -311,12 +318,15 @@ function DonationExpiry() {
   const theme = useTheme();
   //  used to determine whether the page should use components intended for responsive layout
   const responsiveLayout = useMediaQuery(theme.breakpoints.down("xs"));
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 7);
+  const [selectedDate, handleDateChange] = useState(minDate);
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
         margin={responsiveLayout ? "normal" : "none"}
+        minDate={selectedDate}
         autoOk
         fullWidth
         inputVariant="outlined"

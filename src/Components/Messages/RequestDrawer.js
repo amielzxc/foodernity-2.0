@@ -111,7 +111,7 @@ export function RequestDrawer() {
           <DonationNotes />
           <DonationPickupDetails />
         </div>
-        {/* <CancelButton /> */}
+
         <div
           style={{
             display: "flex",
@@ -120,6 +120,7 @@ export function RequestDrawer() {
           }}
         >
           <Divider className={classes.divider_margin} />
+          {/* <CancelButton /> */}
           <DeclineButton />
           <ApproveButton />
         </div>

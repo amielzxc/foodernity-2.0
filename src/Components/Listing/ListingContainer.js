@@ -10,7 +10,7 @@ import {
 import { FilterDrawerResponsive } from "./FilterDrawer";
 import ListingItem from "./ListingItem";
 import AddIcon from "@material-ui/icons/Add";
-import ListingData from "../Common/MockData";
+import { ListingData } from "../Common/MockData";
 import { Link } from "react-router-dom";
 import MainContainer from "../Common/MainContainer";
 
@@ -58,7 +58,7 @@ function AddListing() {
   return (
     <div className={classes.container__addListing}>
       <Typography variant="h6" component="h3">
-        18 listings near you
+        Listings near you
       </Typography>
       <Link to="/listings/post" className={classes.link_undecorated}>
         <Button startIcon={<AddIcon />} variant="contained" color="primary">

@@ -138,10 +138,10 @@ function ReportButton() {
 function DonationImages(props) {
   const classes = useStyles();
   const image = [
-    "http://cdn.shopify.com/s/files/1/2713/3026/products/lucky-me-pancit-canton-chilli-mansi-instant-noodles-60g-65-p_600x.jpg?v=1545281033",
-    "https://www.sarisaristore.se/637-large_default/lucky-me-pancit-canton.jpg",
-    "https://cdn.shopify.com/s/files/1/0338/0694/2253/products/LuckyMePancitCantonSweetSpicy2.12oz_Front_ade288b8-bf42-4de6-ae27-e794a40b6b8a_758x659.jpg?v=1585674364",
-    "https://i.imgur.com/4UuWKk4.png",
+    "https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg",
+    "https://www.newsgra.ph/wp-content/uploads/2016/07/Pancit-Canton.jpg",
+    "https://cf.shopee.ph/file/43293b7a4630b8d2332ed4c2a8d9e9fd",
+    "https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg",
   ];
 
   const [index, setIndex] = useState(0);
