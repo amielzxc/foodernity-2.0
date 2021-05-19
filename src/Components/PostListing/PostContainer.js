@@ -1,19 +1,19 @@
-import React from "react"
-import { useTheme, useMediaQuery, Grid } from "@material-ui/core"
-import { StepperDrawerResponsive } from "./StepperDrawer"
-import { useStepperStore } from "./Post"
-import Guidelines from "./Guidelines"
-import MainContainer from "../Common/MainContainer"
-import ItemDetails from "./ItemDetails"
-import PickupDetails from "./PickupDetails"
-import DonationPreview from "./DonationPreview"
+import React from 'react'
+import { useTheme, useMediaQuery, Grid } from '@material-ui/core'
+import { StepperDrawerResponsive } from './StepperDrawer'
+import { usePostStore } from './Post'
+import Guidelines from './Guidelines'
+import MainContainer from '../Common/MainContainer'
+import ItemDetails from './ItemDetails'
+import PickupDetails from './PickupDetails'
+import DonationPreview from './DonationPreview'
 // returns the container for all the steps of the donating process
 function PostContainer() {
    // this state is currently stored in the Post.js for the mean time
-   const current = useStepperStore((state) => state.current)
+   const current = usePostStore((state) => state.current)
    const theme = useTheme()
    //  used to determine whether the page should use components intended for responsive layout
-   const responsiveLayout = useMediaQuery(theme.breakpoints.down("sm"))
+   const responsiveLayout = useMediaQuery(theme.breakpoints.down('sm'))
 
    return (
       <MainContainer>
