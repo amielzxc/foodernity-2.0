@@ -38,7 +38,13 @@ const App = () => {
                   <Route path="/" exact component={Signin} />
                   <Route path="/signup" component={Signup} />
                   <Route path="/forgotpassword" component={ForgotPassword} />
-                  <Route path="/admin" component={Admin} />
+                  {/* <Route path="/admin" component={Admin} /> */}
+                  <ProtectedRoute
+                     path="/admin"
+                     exact
+                     component={Admin}
+                     isAuth={isAuthenticated}
+                  />
                   <ProtectedRoute
                      path="/listings"
                      exact
