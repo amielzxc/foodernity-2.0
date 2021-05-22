@@ -7,12 +7,9 @@ import {
    Checkbox,
    FormControlLabel,
    Typography,
-   Button,
-   Snackbar,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { usePostStore } from './Post'
-import MuiAlert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles({
    root: {
@@ -59,7 +56,6 @@ function Guidelines() {
 
    const handleSingleCheck = (e) => {
       setIsChecked({ ...isChecked, [e.target.name]: e.target.checked })
-      handleUpdateAllCheck()
    }
 
    const handleUpdateAllCheck = () => {
@@ -75,7 +71,6 @@ function Guidelines() {
       />
    ))
 
-   console.log(checkedGuidelines)
    if (isChecked)
       return (
          <div className={classes.root}>
@@ -94,7 +89,7 @@ function Guidelines() {
                   aliquam mauris.
                </Typography>
             </div>
-            {guidelinesArray}
+            <form onBlur={handleUpdateAllCheck}>{guidelinesArray}</form>
          </div>
       )
 }
@@ -129,35 +124,5 @@ function AccordionItem(props) {
       </Accordion>
    )
 }
-function Alert(props) {
-   return <MuiAlert elevation={6} variant="filled" {...props} />
-}
 
-function SendAlert() {
-   const [open, setOpen] = React.useState(false)
-   const handleClick = () => {
-      setOpen(true)
-   }
-   const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-         return
-      }
-      setOpen(false)
-   }
-
-   const message =
-      'You must acknowledge the guidelines before proceeding to donation details'
-   return (
-      <>
-         <Button variant="outlined" onClick={handleClick}>
-            Open success snackbar
-         </Button>
-         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error">
-               {message}
-            </Alert>
-         </Snackbar>
-      </>
-   )
-}
 export default Guidelines

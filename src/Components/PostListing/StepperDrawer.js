@@ -9,11 +9,12 @@ import {
    StepLabel,
    StepContent,
    Button,
+   Snackbar,
 } from '@material-ui/core'
 import { usePostStore } from './Post'
 import LeftDrawer from '../Common/LeftDrawer'
 import DialogDrawer from '../Common/DialogDrawer'
-
+import MuiAlert from '@material-ui/lab/Alert'
 const useStyles = makeStyles((theme) => ({
    root: {
       width: '100%',
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#66BB6A',
    },
 }))
+
 // returns a left drawer that is used to display the stepper
 // this drawer uses the left drawer component in Common folder
 export function StepperDrawer() {
@@ -108,6 +110,8 @@ function getStepContent(step) {
 }
 // returns the vertical stepper itself
 function VerticalStepper() {
+   const checkedGuidelines = usePostStore((state) => state.checkedGuidelines)
+   const [displayAlert, setDisplayAlert] = useState(false)
    const current = usePostStore((state) => state.current)
    const classes = useStyles()
    const setNext = usePostStore((state) => state.setNext)
@@ -117,13 +121,28 @@ function VerticalStepper() {
    const steps = getSteps()
 
    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1)
-      setNext()
+      if (!checkedGuidelines.includes(false)) {
+         setActiveStep((prevActiveStep) => prevActiveStep + 1)
+         setNext()
+         setDisplayAlert(false)
+      } else {
+         setDisplayAlert(true)
+      }
    }
 
    const handleBack = () => {
       setActiveStep((prevActiveStep) => prevActiveStep - 1)
       setBack()
+   }
+   const handleClick = () => {
+      setDisplayAlert(true)
+   }
+
+   const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+         return
+      }
+      setDisplayAlert(false)
    }
 
    return (
@@ -159,6 +178,25 @@ function VerticalStepper() {
                </Step>
             ))}
          </Stepper>
+         <CustomizedSnackbars open={displayAlert} close={handleClose} />
       </div>
+   )
+}
+
+function Alert(props) {
+   return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
+function CustomizedSnackbars(props) {
+   const { close } = props
+   const message = 'You should acknowledge the guidelines first.'
+   return (
+      <>
+         <Snackbar open={props.open} autoHideDuration={6000} onClose={close}>
+            <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
    )
 }

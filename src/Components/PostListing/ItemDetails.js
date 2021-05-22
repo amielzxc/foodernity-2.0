@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import {
    Grid,
    makeStyles,
@@ -10,10 +10,7 @@ import {
    FormControl,
    InputLabel,
    Select,
-   FormHelperText,
    Tooltip,
-   Input,
-   Chip,
    useTheme,
    useMediaQuery,
 } from '@material-ui/core'
@@ -24,8 +21,9 @@ import {
    MuiPickersUtilsProvider,
    KeyboardDatePicker,
 } from '@material-ui/pickers'
-import image from '../Listing/pickup_map.png'
+
 import { usePostStore } from './Post'
+
 const useStyles = makeStyles((theme) => ({
    root: {
       maxWidth: '700px',
@@ -61,12 +59,29 @@ const useStyles = makeStyles((theme) => ({
 }))
 // returns the donation details fields to be filled up by the user
 function ItemDetails() {
-   const checkedGuidelines = usePostStore((state) => state.checkedGuidelines)
-   console.log(checkedGuidelines)
    const { handleSubmit, control } = useForm()
 
+   const checkedGuidelines = usePostStore((state) => state.checkedGuidelines)
    const classes = useStyles()
    const recipientHelper = 'this is recipient helper'
+
+   const setDonationName = usePostStore((state) => state.setDonationName)
+   const setDonationCategory = usePostStore(
+      (state) => state.setDonationCategory
+   )
+   const setDonationNotes = usePostStore((state) => state.setDonationNotes)
+   const setDonationRecipient = usePostStore(
+      (state) => state.setDonationRecipient
+   )
+   const setDonationExpiry = usePostStore((state) => state.setDonationExpiry)
+
+   const onSubmit = (data) => {
+      setDonationName(data.donationName)
+      setDonationRecipient(data.donationRecipient)
+      setDonationCategory(data.donationCategory)
+      setDonationNotes(data.donationNotes)
+      setDonationExpiry(data.donationExpiry)
+   }
 
    return (
       <Grid
@@ -80,30 +95,34 @@ function ItemDetails() {
          <Typography variant="h6" className={classes.title}>
             Item Details
          </Typography>
-         <Paper className={classes.container}>
-            <Photos />
-            <Divider className={classes.divider_margin} />
-            <DonationName control={control} />
-            <Grid container item spacing={2}>
-               <Grid item xs={12} sm={6}>
-                  <DonationQuantity control={control} />
+         <Paper elevation={2} className={classes.container}>
+            <form onBlur={handleSubmit(onSubmit)}>
+               <Photos />
+               <Divider className={classes.divider_margin} />
+               <Grid container item spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                     <DonationName control={control} />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                     <DonationRecipientHelper
+                        control={control}
+                        message={recipientHelper}
+                     />
+                  </Grid>
                </Grid>
-               <Grid item xs={12} sm={6}>
-                  <DonationRecipientHelper
-                     control={control}
-                     message={recipientHelper}
-                  />
+               <Grid container item spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                     <DonationCategory control={control} />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                     <div className={classes.container__inputHelper}>
+                        <DonationExpiry control={control} />
+                        <Helper message={'a'} />
+                     </div>
+                  </Grid>
                </Grid>
-            </Grid>
-            <Grid container item spacing={2}>
-               <Grid item xs={12} sm={6}>
-                  <DonationCategory />
-               </Grid>
-               <Grid item xs={12} sm={6}>
-                  <DonationExpiryHelper message={recipientHelper} />
-               </Grid>
-            </Grid>
-            <DonationNotes />
+               <DonationNotes control={control} />
+            </form>
          </Paper>
       </Grid>
    )
@@ -133,28 +152,28 @@ function Photos() {
             </Typography>
          </div>
          <Grid container>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6}>
                <img
                   className={classes.image__donation}
                   src={image[0]}
                   alt="map"
                />
             </Grid>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6}>
                <img
                   className={classes.image__donation}
                   src={image[1]}
                   alt="map"
                />
             </Grid>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6}>
                <img
                   className={classes.image__donation}
                   src={image[2]}
                   alt="map"
                />
             </Grid>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6}>
                <img
                   className={classes.image__donation}
                   src={image[3]}
@@ -167,20 +186,22 @@ function Photos() {
 }
 // returns input field for the donation's name
 function DonationName(props) {
+   const donationName = usePostStore((state) => state.donationName)
+
    return (
       <Controller
-         name="donationItem"
+         name="donationName"
          control={props.control}
-         defaultValue=""
-         rules={{ required: 'Donation item required' }}
+         defaultValue={donationName}
+         rules={{ required: 'Donation Name required' }}
          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
+               autoFocus
                margin="normal"
                type="text"
                variant="outlined"
-               id="donationItem"
-               label="Donation Item"
-               //autoFocus
+               id="donationName"
+               label="Donation Name"
                required
                fullWidth
                value={value}
@@ -192,39 +213,7 @@ function DonationName(props) {
       />
    )
 }
-// returns input field for the quantity of donation
-function DonationQuantity(props) {
-   return (
-      <Controller
-         name="donationQuantity"
-         control={props.control}
-         defaultValue=""
-         rules={{ required: 'Quantity required' }}
-         render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl variant="outlined" fullWidth required margin="normal">
-               <InputLabel id="donationQuantity">Quantity</InputLabel>
-               <Select
-                  labelId="donationQuantity"
-                  //id="demo-simple-select-outlined"
-                  //value={age}
-                  //onChange={handleChange}
-                  label="Quantity"
-               >
-                  <MenuItem value="">
-                     <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={1}>1</MenuItem>
-                  <MenuItem value={2}>2</MenuItem>
-                  <MenuItem value={3}>3</MenuItem>
-                  <MenuItem value={4}>4</MenuItem>
-                  <MenuItem value={5}>5</MenuItem>
-               </Select>
-               <FormHelperText>{error ? error.message : null}</FormHelperText>
-            </FormControl>
-         )}
-      />
-   )
-}
+
 // returns input field for the reciepient along with helper
 function DonationRecipientHelper(props) {
    const classes = useStyles()
@@ -241,26 +230,28 @@ function DonationRecipient(props) {
    const theme = useTheme()
    //  used to determine whether the page should use components intended for responsive layout
    const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
+   const donationRecipient = usePostStore((state) => state.donationRecipient)
 
    return (
-      <Controller
-         name="donationRecipient"
-         control={props.control}
-         defaultValue=""
-         rules={{ required: 'Recipient required' }}
-         render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <FormControl
-               variant="outlined"
-               fullWidth
-               required
-               margin={responsiveLayout ? 'none' : 'normal'}
-            >
-               <InputLabel id="donationRecipient">Recipient</InputLabel>
+      <FormControl
+         variant="outlined"
+         fullWidth
+         required
+         margin={responsiveLayout ? 'none' : 'normal'}
+      >
+         <InputLabel id="donationRecipient">Recipient</InputLabel>
+         <Controller
+            name="donationRecipient"
+            control={props.control}
+            defaultValue={donationRecipient}
+            rules={{ required: 'Recipient required' }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
                <Select
+                  defaultValue={value ? value : ''}
                   labelId="donationRecipient"
                   //id="demo-simple-select-outlined"
-                  //value={age}
-                  //onChange={handleChange}
+                  value={value}
+                  onChange={onChange}
                   label="Recipient"
                >
                   <MenuItem value="">
@@ -273,108 +264,102 @@ function DonationRecipient(props) {
                   </MenuItem>
                   <MenuItem value={'Individuals'}>Individuals</MenuItem>
                </Select>
-               <FormHelperText>{error ? error.message : null}</FormHelperText>
-            </FormControl>
+            )}
+         />
+      </FormControl>
+   )
+}
+// returns select field that allows donor to choose the donation's food category
+function DonationCategory(props) {
+   const donationCategory = usePostStore((state) => state.donationCategory)
+   const theme = useTheme()
+   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
+
+   return (
+      <FormControl
+         variant="outlined"
+         fullWidth
+         required
+         margin={responsiveLayout ? 'normal' : 'none'}
+      >
+         <InputLabel id="donationCategory">Category</InputLabel>
+         <Controller
+            name="donationCategory"
+            control={props.control}
+            defaultValue={donationCategory}
+            rules={{ required: 'Category required' }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+               <Select
+                  defaultValue={value ? value : ''}
+                  labelId="donationRecipient"
+                  //id="demo-simple-select-outlined"
+                  value={value}
+                  onChange={onChange}
+                  label="Category"
+               >
+                  <MenuItem value="">
+                     <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={'Category 1'}>Category 1</MenuItem>
+                  <MenuItem value={'Category 2'}>Category 2</MenuItem>
+                  <MenuItem value={'Category 3'}>Category 3</MenuItem>
+                  <MenuItem value={'Category 4'}>Category 4</MenuItem>
+               </Select>
+            )}
+         />
+      </FormControl>
+   )
+}
+
+// returns input field for expiry date of the donation
+function DonationExpiry(props) {
+   const donationExpiry = usePostStore((state) => state.donationExpiry)
+   return (
+      <Controller
+         name="donationExpiry"
+         control={props.control}
+         defaultValue={donationExpiry}
+         rules={{ required: 'Donation Expiry required' }}
+         render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+               <KeyboardDatePicker
+                  minDate={value}
+                  autoOk
+                  fullWidth
+                  inputVariant="outlined"
+                  label="Expiry Date"
+                  format="MM/dd/yyyy"
+                  value={value}
+                  InputAdornmentProps={{ position: 'end' }}
+                  onChange={onChange}
+               />
+            </MuiPickersUtilsProvider>
          )}
       />
    )
 }
-// returns select field that allows donor to choose the donation's food category
-function DonationCategory() {
-   const categories = ['Categ 1', 'Categ 2', 'Categ 3', 'Categ 4', 'Categ 5']
-   const [personName, setPersonName] = useState([])
-   const handleChange = (event) => {
-      setPersonName(event.target.value)
-   }
-
-   return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-         <div style={{ width: '95%' }}>
-            <FormControl fullWidth>
-               <InputLabel id="donationCategory">Category(s)</InputLabel>
-               <Select
-                  labelId="donationCategory"
-                  //id="demo-mutiple-chip"
-                  multiple
-                  value={personName}
-                  onChange={handleChange}
-                  input={<Input id="category" />}
-                  renderValue={(selected) => (
-                     <div
-                        style={{
-                           display: 'flex',
-                           flexWrap: 'wrap',
-                        }}
-                     >
-                        {selected.map((value) => (
-                           <Chip
-                              key={value}
-                              label={value}
-                              color="primary"
-                              style={{ margin: '2px' }}
-                           />
-                        ))}
-                     </div>
-                  )}
-               >
-                  {categories.map((category) => (
-                     <MenuItem key={category} value={category}>
-                        {category}
-                     </MenuItem>
-                  ))}
-               </Select>
-            </FormControl>
-         </div>
-      </div>
-   )
-}
-
-function DonationExpiryHelper(props) {
-   const classes = useStyles()
-   return (
-      <div className={classes.container__inputHelper}>
-         <DonationExpiry control={props.control} />
-         <Helper message={props.message} />
-      </div>
-   )
-}
-// returns input field for expiry date of the donation
-function DonationExpiry() {
-   const theme = useTheme()
-   //  used to determine whether the page should use components intended for responsive layout
-   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
-   const minDate = new Date()
-   minDate.setDate(minDate.getDate() + 7)
-   const [selectedDate, handleDateChange] = useState(minDate)
-
-   return (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-         <KeyboardDatePicker
-            margin={responsiveLayout ? 'normal' : 'none'}
-            minDate={selectedDate}
-            autoOk
-            fullWidth
-            inputVariant="outlined"
-            label="Expiry Date"
-            format="MM/dd/yyyy"
-            value={selectedDate}
-            InputAdornmentProps={{ position: 'end' }}
-            onChange={(date) => handleDateChange(date)}
-         />
-      </MuiPickersUtilsProvider>
-   )
-}
 // returns multiline input field for the donation notes
-function DonationNotes() {
+function DonationNotes(props) {
+   const donationNotes = usePostStore((state) => state.donationNotes)
+
    return (
-      <TextField
-         margin="normal"
-         fullWidth
-         id="donationNotes"
-         label="Donation Notes"
-         multiline
-         rows={4}
-         variant="outlined"
+      <Controller
+         name="donationNotes"
+         control={props.control}
+         defaultValue={donationNotes}
+         render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextField
+               margin="normal"
+               variant="outlined"
+               fullWidth
+               id="donationNotes"
+               label="Donation Notes"
+               multiline
+               rows={4}
+               value={value}
+               onChange={onChange}
+            />
+         )}
       />
    )
 }

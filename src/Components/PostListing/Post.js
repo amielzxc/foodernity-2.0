@@ -10,6 +10,7 @@ import { StepperDrawer } from './StepperDrawer'
 import StyledAppBar from '../Common/StyledAppBar'
 import create from 'zustand'
 import PostContainer from './PostContainer'
+import { set } from 'react-hook-form'
 
 export const usePostStore = create((set) => ({
    current: 0,
@@ -23,6 +24,57 @@ export const usePostStore = create((set) => ({
    setCheckedGuidelines: (object) => {
       set((state) => ({
          checkedGuidelines: (state.checkedGuidelines = object),
+      }))
+   },
+   donationName: '',
+   setDonationName: (name) => {
+      set((state) => ({ donationName: (state.donationName = name) }))
+   },
+   donationRecipient: '',
+   setDonationRecipient: (recipient) => {
+      set((state) => ({
+         donationRecipient: (state.donationRecipient = recipient),
+      }))
+   },
+   donationCategory: '',
+   setDonationCategory: (category) => {
+      set((state) => ({
+         donationCategory: (state.donationCategory = category),
+      }))
+   },
+   donationExpiry: new Date(new Date().setDate(new Date().getDate() + 7)),
+   setDonationExpiry: (date) => {
+      set((state) => ({
+         donationExpiry: (state.donationExpiry = date),
+      }))
+   },
+   donationNotes: '',
+   setDonationNotes: (note) => {
+      set((state) => ({ donationNotes: (state.donationNotes = note) }))
+   },
+   pickupLocation: null,
+   setPickupLocation: (location) => {
+      set((state) => ({
+         pickupLocation: (state.pickupLocation = location),
+      }))
+   },
+   pickupLocationCoordinate: {},
+   setPickupLocationCoordinate: (coordinate) => {
+      set((state) => ({
+         pickupLocationCoordinate: (state.pickupLocationCoordinate =
+            coordinate),
+      }))
+   },
+   pickupDate: new Date(new Date().setDate(new Date().getDate())),
+   setPickupDate: (date) => {
+      set((state) => ({
+         pickupDate: (state.pickupDate = date),
+      }))
+   },
+   pickupTime: new Date(new Date().setDate(new Date().getDate())),
+   setPickupTime: (time) => {
+      set((state) => ({
+         pickupTime: (state.pickupTime = time),
       }))
    },
 }))
@@ -60,6 +112,11 @@ function Post() {
          </div>
       </>
    )
+}
+
+// this will be used to validate all the forms. will return false if one input has not been filled up else true
+export function validateAll() {
+   return <p>s</p>
 }
 
 export default Post
