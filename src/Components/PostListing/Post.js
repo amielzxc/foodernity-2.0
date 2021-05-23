@@ -115,8 +115,8 @@ function Post() {
 
 // this will be used to validate all the forms. will return false if one input has not been filled up else true
 export function validateAll() {
-   const donationName = usePostStore((state) => state.donationName)
-   const donationRecipient = usePostStore((state) => state.donationRecipient)
+   // const donationName = usePostStore((state) => state.donationName)
+   // const donationRecipient = usePostStore((state) => state.donationRecipient)
    return <p>s</p>
 }
 
