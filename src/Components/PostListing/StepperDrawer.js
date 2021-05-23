@@ -134,9 +134,6 @@ function VerticalStepper() {
       setActiveStep((prevActiveStep) => prevActiveStep - 1)
       setBack()
    }
-   const handleClick = () => {
-      setDisplayAlert(true)
-   }
 
    const handleClose = (event, reason) => {
       if (reason === 'clickaway') {

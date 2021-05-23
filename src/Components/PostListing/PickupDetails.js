@@ -8,7 +8,6 @@ import {
    KeyboardDatePicker,
 } from '@material-ui/pickers'
 import { usePostStore } from './Post'
-import LocationInput from './LocationInput'
 import GoogleMap from './GoogleMap'
 
 const useStyles = makeStyles((theme) => ({

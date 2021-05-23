@@ -10,7 +10,6 @@ import { StepperDrawer } from './StepperDrawer'
 import StyledAppBar from '../Common/StyledAppBar'
 import create from 'zustand'
 import PostContainer from './PostContainer'
-import { set } from 'react-hook-form'
 
 export const usePostStore = create((set) => ({
    current: 0,

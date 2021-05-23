@@ -25,13 +25,14 @@ export function LocationInput(props) {
    const [value, setValue] = useState(pickupLocation)
    const [inputValue, setInputValue] = useState('')
    const [options, setOptions] = useState([])
-   const setPickupLocation = usePostStore((state) => state.setPickupLocation)
 
    const fetch = useMemo(
       () =>
          throttle((request, callback) => {
+            request.componentRestrictions = { country: 'ph' }
             autocompleteService.current.getPlacePredictions(request, callback)
          }, 200),
+
       []
    )
 
@@ -62,7 +63,6 @@ export function LocationInput(props) {
             if (results) {
                newOptions = [...newOptions, ...results]
             }
-
             setOptions(newOptions)
          }
       })

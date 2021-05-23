@@ -1,5 +1,5 @@
 import { Grid, makeStyles, Chip, Paper, Typography } from '@material-ui/core'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import ScheduleIcon from '@material-ui/icons/Schedule'

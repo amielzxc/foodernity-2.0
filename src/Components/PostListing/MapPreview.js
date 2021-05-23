@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+
 import { usePostStore } from './Post'
 
 const style = {

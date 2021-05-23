@@ -60,8 +60,6 @@ const useStyles = makeStyles((theme) => ({
 // returns the donation details fields to be filled up by the user
 function ItemDetails() {
    const { handleSubmit, control } = useForm()
-
-   const checkedGuidelines = usePostStore((state) => state.checkedGuidelines)
    const classes = useStyles()
    const recipientHelper = 'this is recipient helper'
 

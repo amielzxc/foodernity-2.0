@@ -16,6 +16,10 @@ export const useFilterStore = create((set) => ({
    setFilterButton: (filter) => {
       set((state) => ({ filterButton: (state.filterButton = filter) }))
    },
+   userLocation: '',
+   setUserLocation: (location) => {
+      set((state) => ({ userLocation: (state.userLocation = location) }))
+   },
    distance: 3,
    setDistance: (distance) => {
       set((state) => ({ distance: (state.distance = distance) }))
