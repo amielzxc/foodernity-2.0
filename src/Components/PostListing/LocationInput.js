@@ -19,9 +19,10 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 
-export function LocationInput() {
+export function LocationInput(props) {
+   const pickupLocation = usePostStore((state) => state.pickupLocation)
    const classes = useStyles()
-   const [value, setValue] = useState('')
+   const [value, setValue] = useState(pickupLocation)
    const [inputValue, setInputValue] = useState('')
    const [options, setOptions] = useState([])
 
@@ -93,6 +94,12 @@ export function LocationInput() {
             onChange={(event, newValue) => {
                setOptions(newValue ? [newValue, ...options] : options)
                setValue(newValue)
+
+               if (newValue) {
+                  props.select(newValue.description)
+               } else {
+                  props.select('')
+               }
             }}
             onInputChange={(event, newInputValue) => {
                setInputValue(newInputValue)

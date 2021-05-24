@@ -138,18 +138,10 @@ function VerticalStepper() {
             setDisplayAlert(true)
          }
       } else if (current === 1) {
-         for (let i = 0; i < arr.length; i++) {
-            if (arr[i] === null || arr.includes('')) {
-               console.log('fill up first')
-               break
-            } else {
-               setActiveStep((prevActiveStep) => prevActiveStep + 1)
-               setNext()
-            }
-         }
-      } else {
          setActiveStep((prevActiveStep) => prevActiveStep + 1)
          setNext()
+      } else if (current === 2) {
+         console.log('save to db')
       }
    }
 
