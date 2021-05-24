@@ -23,6 +23,7 @@ import {
 } from '@material-ui/pickers'
 
 import { usePostStore } from './Post'
+import UploadImage from './UploadImage'
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -95,7 +96,7 @@ function ItemDetails() {
          </Typography>
          <Paper elevation={2} className={classes.container}>
             <form onBlur={handleSubmit(onSubmit)}>
-               <Photos />
+               <UploadImage />
                <Divider className={classes.divider_margin} />
                <Grid container item spacing={2}>
                   <Grid item xs={12} sm={6}>
@@ -125,63 +126,6 @@ function ItemDetails() {
       </Grid>
    )
 }
-// returns component that allows user to add photos
-function Photos() {
-   const classes = useStyles()
-   const image = [
-      'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
-      'https://www.newsgra.ph/wp-content/uploads/2016/07/Pancit-Canton.jpg',
-      'https://cf.shopee.ph/file/43293b7a4630b8d2332ed4c2a8d9e9fd',
-      'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
-   ]
-
-   return (
-      <>
-         <div className={classes.container__inputHelper}>
-            <Typography
-               variant="body1"
-               component="p"
-               className={classes.text_bold}
-            >
-               Photos &nbsp;
-            </Typography>
-            <Typography variant="caption" component="p">
-               You can add up to 4 photos
-            </Typography>
-         </div>
-         <Grid container>
-            <Grid item xs={6}>
-               <img
-                  className={classes.image__donation}
-                  src={image[0]}
-                  alt="map"
-               />
-            </Grid>
-            <Grid item xs={6}>
-               <img
-                  className={classes.image__donation}
-                  src={image[1]}
-                  alt="map"
-               />
-            </Grid>
-            <Grid item xs={6}>
-               <img
-                  className={classes.image__donation}
-                  src={image[2]}
-                  alt="map"
-               />
-            </Grid>
-            <Grid item xs={6}>
-               <img
-                  className={classes.image__donation}
-                  src={image[3]}
-                  alt="map"
-               />
-            </Grid>
-         </Grid>
-      </>
-   )
-}
 // returns input field for the donation's name
 function DonationName(props) {
    const donationName = usePostStore((state) => state.donationName)
@@ -194,7 +138,6 @@ function DonationName(props) {
          rules={{ required: 'Donation Name required' }}
          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-               autoFocus
                margin="normal"
                type="text"
                variant="outlined"

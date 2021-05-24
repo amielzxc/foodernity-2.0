@@ -25,6 +25,10 @@ export const usePostStore = create((set) => ({
          checkedGuidelines: (state.checkedGuidelines = object),
       }))
    },
+   donationImage: null,
+   setDonationImage: (image) => {
+      set((state) => ({ donationImage: (state.donationImage = image) }))
+   },
    donationName: '',
    setDonationName: (name) => {
       set((state) => ({ donationName: (state.donationName = name) }))

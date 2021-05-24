@@ -17,6 +17,7 @@ import { useFilterStore } from './Listings'
 import LeftDrawer from '../Common/LeftDrawer'
 import DialogDrawer from '../Common/DialogDrawer'
 import 'date-fns'
+import ChangeLocation from './ChangeLocation'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
@@ -79,6 +80,7 @@ export function FilterDrawer() {
          <FilterButtons />
          <Divider className={classes.divider_margin} />
          <CurrentLocation />
+         <ChangeLocation />
          <Divider className={classes.divider_margin} />
          <DistanceFilter />
          <Divider className={classes.divider_margin} />
@@ -97,6 +99,7 @@ export function FilterDrawerResponsive() {
             <FilterButtons />
             <Divider className={classes.divider_margin} />
             <CurrentLocation />
+            <ChangeLocation />
             <Divider className={classes.divider_margin} />
             <DistanceFilter />
             <Divider className={classes.divider_margin} />

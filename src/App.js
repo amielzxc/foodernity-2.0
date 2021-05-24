@@ -4,6 +4,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import ProtectedRoute from './ProtectedRoute'
 import { useStore } from './Store'
 import Fallback from './Components/etc/Fallback'
+import UploadImage from './Components/PostListing/UploadImage'
 const Signin = React.lazy(() => import('./Components/Account/Signin'))
 const Signup = React.lazy(() => import('./Components/Account/Signup'))
 const ForgotPassword = React.lazy(() =>
@@ -35,6 +36,7 @@ const App = () => {
       //    <h1>Maps Integration</h1>
       //    <GoogleMap />
       // </div>
+
       <Router>
          <Suspense fallback={<Fallback />}>
             <ThemeProvider theme={theme}>

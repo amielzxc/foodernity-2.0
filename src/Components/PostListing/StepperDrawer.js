@@ -117,16 +117,39 @@ function VerticalStepper() {
    const setNext = usePostStore((state) => state.setNext)
    const setBack = usePostStore((state) => state.setBack)
 
+   const donationImage = usePostStore((state) => state.donationImage) // null
+   const donationName = usePostStore((state) => state.donationName) // ''
+   const donationRecipient = usePostStore((state) => state.donationRecipient) // ''
+   const donationCategory = usePostStore((state) => state.donationCategory) // ''
+   const pickupLocation = usePostStore((state) => state.pickupLocation) // null
+
+   const arr = [donationImage, donationName, donationRecipient]
+
    const [activeStep, setActiveStep] = useState(current)
    const steps = getSteps()
 
    const handleNext = () => {
-      if (!checkedGuidelines.includes(false)) {
+      if (current === 0) {
+         if (!checkedGuidelines.includes(false)) {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1)
+            setNext()
+            setDisplayAlert(false)
+         } else {
+            setDisplayAlert(true)
+         }
+      } else if (current === 1) {
+         for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === null || arr.includes('')) {
+               console.log('fill up first')
+               break
+            } else {
+               setActiveStep((prevActiveStep) => prevActiveStep + 1)
+               setNext()
+            }
+         }
+      } else {
          setActiveStep((prevActiveStep) => prevActiveStep + 1)
          setNext()
-         setDisplayAlert(false)
-      } else {
-         setDisplayAlert(true)
       }
    }
 

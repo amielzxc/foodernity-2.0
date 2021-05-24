@@ -87,20 +87,9 @@ function DonationPreview() {
    )
 }
 // returns the photos of the donation
-function DonationImages(props) {
+function DonationImages() {
    const classes = useStyles()
-   const image = [
-      'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
-      'https://www.newsgra.ph/wp-content/uploads/2016/07/Pancit-Canton.jpg',
-      'https://cf.shopee.ph/file/43293b7a4630b8d2332ed4c2a8d9e9fd',
-      'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
-   ]
-
-   const [index, setIndex] = useState(0)
-
-   const handleChangeImage = (index) => {
-      setIndex(index)
-   }
+   const donationImage = usePostStore((state) => state.donationImage)
 
    return (
       <Grid
@@ -112,61 +101,34 @@ function DonationImages(props) {
          className={classes.container}
       >
          <Typography variant="h6" className={classes.title}>
-            Donation Images
+            Donation Image
          </Typography>
          <Paper elevation={2} className={classes.container__paper}>
-            <img
-               src={image[index]}
-               alt="pancit canton"
-               className={classes.image__mainPreview}
-            />
-            <div className={classes.container__subImages}>
+            <div
+               style={{
+                  backgroundImage: `url(${donationImage})`,
+                  backgroundSize: 'contain',
+                  zIndex: '0',
+                  filter: 'blur(5px)',
+                  height: '450px',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+               }}
+            >
                <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(0)
+                  style={{
+                     zIndex: '9999',
                   }}
                >
                   <img
-                     src={image[0]}
-                     alt="donation-image1"
-                     className={classes.image__sub}
-                  />
-               </div>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(1)
-                  }}
-               >
-                  <img
-                     src={image[1]}
-                     alt="donation-image2"
-                     className={classes.image__sub}
-                  />
-               </div>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(2)
-                  }}
-               >
-                  <img
-                     src={image[2]}
-                     alt="donation-image3"
-                     className={classes.image__sub}
-                  />
-               </div>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(3)
-                  }}
-               >
-                  <img
-                     src={image[3]}
-                     alt="donation-image4"
-                     className={classes.image__sub}
+                     style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                     }}
+                     src={donationImage}
+                     alt="donation-image"
                   />
                </div>
             </div>
