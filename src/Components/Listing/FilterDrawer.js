@@ -80,7 +80,6 @@ export function FilterDrawer() {
          <FilterButtons />
          <Divider className={classes.divider_margin} />
          <CurrentLocation />
-         <ChangeLocation />
          <Divider className={classes.divider_margin} />
          <DistanceFilter />
          <Divider className={classes.divider_margin} />
@@ -99,7 +98,6 @@ export function FilterDrawerResponsive() {
             <FilterButtons />
             <Divider className={classes.divider_margin} />
             <CurrentLocation />
-            <ChangeLocation />
             <Divider className={classes.divider_margin} />
             <DistanceFilter />
             <Divider className={classes.divider_margin} />
@@ -126,6 +124,12 @@ function Title() {
 }
 // returns the current location selected by the user
 function CurrentLocation() {
+   const userLocation = useFilterStore((state) => state.userLocation)
+   const [toggle, setToggle] = useState(false)
+
+   const handleSetToggle = () => {
+      setToggle(!toggle)
+   }
    const classes = useStyles()
    return (
       <div>
@@ -137,8 +141,8 @@ function CurrentLocation() {
                className={classes.icon__location}
                color="primary"
             />
-            <Typography variant="body1">Bali Oasis, Pasig</Typography>
-            <IconButton size="small">
+            <Typography variant="body1">{userLocation}</Typography>
+            <IconButton size="small" onClick={handleSetToggle}>
                <EditIcon
                   className={classes.icon__editLocation}
                   color="primary"
@@ -146,6 +150,7 @@ function CurrentLocation() {
                />
             </IconButton>
          </div>
+         {toggle && <ChangeLocation toggle={handleSetToggle} />}
       </div>
    )
 }

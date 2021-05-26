@@ -136,7 +136,7 @@ function DonationName(props) {
          control={props.control}
          defaultValue={donationName}
          rules={{ required: 'Donation Name required' }}
-         render={({ field: { onChange, value }, fieldState: { error } }) => (
+         render={({ field: { onChange, value } }) => (
             <TextField
                margin="normal"
                type="text"
@@ -147,8 +147,6 @@ function DonationName(props) {
                fullWidth
                value={value}
                onChange={onChange}
-               error={!!error}
-               helperText={error ? error.message : null}
             />
          )}
       />
@@ -186,7 +184,7 @@ function DonationRecipient(props) {
             control={props.control}
             defaultValue={donationRecipient}
             rules={{ required: 'Recipient required' }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value } }) => (
                <Select
                   defaultValue={value ? value : ''}
                   labelId="donationRecipient"

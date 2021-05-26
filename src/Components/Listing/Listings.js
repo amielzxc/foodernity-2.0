@@ -16,7 +16,7 @@ export const useFilterStore = create((set) => ({
    setFilterButton: (filter) => {
       set((state) => ({ filterButton: (state.filterButton = filter) }))
    },
-   userLocation: '',
+   userLocation: 'Metro Manila, Philippines',
    setUserLocation: (location) => {
       set((state) => ({ userLocation: (state.userLocation = location) }))
    },
@@ -51,7 +51,8 @@ export default function Listings() {
             <CssBaseline />
             <StyledAppBar />
             {/* displays whether the left drawer should be displayed or not depending on the variable */}
-            {responsiveLayout ? null : <FilterDrawer />}
+            {!responsiveLayout && <FilterDrawer />}
+            {/* <FilterDrawer /> */}
             <ListingContainer />
          </div>
       </>

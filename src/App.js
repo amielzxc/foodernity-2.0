@@ -4,7 +4,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import ProtectedRoute from './ProtectedRoute'
 import { useStore } from './Store'
 import Fallback from './Components/etc/Fallback'
-import UploadImage from './Components/PostListing/UploadImage'
+import Accounts from './Components/Accounts/Accounts'
+
 const Signin = React.lazy(() => import('./Components/Account/Signin'))
 const Signup = React.lazy(() => import('./Components/Account/Signup'))
 const ForgotPassword = React.lazy(() =>
@@ -13,9 +14,9 @@ const ForgotPassword = React.lazy(() =>
 const Listings = React.lazy(() => import('./Components/Listing/Listings'))
 const Error = React.lazy(() => import('./Components/etc/Error'))
 const Post = React.lazy(() => import('./Components/PostListing/Post'))
-const ListingDetail = React.lazy(() =>
-   import('./Components/Listing/ListingDetail')
-)
+// const ListingDetail = React.lazy(() =>
+//    import('./Components/Listing/ListingDetail')
+// )
 const Messages = React.lazy(() => import('./Components/Messages/Messages'))
 const FAQs = React.lazy(() => import('./Components/FAQs&Guidelines/FAQs'))
 const Admin = React.lazy(() => import('./Components/Admin/Admin'))
@@ -44,14 +45,29 @@ const App = () => {
                   <Route path="/" exact component={Signin} />
                   <Route path="/signup" component={Signup} />
                   <Route path="/forgotpassword" component={ForgotPassword} />
-                  {/* <Route path="/admin" component={Admin} /> */}
                   <ProtectedRoute
                      path="/admin"
                      exact
                      component={Admin}
                      isAuth={isAuthenticated}
                   />
-                  <ProtectedRoute
+
+                  <Route path="/listings" exact>
+                     <Listings />
+                  </Route>
+                  <Route path="/post">
+                     <Post />
+                  </Route>
+                  <Route path="/messages">
+                     <Messages />
+                  </Route>
+                  <Route path="/faqs">
+                     <FAQs />
+                  </Route>
+                  <Route path="/account">
+                     <Accounts />
+                  </Route>
+                  {/* <ProtectedRoute
                      path="/listings"
                      exact
                      component={Listings}
@@ -76,7 +92,7 @@ const App = () => {
                      path="/faqs"
                      component={FAQs}
                      isAuth={isAuthenticated}
-                  />
+                  /> */}
                   <Route path="" component={Error} />
                </Switch>
             </ThemeProvider>

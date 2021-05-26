@@ -35,7 +35,7 @@ function FAQsContainer() {
    return (
       <MainContainer>
          {/* displays whether the topics drawer dialog should be displayed or not depending on the variable */}
-         {responsiveLayout ? <TopicsDrawerResponsive /> : null}
+         {responsiveLayout && <TopicsDrawerResponsive />}
          <DonorGuidelines />
          <DoneeGuidelines />
       </MainContainer>

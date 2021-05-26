@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import parse from 'autosuggest-highlight/parse'
 import throttle from 'lodash/throttle'
 import { GoogleApiWrapper } from 'google-maps-react'
+import { useFilterStore } from './Listings'
 
 const autocompleteService = { current: null }
 
@@ -18,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 
-function ChangeLocation() {
+function ChangeLocation(props) {
    const classes = useStyles()
-   const [value, setValue] = React.useState(null)
-   const [inputValue, setInputValue] = React.useState('')
-   const [options, setOptions] = React.useState([])
-   const loaded = React.useRef(false)
+   const [value, setValue] = useState(null)
+   const [inputValue, setInputValue] = useState('')
+   const [options, setOptions] = useState([])
+   const setUserLocation = useFilterStore((state) => state.setUserLocation)
 
-   const fetch = React.useMemo(
+   const fetch = useMemo(
       () =>
          throttle((request, callback) => {
             request.componentRestrictions = { country: 'ph' }
@@ -34,7 +35,7 @@ function ChangeLocation() {
       []
    )
 
-   React.useEffect(() => {
+   useEffect(() => {
       let active = true
 
       if (!autocompleteService.current && window.google) {
@@ -87,6 +88,13 @@ function ChangeLocation() {
          onChange={(event, newValue) => {
             setOptions(newValue ? [newValue, ...options] : options)
             setValue(newValue)
+
+            if (newValue) {
+               setUserLocation(newValue.description)
+            } else {
+               setUserLocation('')
+            }
+            props.toggle()
          }}
          onInputChange={(event, newInputValue) => {
             setInputValue(newInputValue)

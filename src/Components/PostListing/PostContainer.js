@@ -24,14 +24,14 @@ function PostContainer() {
          If 1, return the itemdetails and pickupdetails components which are used to be filled up by the user
          If 2, return the donationpreview component 
          */}
-         {current === 0 ? <Guidelines /> : null}
-         {current === 1 ? (
+         {current === 0 && <Guidelines />}
+         {current === 1 && (
             <Grid container justify="center">
                <ItemDetails />
                <PickupDetails />
             </Grid>
-         ) : null}
-         {current === 2 ? <DonationPreview /> : null}
+         )}
+         {current === 2 && <DonationPreview />}
       </MainContainer>
    )
 }

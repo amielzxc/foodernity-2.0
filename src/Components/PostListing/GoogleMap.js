@@ -54,7 +54,7 @@ export function MapContainer(props) {
    }
    return (
       <>
-         {isEmpty(mapCenter) ? null : (
+         {!isEmpty(mapCenter) && (
             <>
                <div id="googleMaps" style={style}>
                   <Map

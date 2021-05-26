@@ -110,7 +110,7 @@ function Post() {
             <CssBaseline />
             <StyledAppBar />
             {/* displays whether the left drawer should be displayed or not depending on the variable */}
-            {responsiveLayout ? null : <StepperDrawer />}
+            {!responsiveLayout && <StepperDrawer />}
             <PostContainer />
          </div>
       </>

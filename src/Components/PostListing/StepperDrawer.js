@@ -111,7 +111,8 @@ function getStepContent(step) {
 // returns the vertical stepper itself
 function VerticalStepper() {
    const checkedGuidelines = usePostStore((state) => state.checkedGuidelines)
-   const [displayAlert, setDisplayAlert] = useState(false)
+   const [displayAlert1, setDisplayAlert1] = useState(false)
+   const [displayAlert2, setDisplayAlert2] = useState(false)
    const current = usePostStore((state) => state.current)
    const classes = useStyles()
    const setNext = usePostStore((state) => state.setNext)
@@ -123,7 +124,13 @@ function VerticalStepper() {
    const donationCategory = usePostStore((state) => state.donationCategory) // ''
    const pickupLocation = usePostStore((state) => state.pickupLocation) // null
 
-   const arr = [donationImage, donationName, donationRecipient]
+   const arr = [
+      donationImage,
+      donationName,
+      donationRecipient,
+      donationCategory,
+      pickupLocation,
+   ]
 
    const [activeStep, setActiveStep] = useState(current)
    const steps = getSteps()
@@ -133,13 +140,18 @@ function VerticalStepper() {
          if (!checkedGuidelines.includes(false)) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
             setNext()
-            setDisplayAlert(false)
+            setDisplayAlert1(false)
          } else {
-            setDisplayAlert(true)
+            setDisplayAlert1(true)
          }
       } else if (current === 1) {
-         setActiveStep((prevActiveStep) => prevActiveStep + 1)
-         setNext()
+         if (arr.includes(null) || arr.includes('')) {
+            setDisplayAlert2(true)
+         } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1)
+            setNext()
+            setDisplayAlert2(false)
+         }
       } else if (current === 2) {
          console.log('save to db')
       }
@@ -154,7 +166,8 @@ function VerticalStepper() {
       if (reason === 'clickaway') {
          return
       }
-      setDisplayAlert(false)
+      setDisplayAlert1(false)
+      setDisplayAlert2(false)
    }
 
    return (
@@ -190,7 +203,8 @@ function VerticalStepper() {
                </Step>
             ))}
          </Stepper>
-         <CustomizedSnackbars open={displayAlert} close={handleClose} />
+         <StepOneAlert open={displayAlert1} close={handleClose} />
+         <StepTwoAlert open={displayAlert2} close={handleClose} />
       </div>
    )
 }
@@ -199,13 +213,29 @@ function Alert(props) {
    return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-function CustomizedSnackbars(props) {
-   const { close } = props
+function StepOneAlert(props) {
+   const { close, open } = props
    const message = 'You should acknowledge the guidelines first.'
+
    return (
       <>
-         <Snackbar open={props.open} autoHideDuration={6000} onClose={close}>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
             <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
+   )
+}
+
+function StepTwoAlert(props) {
+   const { close, open } = props
+   const message = 'You need to fill up details first.'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="warning">
                {message}
             </Alert>
          </Snackbar>

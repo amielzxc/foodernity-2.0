@@ -73,7 +73,6 @@ function PickupDetails() {
          className={classes.root}
          item
          xs={12}
-         md={8}
          lg={6}
          direction="column"
       >
@@ -140,7 +139,7 @@ function PickupDate(props) {
             control={props.control}
             defaultValue={pickupDate}
             rules={{ required: 'Pickup Date required' }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value } }) => (
                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                      margin="normal"
@@ -174,13 +173,12 @@ function PickupTime(props) {
             control={props.control}
             defaultValue={pickupTime}
             rules={{ required: 'Pickup Time required' }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value } }) => (
                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardTimePicker
                      margin="normal"
                      inputVariant="outlined"
                      fullWidth
-                     //margin="normal"
                      mask="__:__ _M"
                      placeholder="08:00 AM"
                      value={value}

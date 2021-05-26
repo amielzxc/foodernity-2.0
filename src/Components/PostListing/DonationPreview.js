@@ -1,5 +1,5 @@
 import { Grid, makeStyles, Chip, Paper, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React from 'react'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import ScheduleIcon from '@material-ui/icons/Schedule'
@@ -90,7 +90,7 @@ function DonationPreview() {
 function DonationImages() {
    const classes = useStyles()
    const donationImage = usePostStore((state) => state.donationImage)
-
+   const convertedImage = URL.createObjectURL(donationImage)
    return (
       <Grid
          container
@@ -106,31 +106,28 @@ function DonationImages() {
          <Paper elevation={2} className={classes.container__paper}>
             <div
                style={{
-                  backgroundImage: `url(${donationImage})`,
+                  //backgroundImage: `url(${convertedImage})`,
                   backgroundSize: 'contain',
                   zIndex: '0',
-                  filter: 'blur(5px)',
+                  //filter: 'blur(5px)',
                   height: '450px',
                   width: '100%',
                   display: 'flex',
                   justifyContent: 'center',
                }}
             >
-               <div
+               <img
                   style={{
-                     zIndex: '9999',
+                     //backdropFilter: 'blur(10px)',
+                     //zIndex: '1',
+                     maxWidth: '100%',
+                     height: '100%',
+                     objectFit: 'contain',
                   }}
-               >
-                  <img
-                     style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                     }}
-                     src={donationImage}
-                     alt="donation-image"
-                  />
-               </div>
+                  src={convertedImage}
+                  alt="donation"
+               />
+               {/* </div> */}
             </div>
          </Paper>
       </Grid>
