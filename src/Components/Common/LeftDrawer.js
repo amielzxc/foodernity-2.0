@@ -13,7 +13,10 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2.5, 2),
    },
    drawer__container: {
+      display: 'flex',
+      flexDirection: 'column',
       overflow: 'auto',
+      //backgroundColor: 'red',
       height: '100%',
       '&::-webkit-scrollbar': {
          display: 'none',

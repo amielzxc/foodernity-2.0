@@ -1,10 +1,12 @@
-import React from "react"
-import { makeStyles, Typography } from "@material-ui/core"
+import React from 'react'
+import { makeStyles, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
    root: {
-      display: "flex",
-      color: "white",
+      marginTop: 'auto',
+   },
+   text_inline: {
+      display: 'inline',
    },
 })
 
@@ -14,22 +16,25 @@ function Footer() {
 
    const classes = useStyles()
    return (
-      <footer>
-         <div className={classes.root}>
-            <Typography variant="body2" component="p">
+      <div className={classes.root}>
+         <footer>
+            <Typography variant="body2" className={classes.text_inline}>
                Terms of service
             </Typography>
-            <Typography variant="body2" component="p">
+            {' • '}
+            <Typography variant="body2" className={classes.text_inline}>
                Privacy &amp; Policy
             </Typography>
-            <Typography variant="body2" component="p">
-               More
+            {' • '}
+            <Typography variant="body2" className={classes.text_inline}>
+               Site Map
             </Typography>
-            <Typography variant="body2" component="p">
+            {' • '}
+            <Typography variant="body2" className={classes.text_inline}>
                Foodernity © {year}
             </Typography>
-         </div>
-      </footer>
+         </footer>
+      </div>
    )
 }
 

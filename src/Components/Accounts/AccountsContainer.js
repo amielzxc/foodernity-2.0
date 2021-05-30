@@ -14,8 +14,6 @@ function AccountsContainer() {
 
    let { path } = useRouteMatch()
 
-   console.log(path)
-
    return (
       <MainContainer>
          {/* displays whether the topics drawer dialog should be displayed or not depending on the variable */}

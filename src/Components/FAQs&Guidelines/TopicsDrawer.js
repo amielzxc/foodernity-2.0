@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react'
 import BookRoundedIcon from '@material-ui/icons/BookRounded'
 import faqIcon from '@iconify/icons-wpf/faq'
 import DialogDrawer from '../Common/DialogDrawer'
-
+import Footer from '../Common/Footer'
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
       display: 'flex',
@@ -46,6 +46,7 @@ export function TopicsDrawer() {
          <Subtitle subtitle="Donor Guidelines" />
          <Subtitle subtitle="Foodbanks Guidelines" />
          <Subtitle subtitle="Process" />
+         <Footer />
       </LeftDrawer>
    )
 }

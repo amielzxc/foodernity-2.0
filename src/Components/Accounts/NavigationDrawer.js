@@ -7,6 +7,7 @@ import EditRoundedIcon from '@material-ui/icons/EditRounded'
 import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded'
 import { Link, useRouteMatch } from 'react-router-dom'
 import create from 'zustand'
+import Footer from '../Common/Footer'
 
 const useCurrentStore = create((set) => ({
    current: 'My Donations',
@@ -80,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
    },
    hover: {
       '&:hover': {
-         backgroundColor: '#EDEDED',
+         backgroundColor: '#F5F5F5',
          borderRadius: '5px',
       },
    },
@@ -124,6 +125,7 @@ export function NavigationDrawer() {
                link={icon.link}
             />
          ))}
+         <Footer />
       </LeftDrawer>
    )
 }

@@ -72,7 +72,7 @@ function ForgotPassword() {
                      Enter your registered email address and you will receive a
                      password resend link.
                   </Typography>
-                  <ContactNumberField control={control} />
+                  <EmailInput control={control} />
                   <Captcha className={classes.recaptcha} image={Recaptcha} />
                   <SendButton className={classes.button__send} />
                   <SignInButton className={classes.button__signin} />
@@ -85,20 +85,20 @@ function ForgotPassword() {
    )
 }
 // returns the contact number field
-function ContactNumberField(props) {
+function EmailInput(props) {
    return (
       <Controller
-         name="contactNumber"
+         name="emailAddress"
          control={props.control}
          defaultValue=""
-         rules={{ required: 'Contact number required' }}
+         rules={{ required: 'Email address required' }}
          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-               type="tel"
-               autoComplete="tel"
+               type="email"
+               autoComplete="email"
                variant="outlined"
-               id="contactNumber"
-               label="Contact Number"
+               id="emailAddress"
+               label="Email Address"
                autoFocus
                required
                fullWidth

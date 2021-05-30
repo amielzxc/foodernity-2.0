@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles, fade } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -6,14 +6,47 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import { Grid } from '@material-ui/core'
+import { Button, Grid, Paper } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import InputBase from '@material-ui/core/InputBase'
+import ListAltIcon from '@material-ui/icons/ListAlt'
+import ShareIcon from '@material-ui/icons/Share'
+import { grey } from '@material-ui/core/colors'
+import AddIcon from '@material-ui/icons/Add'
 function MyDonations() {
+   const classes = useStyles()
    return (
-      <Grid container>
-         <Grid item sm={12} md={9}>
+      <Grid container spacing={2}>
+         <Grid item xs={12} lg={9}>
             <DonationTabs />
+         </Grid>
+         <Grid item xs={false} lg={3}>
+            <Paper style={{ padding: '10px' }}>
+               <Typography variant="body1" style={{ fontWeight: 'bold' }}>
+                  Having Trouble?
+               </Typography>
+
+               <Typography>• Donor Guidelines</Typography>
+               <Typography>• Donee Guidelines</Typography>
+               <Typography style={{ fontWeight: 'bold' }}>
+                  See all topics
+               </Typography>
+               <Box m={2} />
+               <Button
+                  fullWidth
+                  disableElevation
+                  variant="contained"
+                  color="primary"
+                  //className={classes.button_lightblue}
+                  startIcon={<AddIcon />}
+               >
+                  Post a Donation
+               </Button>
+               <Box m={1} />
+               <Button variant="outlined" color="secondary" fullWidth>
+                  Need help ?
+               </Button>
+            </Paper>
          </Grid>
       </Grid>
    )
@@ -43,7 +76,7 @@ TabPanel.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
    root: {
-      width: 'auto',
+      width: '100%',
       borderRadius: '5px',
    },
    appbar: {
@@ -106,11 +139,60 @@ const useStyles = makeStyles((theme) => ({
          },
       },
    },
+   container__listingitem: {
+      width: '100%',
+      backgroundColor: 'white',
+      display: 'flex',
+      margin: '10px  0',
+      padding: '15px',
+      borderRadius: '5px',
+   },
+   image__listingitem: {
+      height: 'auto',
+      width: '100px',
+      borderRadius: '5px',
+      marginRight: '15px',
+   },
+   container__listingdetail: {
+      flex: '1',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+   },
+   container__button: {
+      alignSelf: 'flex-end',
+      display: 'flex',
+      justifyContent: 'flex-end',
+      flexWrap: 'wrap',
+   },
+   button_grey: {
+      color: theme.palette.getContrastText(grey[500]),
+      backgroundColor: grey[300],
+      '&:hover': {
+         backgroundColor: grey[400],
+         // Reset on touch devices, it doesn't add specificity
+         '@media (hover: none)': {
+            backgroundColor: grey[300],
+         },
+      },
+   },
+   button_lightblue: {
+      marginRight: theme.spacing(1),
+      color: '#2196F3',
+      backgroundColor: '#E3F2FD',
+      '&:hover': {
+         backgroundColor: '#BEE4FF',
+         // Reset on touch devices, it doesn't add specificity
+         '@media (hover: none)': {
+            backgroundColor: '#2196F3',
+         },
+      },
+   },
 }))
 
 function DonationTabs() {
    const classes = useStyles()
-   const [value, setValue] = React.useState(0)
+   const [value, setValue] = useState(0)
 
    const handleChange = (event, newValue) => {
       setValue(newValue)
@@ -143,30 +225,33 @@ function DonationTabs() {
                   <Tab label="All" />
                   <Tab label="Listed" />
                   <Tab label="To Approve" />
-                  <Tab label="Active" />
+                  <Tab label="Ongoing" />
                   <Tab label="Completed" />
                   <Tab label="Unlisted" />
                </Tabs>
             </AppBar>
          </Box>
-         <TabPanel value={value} index={0} component="div">
-            <DonationItem />
-            <DonationItem />
+         <TabPanel value={value} index={0}>
+            <ListedDonation />
+            <ToApproveDonation />
+            <OngoingDonation />
+            <CompletedDonation />
+            <UnlistedDonation />
          </TabPanel>
          <TabPanel value={value} index={1}>
-            Item Two
+            <ListedDonation />
          </TabPanel>
          <TabPanel value={value} index={2}>
-            Item Three
+            <ToApproveDonation />
          </TabPanel>
          <TabPanel value={value} index={3}>
-            Item Four
+            <OngoingDonation />
          </TabPanel>
          <TabPanel value={value} index={4}>
-            Item Five
+            <CompletedDonation />
          </TabPanel>
          <TabPanel value={value} index={5}>
-            Item Six
+            <UnlistedDonation />
          </TabPanel>
       </div>
    )
@@ -191,39 +276,236 @@ function SearchField() {
    )
 }
 
-function DonationItem() {
+function ListedDonation() {
+   const classes = useStyles()
    const imgsrc =
       'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
    return (
       <Box boxShadow={1} borderRadius={5}>
-         <div
-            style={{
-               width: '100%',
-               backgroundColor: 'white',
-               display: 'flex',
-               margin: '10px  0',
-               padding: '15px',
-               borderRadius: '5px',
-            }}
-         >
+         <div className={classes.container__listingitem}>
             <img
-               style={{
-                  height: 'auto',
-                  width: '100px',
-                  borderRadius: '5px',
-                  marginRight: '15px',
-               }}
+               className={classes.image__listingitem}
                src={imgsrc}
                alt="donation"
             />
-            <div
-               style={{
-                  //backgroundColor: 'red',
-                  flex: '1',
-                  display: 'flex',
-                  flexDirection: 'column',
-               }}
-            ></div>
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     Ligo Sardines
+                  </Typography>
+                  <Typography variant="body2">
+                     Available for request •{' '}
+                     <span style={{ fontWeight: '200' }}>Listed 1h ago</span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function ToApproveDonation() {
+   const classes = useStyles()
+   const imgsrc =
+      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgsrc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     Ligo Sardines
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: 'red' }}>
+                        Waiting for your approval
+                     </span>{' '}
+                     • <span style={{ fontWeight: '200' }}>Listed 1h ago</span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function OngoingDonation() {
+   const classes = useStyles()
+   const imgsrc =
+      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgsrc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     Ligo Sardines
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#66BB6A' }}>
+                        Ongoing transaction
+                     </span>{' '}
+                     • <span style={{ fontWeight: '200' }}>Listed 1h ago</span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function CompletedDonation() {
+   const classes = useStyles()
+   const imgsrc =
+      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgsrc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     Ligo Sardines
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#8D6E63' }}>Completed</span> •{' '}
+                     <span style={{ fontWeight: '200' }}>Claimed 1h ago</span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function UnlistedDonation() {
+   const classes = useStyles()
+   const imgsrc =
+      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgsrc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     Ligo Sardines
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#8D6E63' }}>
+                        Unlisted due to expiry limit
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
          </div>
       </Box>
    )

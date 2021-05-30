@@ -15,7 +15,7 @@ import {
    makeStyles,
 } from '@material-ui/core'
 import { deepOrange } from '@material-ui/core/colors'
-import NotificationsIcon from '@material-ui/icons/Notifications'
+
 import MenuIcon from '@material-ui/icons/Menu'
 import { Drafts } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
@@ -39,14 +39,12 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'none',
    },
    navbar__actions: {
-      width: '29rem',
+      width: '25rem',
       display: 'flex',
       justifyContent: 'space-between',
       marginRight: theme.spacing(2),
    },
-   button__notifications: {
-      marginRight: theme.spacing(1),
-   },
+
    avatar__color_orange: {
       color: theme.palette.getContrastText(deepOrange[500]),
       backgroundColor: deepOrange[500],
@@ -76,10 +74,6 @@ function StyledAppBar() {
             </div>
             {/* Displays whether the menu button or the full page buttons depending on the page size */}
             {isMatch ? <MenuButton /> : <NavigationButtons />}
-            {/* Notifications Button */}
-            <IconButton className={classes.button__notifications}>
-               <NotificationsIcon />
-            </IconButton>
 
             <IconButton component={Link} to="/account">
                <Avatar className={classes.avatar__color_orange}>FB</Avatar>
@@ -102,7 +96,6 @@ function NavigationButtons() {
          <Button component={Link} to="messages">
             Messages
          </Button>
-         <Button>Forum</Button>
          <Button component={Link} to="faqs">
             FAQs &amp; Guidelines
          </Button>
@@ -168,7 +161,6 @@ function MenuButton() {
                <ListItemText>Listings</ListItemText>
             </MenuItem>
             <MenuItem onClick={handleClose}>Messages</MenuItem>
-            <MenuItem onClick={handleClose}>Forum</MenuItem>
             <MenuItem onClick={handleClose}>FAQs</MenuItem>
          </Menu>
       </>

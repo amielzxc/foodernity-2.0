@@ -156,7 +156,6 @@ function DonationDetails(props) {
             <Typography variant="h5" className={classes.text_bold}>
                {donationName}
             </Typography>
-            <DistanceFromDonee />
             <ChipCategory />
             <ExpiryDate />
             <DonationNotes donationNotes={donationNotes} />
@@ -167,15 +166,6 @@ function DonationDetails(props) {
    )
 }
 
-function DistanceFromDonee() {
-   const classes = useStyles()
-   return (
-      <div className={classes.container__distanceAway}>
-         <LocationOnIcon color="secondary" />
-         <Typography>3 kilometers away</Typography>
-      </div>
-   )
-}
 // returns the food category of the donation
 function ChipCategory() {
    const donationCategory = usePostStore((state) => state.donationCategory)

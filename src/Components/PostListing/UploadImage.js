@@ -29,7 +29,7 @@ function UploadImage() {
          ? donationImage
          : URL.createObjectURL(donationImage)
    const setDonationImage = usePostStore((state) => state.setDonationImage)
-   var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i
+   var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i
    const [image, setImage] = useState(convertedImage)
    const [displayAlert, setDisplayAlert] = useState(false)
 
@@ -64,7 +64,12 @@ function UploadImage() {
          <div style={buttonStyle}>
             <Button color="primary" variant="contained" component="label">
                Upload Image
-               <input type="file" onChange={onImageChange} hidden />
+               <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png"
+                  onChange={onImageChange}
+                  hidden
+               />
             </Button>
          </div>
          <ImageAlert open={displayAlert} close={handleClose} />

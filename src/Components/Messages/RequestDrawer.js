@@ -8,12 +8,13 @@ import {
    Chip,
    Button,
    withStyles,
+   Avatar,
 } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import DialogDrawer from '../Common/DialogDrawer'
-
+import { deepOrange } from '@material-ui/core/colors'
 const drawerWidth = 350
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2.5, 2),
    },
    drawer__container: {
+      display: 'flex',
+      flexDirection: 'column',
       overflow: 'auto',
       height: '100%',
       '&::-webkit-scrollbar': {
@@ -44,6 +47,14 @@ const useStyles = makeStyles((theme) => ({
    title: {
       fontWeight: 'bold',
       margin: theme.spacing(0.5, 0),
+   },
+   container__avatar: {
+      display: 'flex',
+      alignItems: 'center',
+   },
+   avatar__color: {
+      backgroundColor: deepOrange[500],
+      marginRight: '10px',
    },
    container__donationDetails: {
       height: '70%',
@@ -103,6 +114,8 @@ export function RequestDrawer() {
             <Title />
             <Divider className={classes.divider_margin} />
             <div className={classes.container__donationDetails}>
+               <DoneeName />
+               <Divider className={classes.divider_margin} />
                <DonationName />
                <DistanceFromDonee />
                <ChipCategory />
@@ -116,13 +129,13 @@ export function RequestDrawer() {
                style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'flex-end',
+                  marginTop: 'auto',
                }}
             >
                <Divider className={classes.divider_margin} />
-               {/* <CancelButton /> */}
-               <DeclineButton />
-               <ApproveButton />
+               <CancelButton />
+               {/* <DeclineButton />
+               <ApproveButton /> */}
             </div>
          </div>
       </Drawer>
@@ -165,6 +178,21 @@ function Title() {
    )
 }
 
+function DoneeName() {
+   const classes = useStyles()
+   return (
+      <>
+         <Typography>Listing by</Typography>
+         <div className={classes.container__avatar}>
+            <Avatar className={classes.avatar__color}>FB</Avatar>
+            <Typography variant="body1" component="p">
+               Fhillip Bagsic
+            </Typography>
+         </div>
+      </>
+   )
+}
+
 function DonationName() {
    const classes = useStyles()
    return (
@@ -189,8 +217,6 @@ function ChipCategory() {
    const classes = useStyles()
    return (
       <div className={classes.container__category}>
-         <Chip label="Instant Noodles" color="primary" />
-         <div style={{ width: '5px' }} />
          <Chip label="Canned Goods" color="primary" />
       </div>
    )
@@ -254,13 +280,13 @@ function DonationPickupDetails() {
       </>
    )
 }
-// function CancelButton() {
-//   return (
-//     <Button color="secondary" variant="outlined" fullWidth>
-//       Cancel my Request
-//     </Button>
-//   );
-// }
+function CancelButton() {
+   return (
+      <Button color="secondary" variant="outlined" fullWidth>
+         Cancel my Request
+      </Button>
+   )
+}
 function DeclineButton() {
    return (
       <Button color="secondary" variant="outlined" fullWidth>

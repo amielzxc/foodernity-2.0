@@ -9,7 +9,7 @@ import {
 } from '@material-ui/pickers'
 import { usePostStore } from './Post'
 import GoogleMap from './GoogleMap'
-
+import ScheduleIcon from '@material-ui/icons/Schedule'
 const useStyles = makeStyles((theme) => ({
    root: {
       maxWidth: '700px',
@@ -142,6 +142,7 @@ function PickupDate(props) {
             render={({ field: { onChange, value } }) => (
                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
+                     disablePast
                      margin="normal"
                      autoOk
                      fullWidth
@@ -150,6 +151,7 @@ function PickupDate(props) {
                      value={value}
                      InputAdornmentProps={{ position: 'end' }}
                      onChange={onChange}
+                     InputProps={{ readOnly: true }}
                   />
                </MuiPickersUtilsProvider>
             )}
@@ -179,10 +181,10 @@ function PickupTime(props) {
                      margin="normal"
                      inputVariant="outlined"
                      fullWidth
-                     mask="__:__ _M"
-                     placeholder="08:00 AM"
                      value={value}
                      onChange={onChange}
+                     InputProps={{ readOnly: true }}
+                     keyboardIcon={<ScheduleIcon />}
                   />
                </MuiPickersUtilsProvider>
             )}

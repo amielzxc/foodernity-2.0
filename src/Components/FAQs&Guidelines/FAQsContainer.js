@@ -37,7 +37,7 @@ function FAQsContainer() {
          {/* displays whether the topics drawer dialog should be displayed or not depending on the variable */}
          {responsiveLayout && <TopicsDrawerResponsive />}
          <DonorGuidelines />
-         <DoneeGuidelines />
+         {/* <DoneeGuidelines /> */}
       </MainContainer>
    )
 }
@@ -59,10 +59,8 @@ function DonorGuidelines() {
          </Typography>
          <div className={classes.container__description}>
             <Typography variant="body1" component="p">
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam
-               quis non euismod faucibus a eu cum pharetra elementum. Congue
-               placerat vitae ultrices quis elit aliquam. Gravida a etiam sed
-               aliquam mauris.
+               Guidelines gives you descriptive details on posting donations as
+               well as picking up your donations by beneficiaries.
             </Typography>
          </div>
          <Grid container spacing={2}>

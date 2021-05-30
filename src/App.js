@@ -5,6 +5,8 @@ import ProtectedRoute from './ProtectedRoute'
 import { useStore } from './Store'
 import Fallback from './Components/etc/Fallback'
 import Accounts from './Components/Accounts/Accounts'
+import DonationStatus from './Components/Accounts/DonationStatus'
+import ListingDetail from './Components/Listing/ListingDetail'
 
 const Signin = React.lazy(() => import('./Components/Account/Signin'))
 const Signup = React.lazy(() => import('./Components/Account/Signup'))
@@ -19,7 +21,6 @@ const Post = React.lazy(() => import('./Components/PostListing/Post'))
 // )
 const Messages = React.lazy(() => import('./Components/Messages/Messages'))
 const FAQs = React.lazy(() => import('./Components/FAQs&Guidelines/FAQs'))
-const Admin = React.lazy(() => import('./Components/Admin/Admin'))
 
 const theme = createMuiTheme({
    palette: {
@@ -33,11 +34,6 @@ const theme = createMuiTheme({
 const App = () => {
    const isAuthenticated = useStore((state) => state.isAuthenticated)
    return (
-      // <div>
-      //    <h1>Maps Integration</h1>
-      //    <GoogleMap />
-      // </div>
-
       <Router>
          <Suspense fallback={<Fallback />}>
             <ThemeProvider theme={theme}>
@@ -45,13 +41,6 @@ const App = () => {
                   <Route path="/" exact component={Signin} />
                   <Route path="/signup" component={Signup} />
                   <Route path="/forgotpassword" component={ForgotPassword} />
-                  <ProtectedRoute
-                     path="/admin"
-                     exact
-                     component={Admin}
-                     isAuth={isAuthenticated}
-                  />
-
                   <Route path="/listings" exact>
                      <Listings />
                   </Route>
@@ -67,32 +56,12 @@ const App = () => {
                   <Route path="/account">
                      <Accounts />
                   </Route>
-                  {/* <ProtectedRoute
-                     path="/listings"
-                     exact
-                     component={Listings}
-                     isAuth={isAuthenticated}
-                  />
-                  <ProtectedRoute
-                     path="/listings/post"
-                     component={Post}
-                     isAuth={isAuthenticated}
-                  />
-                  <ProtectedRoute
-                     path="/listings/item"
-                     component={ListingDetail}
-                     isAuth={isAuthenticated}
-                  />
-                  <ProtectedRoute
-                     path="/messages"
-                     component={Messages}
-                     isAuth={isAuthenticated}
-                  />
-                  <ProtectedRoute
-                     path="/faqs"
-                     component={FAQs}
-                     isAuth={isAuthenticated}
-                  /> */}
+                  <Route path="/donationstatus">
+                     <DonationStatus />
+                  </Route>
+                  <Route path="/listingdetail">
+                     <ListingDetail />
+                  </Route>
                   <Route path="" component={Error} />
                </Switch>
             </ThemeProvider>

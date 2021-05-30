@@ -81,11 +81,16 @@ function ActionDrawerResponsive() {
 // returns a return to listings button
 function BackButton() {
    return (
-      <Button variant="text" startIcon={<ArrowBackIcon />} size="small">
-         Back to listings
-      </Button>
+      <div
+         style={{ display: 'flex', alignItems: 'center', marginBottom: '2rem' }}
+      >
+         <ArrowBackIcon fontSize="small" />
+         <div style={{ width: '.5rem' }}></div>
+         <Typography>Back</Typography>
+      </div>
    )
 }
+
 // returns the donor's avatar and name
 function DonorAvatar() {
    const classes = useStyles()
@@ -137,18 +142,8 @@ function ReportButton() {
 // returns the photos of the donation
 function DonationImages(props) {
    const classes = useStyles()
-   const image = [
-      'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
-      'https://www.newsgra.ph/wp-content/uploads/2016/07/Pancit-Canton.jpg',
-      'https://cf.shopee.ph/file/43293b7a4630b8d2332ed4c2a8d9e9fd',
-      'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
-   ]
-
-   const [index, setIndex] = useState(0)
-
-   const handleChangeImage = (index) => {
-      setIndex(index)
-   }
+   const image =
+      'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg'
 
    return (
       <Grid
@@ -164,60 +159,10 @@ function DonationImages(props) {
          </Typography>
          <Paper className={classes.container__paper}>
             <img
-               src={image[index]}
+               src={image}
                alt="pancit canton"
                className={classes.image__mainPreview}
             />
-            <div className={classes.container__subImages}>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(0)
-                  }}
-               >
-                  <img
-                     src={image[0]}
-                     alt="donation-image1"
-                     className={classes.image__sub}
-                  />
-               </div>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(1)
-                  }}
-               >
-                  <img
-                     src={image[1]}
-                     alt="donation-image2"
-                     className={classes.image__sub}
-                  />
-               </div>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(2)
-                  }}
-               >
-                  <img
-                     src={image[2]}
-                     alt="donation-image3"
-                     className={classes.image__sub}
-                  />
-               </div>
-               <div
-                  className={classes.image__subImage}
-                  onClick={() => {
-                     handleChangeImage(3)
-                  }}
-               >
-                  <img
-                     src={image[3]}
-                     alt="donation-image4"
-                     className={classes.image__sub}
-                  />
-               </div>
-            </div>
          </Paper>
       </Grid>
    )
@@ -271,8 +216,6 @@ function ChipCategory() {
    return (
       <div className={classes.container__chipCategory}>
          <Chip label="Instant Noodles" color="primary" />
-         <div style={{ width: '5px' }} />
-         <Chip label="Canned Goods" color="primary" />
       </div>
    )
 }
@@ -294,8 +237,7 @@ function DonationExpiry() {
       <div style={{ margin: '5px 0' }}>
          <Typography>
             The expiry date is on{' '}
-            <span className={classes.text_bold}>June 07, 2021</span>. Exactly 2
-            weeks and 3 days from now.
+            <span className={classes.text_bold}>June 07, 2021</span>.
          </Typography>
       </div>
    )

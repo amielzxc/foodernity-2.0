@@ -94,16 +94,11 @@ function getSteps() {
 function getStepContent(step) {
    switch (step) {
       case 0:
-         return `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.`
+         return `Acknowledgement of guidelines for the compliance of food safety and security.`
       case 1:
-         return 'An ad group contains one or more ads which target a shared set of keywords.'
+         return 'Details of the donations including the item details and pickup details'
       case 2:
-         return `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`
+         return `Preview to show what your donation looks like. Do double check the details you included before posting.`
       default:
          return 'Unknown step'
    }

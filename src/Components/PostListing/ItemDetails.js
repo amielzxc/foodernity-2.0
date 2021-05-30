@@ -227,7 +227,7 @@ function DonationCategory(props) {
             control={props.control}
             defaultValue={donationCategory}
             rules={{ required: 'Category required' }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+            render={({ field: { onChange, value } }) => (
                <Select
                   defaultValue={value ? value : ''}
                   labelId="donationRecipient"
@@ -239,10 +239,11 @@ function DonationCategory(props) {
                   <MenuItem value="">
                      <em>None</em>
                   </MenuItem>
-                  <MenuItem value={'Category 1'}>Category 1</MenuItem>
-                  <MenuItem value={'Category 2'}>Category 2</MenuItem>
-                  <MenuItem value={'Category 3'}>Category 3</MenuItem>
-                  <MenuItem value={'Category 4'}>Category 4</MenuItem>
+                  <MenuItem value={'Canned Goods'}>Canned Goods</MenuItem>
+                  <MenuItem value={'Instant Noodles'}>Instant Noodles</MenuItem>
+                  <MenuItem value={'Biscuits'}>Biscuits</MenuItem>
+                  <MenuItem value={'Beverages'}>Beverages</MenuItem>
+                  <MenuItem value={'Others'}>Others</MenuItem>
                </Select>
             )}
          />
@@ -253,16 +254,17 @@ function DonationCategory(props) {
 // returns input field for expiry date of the donation
 function DonationExpiry(props) {
    const donationExpiry = usePostStore((state) => state.donationExpiry)
+
    return (
       <Controller
          name="donationExpiry"
          control={props.control}
          defaultValue={donationExpiry}
          rules={{ required: 'Donation Expiry required' }}
-         render={({ field: { onChange, value }, fieldState: { error } }) => (
+         render={({ field: { onChange, value } }) => (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                <KeyboardDatePicker
-                  minDate={value}
+                  disablePast
                   autoOk
                   fullWidth
                   inputVariant="outlined"
@@ -271,6 +273,7 @@ function DonationExpiry(props) {
                   value={value}
                   InputAdornmentProps={{ position: 'end' }}
                   onChange={onChange}
+                  InputProps={{ readOnly: true }}
                />
             </MuiPickersUtilsProvider>
          )}
@@ -286,7 +289,7 @@ function DonationNotes(props) {
          name="donationNotes"
          control={props.control}
          defaultValue={donationNotes}
-         render={({ field: { onChange, value }, fieldState: { error } }) => (
+         render={({ field: { onChange, value } }) => (
             <TextField
                margin="normal"
                variant="outlined"

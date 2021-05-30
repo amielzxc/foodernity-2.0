@@ -1280,6 +1280,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@iconify-icons/bx@^1.1.0":
+  "integrity" "sha512-JlCsrgpp4vujb7tDaZtJ/OfeTnsSFyDFSauNO+2ilsHviCb/u3VXbLjdIoDIR5ISGMr0a+W/f0YNOHn3zUqChA=="
+  "resolved" "https://registry.npmjs.org/@iconify-icons/bx/-/bx-1.1.0.tgz"
+  "version" "1.1.0"
+
 "@iconify-icons/flat-color-icons@^1.1.0":
   "integrity" "sha512-tniSR0t1e3IA4QJwMC4VU6hmDcd0OouyUb8Q3Qd4x59SIj3ChELTdCYoMHMxPmERapG06D06MZCh032YybfiiQ=="
   "resolved" "https://registry.npmjs.org/@iconify-icons/flat-color-icons/-/flat-color-icons-1.1.0.tgz"
@@ -9569,7 +9574,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@^17.0.2":
+"react-dom@^16.3.0", "react-dom@^17.0.2", "react-dom@>=16.3.x", "react-dom@~0.14.8 || ^15.0.0 || ^16.0.0":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -9764,7 +9769,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^16.12.0":
+"react@^16.3.0":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"
@@ -9773,7 +9778,7 @@
     "object-assign" "^4.1.1"
     "prop-types" "^15.6.2"
 
-"react@^17.0.2":
+"react@^17.0.2", "react@>=0.14.7", "react@>=16.3.x", "react@~0.14.8 || ^15.0.0 || ^16.0.0":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

@@ -18,6 +18,7 @@ import LeftDrawer from '../Common/LeftDrawer'
 import DialogDrawer from '../Common/DialogDrawer'
 import 'date-fns'
 import ChangeLocation from './ChangeLocation'
+import Footer from '../Common/Footer'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
@@ -84,6 +85,7 @@ export function FilterDrawer() {
          <DistanceFilter />
          <Divider className={classes.divider_margin} />
          <FoodCategory />
+         <Footer />
       </LeftDrawer>
    )
 }
@@ -297,7 +299,7 @@ function FoodCategory() {
 
    console.log(foodCategory)
    return (
-      <div>
+      <div style={{ marginBottom: '1rem' }}>
          <div className={classes.container__titleButton}>
             <Typography variant="h6" className={classes.text_bold}>
                Food Category
@@ -320,19 +322,19 @@ function FoodCategory() {
                handleChange={handleSingleCheck}
             />
             <CategoryCheckBox
-               label="Beverages"
+               label="Biscuits"
                name="test3"
                checked={isChecked.test3}
                handleChange={handleSingleCheck}
             />
             <CategoryCheckBox
-               label="Categ 4"
+               label="Beverages"
                name="test4"
                checked={isChecked.test4}
                handleChange={handleSingleCheck}
             />
             <CategoryCheckBox
-               label="Categ 5"
+               label="Others"
                name="test5"
                checked={isChecked.test5}
                handleChange={handleSingleCheck}

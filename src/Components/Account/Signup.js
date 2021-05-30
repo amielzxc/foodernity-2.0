@@ -76,7 +76,7 @@ function Signup() {
                      variant="h3"
                      className={`${classes.text_highlighted} ${classes.title}`}
                   >
-                     Sign up to Foodernity
+                     Create an Account
                   </Typography>
                   <Grid
                      container
@@ -87,7 +87,7 @@ function Signup() {
                   >
                      <FirstNameInput control={control} />
                      <LastNameInput control={control} />
-                     <ContactNumberInput control={control} />
+                     <EmailInput control={control} />
                      <PasswordInput control={control} />
                      <ConfirmPasswordInput control={control} />
                   </Grid>
@@ -175,21 +175,21 @@ function LastNameInput(props) {
    )
 }
 // returns contact number input field
-function ContactNumberInput(props) {
+function EmailInput(props) {
    return (
       <Grid item xs={12}>
          <Controller
-            name="contactNumber"
+            name="emailAdress"
             control={props.control}
             defaultValue=""
-            rules={{ required: 'Contact number required' }}
+            rules={{ required: 'Email required' }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                <TextField
-                  type="tel"
-                  autoComplete="tel"
+                  type="email"
+                  autoComplete="email"
                   variant="outlined"
-                  id="contactNumber"
-                  label="Contact Number"
+                  id="emailAddress"
+                  label="Email Address"
                   required
                   fullWidth
                   value={value}

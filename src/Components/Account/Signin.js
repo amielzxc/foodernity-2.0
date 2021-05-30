@@ -106,7 +106,7 @@ function Signin() {
                <Typography
                   variant="h2"
                   className={classes.heading}
-                  component="p"
+                  component="h2"
                >
                   Foodernity.
                </Typography>
@@ -118,11 +118,15 @@ function Signin() {
          </Grid>
          <Grid container item xs={12} md={7} lg={6} direction="column">
             <div className={classes.container__form}>
-               <Typography variant="h2" className={classes.title}>
-                  Sign In to Continue
+               <Typography
+                  variant="h3"
+                  component="h1"
+                  className={classes.title}
+               >
+                  Welcome to Foodernity
                </Typography>
                <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-                  <ContactNumberInput control={control} />
+                  <EmailInput control={control} />
                   <PasswordInput control={control} />
                   <SignInButton className={classes.button__signin} />
                   <Typography
@@ -159,20 +163,20 @@ function Signin() {
    )
 }
 // returns the contact number input field
-function ContactNumberInput(props) {
+function EmailInput(props) {
    return (
       <Controller
-         name="contact"
+         name="emailAddress"
          control={props.control}
          defaultValue=""
-         rules={{ required: 'Contact number required' }}
+         rules={{ required: 'Email required' }}
          render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-               type="tel"
+               type="email"
                variant="outlined"
-               id="contact"
-               label="Contact Number"
-               autoComplete="tel"
+               id="emailAddress"
+               label="Email Address"
+               autoComplete="email"
                margin="normal"
                autoFocus
                fullWidth

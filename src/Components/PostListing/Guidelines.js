@@ -27,17 +27,17 @@ const useStyles = makeStyles({
 const guidelines = [
    {
       name: 'guidelines1',
-      label: 'Guidelines 1',
-      description: 'Guidelines 1 desc',
+      label: 'I acknowledge that I am donating consumables which are the following:',
+      description: '',
    },
    {
       name: 'guidelines2',
-      label: 'Guidelines 2',
+      label: 'I acknowledge that I practice safe food handling practices',
       description: 'Guidelines 2 desc',
    },
    {
       name: 'guidelines3',
-      label: 'Guidelines 3',
+      label: 'I acknowledge that I am not donating consumables which are the following:',
       description: 'Guidelines 3 desc',
    },
 ]
@@ -83,10 +83,9 @@ function Guidelines() {
             </Typography>
             <div className={classes.container__description}>
                <Typography variant="body1" component="p">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam
-                  quis non euismod faucibus a eu cum pharetra elementum. Congue
-                  placerat vitae ultrices quis elit aliquam. Gravida a etiam sed
-                  aliquam mauris.
+                  Before proceeding to donate, you must adhere to the guidelines
+                  first to protect you and the safety of others as well. The
+                  guidelines to acknowledge are as follows:
                </Typography>
             </div>
             <form onBlur={handleUpdateAllCheck}>{guidelinesArray}</form>
@@ -119,7 +118,71 @@ function AccordionItem(props) {
             />
          </AccordionSummary>
          <AccordionDetails>
-            <Typography color="textSecondary">{description}</Typography>
+            <div>
+               <div>
+                  <Typography style={{ fontWeight: 'bold' }}>
+                     Home-Prepared Foods
+                  </Typography>
+                  <Typography>
+                     Most homeprepared foods are not allowed to accept or serve
+                     most types of homeprepared foods. However, homemade baked
+                     goods that do not need refrigeration to remain safe (such
+                     as cookies, cakes, fruit pies, and breads) may be received
+                     from DONORS.
+                  </Typography>
+               </div>
+               <br />
+               <div>
+                  <Typography style={{ fontWeight: 'bold' }}>
+                     Commercially Packaged Foods Not Needing Refrigeration
+                  </Typography>
+                  <Typography>
+                     The donation of commercially canned, boxed, and otherwise
+                     packaged foods is encouraged.
+                  </Typography>
+               </div>
+               <br />
+               <div>
+                  <Typography style={{ fontWeight: 'bold' }}>
+                     Fresh Produce Donations
+                  </Typography>
+                  <Typography>
+                     Food donations may include fresh produce, including
+                     home-grown fruits and vegetables. Fresh produce should be
+                     protected from contamination and receive final preparation,
+                     such as washing and cutting, in a DONOR KITCHEN or licensed
+                     kitchen.
+                  </Typography>
+               </div>
+               <br />
+               <div>
+                  <Typography style={{ fontWeight: 'bold' }}>
+                     Food Prepared in a DONOR KITCHEN
+                  </Typography>
+                  <Typography>
+                     Except for baked goods (such as bread, cookies, and fruit
+                     pies), DONATED FOOD DISTRIBUTING ORGANIZATIONS may not
+                     accept foods prepared in a home kitchen. Instead, foods for
+                     donation should be prepared in either a DONOR KITCHEN or a
+                     commercial food establishment, such as a restaurant.
+                  </Typography>
+               </div>
+               <br />
+               <div>
+                  <Typography style={{ fontWeight: 'bold' }}>
+                     Food Donation by Licensed Food Establishments
+                  </Typography>
+                  <Typography>
+                     Licensed food establishments are encouraged to donate
+                     surplus foods to DONATED FOOD DISTRIBUTING ORGANIZATIONS.
+                     Because licensed food establishments have commercial-grade
+                     equipment, unlike many DONOR KITCHENS, these may safely
+                     include foods that have gone through typical multiple food
+                     preparation steps and handled with the same consideration
+                     for safety as the food sold to customers.
+                  </Typography>
+               </div>
+            </div>
          </AccordionDetails>
       </Accordion>
    )
