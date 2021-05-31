@@ -13,8 +13,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt'
 import ShareIcon from '@material-ui/icons/Share'
 import { grey } from '@material-ui/core/colors'
 import AddIcon from '@material-ui/icons/Add'
+
 function MyDonations() {
-   const classes = useStyles()
    return (
       <Grid container spacing={2}>
          <Grid item xs={12} lg={9}>

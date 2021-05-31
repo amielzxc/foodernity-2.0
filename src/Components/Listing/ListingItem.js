@@ -9,6 +9,8 @@ import {
    Grid,
 } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
+import { Link } from 'react-router-dom'
+
 const useStyles = makeStyles({
    root: {
       maxWidth: 345,
@@ -29,19 +31,19 @@ const useStyles = makeStyles({
 // returns a listing card
 function ListingItem(props) {
    const classes = useStyles()
-   const { listingImage, listingName, distance, postTime } = props
+   const { listingId, imgLoc, donationName, distance, postTime } = props
    return (
       <Grid item xs={6} sm={4} md={4} lg={3} xl={2}>
          <Card className={classes.root}>
-            <CardActionArea>
+            <CardActionArea component={Link} to={`/listings/${listingId}`}>
                <CardMedia
                   className={classes.media}
-                  image={listingImage}
-                  title={listingName}
+                  image={imgLoc}
+                  title={donationName}
                />
                <CardContent>
                   <Typography variant="h6" component="h4" noWrap>
-                     {listingName}
+                     {donationName}
                   </Typography>
                   <Grid container alignItems="center">
                      <LocationOnIcon

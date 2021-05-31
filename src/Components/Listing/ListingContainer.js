@@ -34,8 +34,9 @@ function ListingContainer() {
    const listingItems = ListingData.map((item) => (
       <ListingItem
          key={item.listingId}
-         listingImage={item.listingImage}
-         listingName={item.listingName}
+         listingId={item.listingId}
+         imgLoc={item.listingImage}
+         donationName={item.listingName}
          distance={item.distance}
          postTime={item.postTime}
       />

@@ -297,7 +297,6 @@ function FoodCategory() {
 
    const classes = useStyles()
 
-   console.log(foodCategory)
    return (
       <div style={{ marginBottom: '1rem' }}>
          <div className={classes.container__titleButton}>

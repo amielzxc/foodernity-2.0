@@ -1,12 +1,10 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import ProtectedRoute from './ProtectedRoute'
-import { useStore } from './Store'
+import shadows from './Components/utils/shadows'
 import Fallback from './Components/etc/Fallback'
 import Accounts from './Components/Accounts/Accounts'
 import DonationStatus from './Components/Accounts/DonationStatus'
-import ListingDetail from './Components/Listing/ListingDetail'
 
 const Signin = React.lazy(() => import('./Components/Account/Signin'))
 const Signup = React.lazy(() => import('./Components/Account/Signup'))
@@ -16,12 +14,12 @@ const ForgotPassword = React.lazy(() =>
 const Listings = React.lazy(() => import('./Components/Listing/Listings'))
 const Error = React.lazy(() => import('./Components/etc/Error'))
 const Post = React.lazy(() => import('./Components/PostListing/Post'))
-// const ListingDetail = React.lazy(() =>
-//    import('./Components/Listing/ListingDetail')
-// )
+const ListingDetail = React.lazy(() =>
+   import('./Components/Listing/ListingDetail')
+)
 const Messages = React.lazy(() => import('./Components/Messages/Messages'))
 const FAQs = React.lazy(() => import('./Components/FAQs&Guidelines/FAQs'))
-
+const Admin = React.lazy(() => import('./Components/Admin/Admin'))
 const theme = createMuiTheme({
    palette: {
       primary: {
@@ -29,10 +27,10 @@ const theme = createMuiTheme({
       },
       default: '#FFFFFF',
    },
+   shadows,
 })
 
 const App = () => {
-   const isAuthenticated = useStore((state) => state.isAuthenticated)
    return (
       <Router>
          <Suspense fallback={<Fallback />}>
@@ -43,6 +41,9 @@ const App = () => {
                   <Route path="/forgotpassword" component={ForgotPassword} />
                   <Route path="/listings" exact>
                      <Listings />
+                  </Route>
+                  <Route path="/listings/:listingId">
+                     <ListingDetail />
                   </Route>
                   <Route path="/post">
                      <Post />
@@ -61,6 +62,9 @@ const App = () => {
                   </Route>
                   <Route path="/listingdetail">
                      <ListingDetail />
+                  </Route>
+                  <Route path="/admin">
+                     <Admin />
                   </Route>
                   <Route path="" component={Error} />
                </Switch>

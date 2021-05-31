@@ -23,14 +23,17 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import MapImage from './pickup_map.png'
 import DialogDrawer from '../Common/DialogDrawer'
+import { useParams } from 'react-router-dom'
 
 // returns a page that displays the details of the donation when user clicks on a donation listing
-export default function ListingDetail() {
+export default function ListingDetail(props) {
    const classes = useStyles()
    const theme = useTheme()
    // decides what screen size should be considered as a responsive layout - below 960px
    const responsiveLayout = useMediaQuery(theme.breakpoints.down('sm'))
+   const { listingId } = useParams()
 
+   console.log(listingId)
    return (
       <div className={classes.root}>
          <CssBaseline />
@@ -72,8 +75,16 @@ function ActionDrawerResponsive() {
    return (
       <div className={classes.container__drawer_responsive}>
          <BackButton />
-         <DialogDrawer buttonName="actions" dialogTitle="Action Filters">
-            <Typography>Filter</Typography>
+         <DialogDrawer buttonName="actions" dialogTitle="Actions">
+            <Typography>
+               Listed <span className={classes.text_bold}>2h ago</span> by
+            </Typography>
+            <DonorAvatar />
+            <Divider className={classes.divider_margin} />
+            <SendMessageButton />
+            <RequestButton />
+            <Divider className={classes.divider_margin} />
+            <ReportButton />
          </DialogDrawer>
       </div>
    )

@@ -1,7 +1,7 @@
 import { Box, makeStyles, Typography, Grid } from '@material-ui/core'
 import StarRateRoundedIcon from '@material-ui/icons/StarRateRounded'
 import dummychart from './dummychart.png'
-import { Icon, InlineIcon } from '@iconify/react'
+import { Icon } from '@iconify/react'
 import bxsDonateHeart from '@iconify-icons/bx/bxs-donate-heart'
 
 function MyProfile() {
