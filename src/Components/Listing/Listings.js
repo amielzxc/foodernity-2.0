@@ -51,7 +51,7 @@ export default function Listings() {
    const distance = useFilterStore((state) => state.distance)
    const foodCategory = useFilterStore((state) => state.foodCategory)
 
-   console.log(`${filterButton} ${userLocation} ${distance} ${foodCategory}`)
+   // console.log(`${filterButton} ${userLocation} ${distance} ${foodCategory}`)
    return (
       <>
          <Helmet>

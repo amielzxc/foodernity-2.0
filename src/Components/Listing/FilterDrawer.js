@@ -19,6 +19,8 @@ import DialogDrawer from '../Common/DialogDrawer'
 import 'date-fns'
 import ChangeLocation from './ChangeLocation'
 import Footer from '../Common/Footer'
+import Geocode from 'react-geocode'
+import Axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
@@ -104,6 +106,47 @@ export function FilterDrawer() {
       setUserLocation(userLocation)
       setDistance(distance)
       setFoodCategory(foodCategory)
+      console.log(distance)
+      const arrHolder = []
+      const arr = [
+         'Canned Goods',
+         'Instant Noodles',
+         'Biscuits',
+         'Beverages',
+         'Others',
+      ]
+      for (let i = 0; i < arr.length; i++) {
+         if (foodCategory[i] === true) {
+            arrHolder.push(arr[i])
+         }
+      }
+      console.log(arrHolder)
+
+      Geocode.setApiKey('AIzaSyDyn1Cs8FHCOEedwL6jWkq1EtWhulBUc70')
+
+      Geocode.fromAddress(userLocation).then(
+         (response) => {
+            const coordinates = response.results[0].geometry.location
+            console.log(coordinates)
+            const obj = {
+               userID: localStorage.getItem('userID'),
+               categoryFilters: arrHolder,
+               coordinates: coordinates,
+               radius: distance,
+            }
+            Axios.post('http://localhost:3001/listingItem/get/filter', obj)
+               .then((response) => {
+                  console.log(response)
+               })
+               .catch((error) => {
+                  console.log(error)
+               })
+         },
+         (error) => {
+            console.error(error)
+         }
+      )
+      // console.log(coordinates)
    }
 
    return (

@@ -25,6 +25,9 @@ function ChangeLocation(props) {
    const [inputValue, setInputValue] = useState('')
    const [options, setOptions] = useState([])
    const { setUserLocation } = props
+   const setUserCoordinates = useFilterStore(
+      (state) => state.setUserCoordinates
+   )
 
    const fetch = useMemo(
       () =>
@@ -88,6 +91,7 @@ function ChangeLocation(props) {
          onChange={(event, newValue) => {
             setOptions(newValue ? [newValue, ...options] : options)
             setValue(newValue)
+            // console.log(newValue)
 
             if (newValue) {
                setUserLocation(newValue.description)
