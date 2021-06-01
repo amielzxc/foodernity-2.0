@@ -45,7 +45,7 @@ function ListingContainer() {
                      key={data.listingID}
                      listingID={data.listingID}
                      listingImage={data.imgLoc}
-                     listingName={data.donationName}
+                     donationName={data.donationName}
                      distance={data.pickupLoc}
                      postTime={data.postTime}
                   />
