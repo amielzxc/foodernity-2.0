@@ -19,9 +19,6 @@ import DialogDrawer from '../Common/DialogDrawer'
 import 'date-fns'
 import ChangeLocation from './ChangeLocation'
 import Footer from '../Common/Footer'
-import Axios from 'axios'
-import ListingItem from './ListingItem'
-import * as geometry from 'spherical-geometry-js'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
@@ -213,41 +210,6 @@ function Title() {
       </div>
    )
 }
-// returns the current location selected by the user
-function CurrentLocation() {
-   const userLocation = useFilterStore((state) => state.userLocation)
-   // const setUserLocation = useFilterStore((state) => state.setUserLocation)
-   const [toggle, setToggle] = useState(false)
-
-   const handleSetToggle = () => {
-      setToggle(!toggle)
-      // setUserLocation(userLocation)
-   }
-   console.log(userLocation)
-   const classes = useStyles()
-   return (
-      <div>
-         <Typography variant="h6" className={classes.text_bold}>
-            My Location
-         </Typography>
-         <div className={classes.container__location}>
-            <LocationOnIcon
-               className={classes.icon__location}
-               color="primary"
-            />
-            <Typography variant="body1">{userLocation}</Typography>
-            <IconButton size="small" onClick={handleSetToggle}>
-               <EditIcon
-                  className={classes.icon__editLocation}
-                  color="primary"
-                  fontSize="small"
-               />
-            </IconButton>
-         </div>
-         {toggle && <ChangeLocation toggle={handleSetToggle} />}
-      </div>
-   )
-}
 
 // returns button group which filters the current listings according to the user's preference
 function FilterButtons(props) {
@@ -379,7 +341,6 @@ function DistanceFilter(props) {
    const { distance, setTempDistance } = props
 
    const [value, setvalue] = useState(distance)
-
    const handleChange = (event, value) => {
       setvalue(value)
       handleSetDistance()
@@ -430,47 +391,6 @@ function FoodCategory(props) {
    }
 
    const handleUpdateAllCheck = () => {
-      setFoodCategory(Object.values(isChecked))
-
-      //axios to db then the response will set the new list of items to be displayed
-      // setListingData()
-      const filters = []
-      const keys = [
-         'Canned Goods',
-         'Instant Noodles',
-         'Biscuits',
-         'Beverages',
-         'Others',
-      ]
-      const values = Object.values(isChecked)
-      for (let i = 0; i < values.length; i++) {
-         if (values[i] === true) {
-            filters.push(keys[i])
-         }
-      }
-      const obj = {
-         userID: localStorage.getItem('userID'),
-         categoryFilters: filters,
-      }
-
-      Axios.post('http://localhost:3001/listingItem/get/filter', obj).then(
-         (response) => {
-            // console.log(res.data)
-            //add the distance filter algorithm here to finalize the data that should be displayed
-            setListingData(
-               response.data.map((data) => (
-                  <ListingItem
-                     key={data.listingID}
-                     listingID={data.listingID}
-                     listingImage={data.imgLoc}
-                     listingName={data.donationName}
-                     distance={data.pickupLoc}
-                     postTime={data.postTime}
-                  />
-               ))
-            )
-         }
-      )
       setTempFoodCategory(Object.values(isChecked))
    }
 
