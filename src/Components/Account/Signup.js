@@ -63,7 +63,7 @@ function Signup() {
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
    function onSubmit(data) {
-      console.log(data)
+      // console.log(data)
 
       if (data.password !== data.confirmPassword) {
          console.log("password and confirm password didn't match")
@@ -80,12 +80,14 @@ function Signup() {
             userStatus: 'active',
          }
 
-         console.log(obj)
-         Axios.post('http://localhost:3001/user/add', obj).then((err, res) => {
-            if (err) {
-            } else {
-            }
-         })
+         // console.log(obj)
+         Axios.post('http://localhost:3001/user/add', obj)
+            .then((res) => {
+               console.log(res.data)
+            })
+            .catch((error) => {
+               console.log(error)
+            })
       }
    }
 

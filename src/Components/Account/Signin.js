@@ -96,19 +96,19 @@ function Signin() {
       }
 
       console.log(obj)
-      Axios.post('http://localhost:3001/user/login', obj).then((res, error) => {
-         if (!error) {
+      Axios.post('http://localhost:3001/login', obj)
+         .then((res) => {
             if (res.data) {
                console.log('hello')
                console.log(res.data)
                history.replace('/listings')
                console.log('userID: ' + res.data.userID)
                localStorage.setItem('userID', res.data.userID)
-            } else {
-               console.log(error.message)
             }
-         }
-      })
+         })
+         .catch((error) => {
+            console.log(error)
+         })
    }
 
    return (
