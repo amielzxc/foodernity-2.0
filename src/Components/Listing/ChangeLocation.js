@@ -24,7 +24,7 @@ function ChangeLocation(props) {
    const [value, setValue] = useState(null)
    const [inputValue, setInputValue] = useState('')
    const [options, setOptions] = useState([])
-   const setUserLocation = useFilterStore((state) => state.setUserLocation)
+   const { setUserLocation } = props
 
    const fetch = useMemo(
       () =>
