@@ -31,14 +31,14 @@ const useStyles = makeStyles({
 // returns a listing card
 function ListingItem(props) {
    const classes = useStyles()
-   const { listingId, imgLoc, donationName, distance, postTime } = props
+   const { listingID, listingImage, donationName, distance, postTime } = props
    return (
       <Grid item xs={6} sm={4} md={4} lg={3} xl={2}>
          <Card className={classes.root}>
-            <CardActionArea component={Link} to={`/listings/${listingId}`}>
+            <CardActionArea component={Link} to={`/listings/${listingID}`}>
                <CardMedia
                   className={classes.media}
-                  image={imgLoc}
+                  image={listingImage}
                   title={donationName}
                />
                <CardContent>

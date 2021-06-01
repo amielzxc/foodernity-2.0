@@ -15,6 +15,8 @@ import { usePostStore } from './Post'
 import LeftDrawer from '../Common/LeftDrawer'
 import DialogDrawer from '../Common/DialogDrawer'
 import MuiAlert from '@material-ui/lab/Alert'
+import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
    root: {
       width: '100%',
@@ -113,11 +115,26 @@ function VerticalStepper() {
    const setNext = usePostStore((state) => state.setNext)
    const setBack = usePostStore((state) => state.setBack)
 
+   // const donationImage = usePostStore((state) => state.donationImage) // null
+   // const donationName = usePostStore((state) => state.donationName) // ''
+   // const donationRecipient = usePostStore((state) => state.donationRecipient) // ''
+   // const donationCategory = usePostStore((state) => state.donationCategory) // ''
+   // const pickupLocation = usePostStore((state) => state.pickupLocation) // null
+
    const donationImage = usePostStore((state) => state.donationImage) // null
    const donationName = usePostStore((state) => state.donationName) // ''
+   const donationNotes = usePostStore((state) => state.donationNotes) // ''
    const donationRecipient = usePostStore((state) => state.donationRecipient) // ''
    const donationCategory = usePostStore((state) => state.donationCategory) // ''
+   const donationExpiry = usePostStore((state) => state.donationExpiry) // ''
+   const pickupTime = usePostStore((state) => state.pickupTime)
+   const pickupDate = usePostStore((state) => state.pickupDate)
    const pickupLocation = usePostStore((state) => state.pickupLocation) // null
+   const pickupLocationCoordinate = usePostStore(
+      (state) => state.pickupLocationCoordinate
+   ) // null
+
+   const history = useHistory()
 
    const arr = [
       donationImage,
@@ -148,7 +165,48 @@ function VerticalStepper() {
             setDisplayAlert2(false)
          }
       } else if (current === 2) {
-         console.log('save to db')
+         // console.log('save to db')
+         const formData = new FormData()
+         formData.append('file', donationImage)
+         formData.append('upload_preset', 'kbusolgc')
+         Axios.post(
+            'https://api.cloudinary.com/v1_1/dy5g3pexw/image/upload',
+            formData
+         ).then(async (response, err) => {
+            if (!err) {
+               console.log(response.data.secure_url)
+
+               const obj = {
+                  donorID: localStorage.getItem('userID'),
+                  postDate: `${
+                     new Date().getMonth() + 1
+                  }/${new Date().getDate()}/${new Date().getFullYear()}`,
+                  postTime: `${new Date().getHours()}:${new Date().getMinutes()}`,
+                  donationName: donationName,
+                  donationNotes: donationNotes,
+                  donationCategory: donationCategory,
+                  donationRecipient: donationRecipient,
+                  donationExpiry: donationExpiry,
+                  pickupDate: pickupDate,
+                  pickupTime: pickupTime,
+                  pickupLocation: pickupLocation,
+                  pickupLocationCoordinate: pickupLocationCoordinate,
+                  donationImage: response.data.secure_url,
+               }
+
+               Axios.post('http://localhost:3001/listingItem/post', obj).then(
+                  (response, err) => {
+                     if (err) {
+                        console.log('error: ' + err)
+                     }
+                  }
+               )
+               console.log('umabot ako dito pakyu')
+               history.replace('/listings')
+            } else {
+               console.log(err)
+            }
+         })
       }
    }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
    Typography,
    Grid,
@@ -13,6 +13,8 @@ import AddIcon from '@material-ui/icons/Add'
 import { ListingData } from '../Common/MockData'
 import { Link } from 'react-router-dom'
 import MainContainer from '../Common/MainContainer'
+import Axios from 'axios'
+import { useFilterStore } from './Listings'
 
 const useStyles = makeStyles((theme) => ({
    container__addListing: {
@@ -27,20 +29,46 @@ const useStyles = makeStyles((theme) => ({
 }))
 // returns the container for individual listings that is displayed as a grid
 function ListingContainer() {
+   const listingData = useFilterStore((state) => state.listingData)
+   const setListingData = useFilterStore((state) => state.setListingData)
+   useEffect(() => {
+      const obj = { userID: localStorage.getItem('userID') }
+      Axios.post('http://localhost:3001/listingItem/get', obj).then(
+         (response, err) => {
+            if (err) {
+               console.log(err)
+            }
+            console.log(response.data)
+            setListingData(
+               response.data.map((data) => (
+                  <ListingItem
+                     key={data.listingID}
+                     listingID={data.listingID}
+                     listingImage={data.imgLoc}
+                     listingName={data.donationName}
+                     distance={data.pickupLoc}
+                     postTime={data.postTime}
+                  />
+               ))
+            )
+         }
+      )
+   }, [])
+
    const theme = useTheme()
    //  used to determine whether the page should use components intended for responsive layout
    const responsiveLayout = useMediaQuery(theme.breakpoints.down('sm'))
    //  maps the mock listing data for the mean time to display available listings
-   const listingItems = ListingData.map((item) => (
-      <ListingItem
-         key={item.listingId}
-         listingId={item.listingId}
-         imgLoc={item.listingImage}
-         donationName={item.listingName}
-         distance={item.distance}
-         postTime={item.postTime}
-      />
-   ))
+   // const listingItems = ListingData.map((item) => (
+   //    <ListingItem
+   //       key={item.listingId}
+   //       listingId={item.listingId}
+   //       imgLoc={item.listingImage}
+   //       donationName={item.listingName}
+   //       distance={item.distance}
+   //       postTime={item.postTime}
+   //    />
+   // ))
 
    return (
       <MainContainer>
@@ -48,7 +76,7 @@ function ListingContainer() {
          {responsiveLayout && <FilterDrawerResponsive />}
          <AddListing />
          <Grid container spacing={1}>
-            {listingItems}
+            {listingData}
          </Grid>
       </MainContainer>
    )

@@ -11,6 +11,8 @@ import googleIcon from '@iconify-icons/flat-color-icons/google'
 import BackgroundImage from './signin-background.png'
 import { Link } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
+import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
    container__main: {
@@ -85,8 +87,28 @@ const useStyles = makeStyles((theme) => ({
 function Signin() {
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
+   const history = useHistory()
    function onSubmit(data) {
-      console.log(data)
+      // console.log(data)
+      const obj = {
+         email: data.emailAddress,
+         password: data.password,
+      }
+
+      console.log(obj)
+      Axios.post('http://localhost:3001/user/login', obj).then((res, error) => {
+         if (!error) {
+            if (res.data) {
+               console.log('hello')
+               console.log(res.data)
+               history.replace('/listings')
+               console.log('userID: ' + res.data.userID)
+               localStorage.setItem('userID', res.data.userID)
+            } else {
+               console.log(error.message)
+            }
+         }
+      })
    }
 
    return (

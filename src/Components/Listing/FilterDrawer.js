@@ -19,6 +19,9 @@ import DialogDrawer from '../Common/DialogDrawer'
 import 'date-fns'
 import ChangeLocation from './ChangeLocation'
 import Footer from '../Common/Footer'
+import Axios from 'axios'
+import ListingItem from './ListingItem'
+import * as geometry from 'spherical-geometry-js'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
@@ -127,11 +130,14 @@ function Title() {
 // returns the current location selected by the user
 function CurrentLocation() {
    const userLocation = useFilterStore((state) => state.userLocation)
+   // const setUserLocation = useFilterStore((state) => state.setUserLocation)
    const [toggle, setToggle] = useState(false)
 
    const handleSetToggle = () => {
       setToggle(!toggle)
+      // setUserLocation(userLocation)
    }
+   console.log(userLocation)
    const classes = useStyles()
    return (
       <div>
@@ -243,11 +249,17 @@ function DistanceFilter() {
    const distance = useFilterStore((state) => state.distance)
    const setDistance = useFilterStore((state) => state.setDistance)
    const [value, setvalue] = useState(distance)
+
    const handleChange = (event, value) => {
       setvalue(value)
    }
    const handleSetDistance = () => {
       setDistance(value)
+      var distanceInMeters = geometry.computeDistanceBetween(
+         { lat: 14.6043, lng: 120.9946 },
+         { lat: 14.5353, lng: 120.9827 }
+      )
+      console.log(distanceInMeters * 0.001)
    }
 
    return (
@@ -279,6 +291,7 @@ function DistanceFilter() {
 function FoodCategory() {
    const foodCategory = useFilterStore((state) => state.foodCategory)
    const setFoodCategory = useFilterStore((state) => state.setFoodCategory)
+   const setListingData = useFilterStore((state) => state.setListingData)
    const [isChecked, setIsChecked] = useState({
       test1: foodCategory[0],
       test2: foodCategory[1],
@@ -293,6 +306,46 @@ function FoodCategory() {
 
    const handleUpdateAllCheck = () => {
       setFoodCategory(Object.values(isChecked))
+
+      //axios to db then the response will set the new list of items to be displayed
+      // setListingData()
+      const filters = []
+      const keys = [
+         'Canned Goods',
+         'Instant Noodles',
+         'Biscuits',
+         'Beverages',
+         'Others',
+      ]
+      const values = Object.values(isChecked)
+      for (let i = 0; i < values.length; i++) {
+         if (values[i] === true) {
+            filters.push(keys[i])
+         }
+      }
+      const obj = {
+         userID: localStorage.getItem('userID'),
+         categoryFilters: filters,
+      }
+
+      Axios.post('http://localhost:3001/listingItem/get/filter', obj).then(
+         (response) => {
+            // console.log(res.data)
+            //add the distance filter algorithm here to finalize the data that should be displayed
+            setListingData(
+               response.data.map((data) => (
+                  <ListingItem
+                     key={data.listingID}
+                     listingID={data.listingID}
+                     listingImage={data.imgLoc}
+                     listingName={data.donationName}
+                     distance={data.pickupLoc}
+                     postTime={data.postTime}
+                  />
+               ))
+            )
+         }
+      )
    }
 
    const classes = useStyles()
@@ -303,9 +356,9 @@ function FoodCategory() {
             <Typography variant="h6" className={classes.text_bold}>
                Food Category
             </Typography>
-            <IconButton onClick={handleUpdateAllCheck}>
+            {/* <IconButton onClick={handleUpdateAllCheck}>
                <RefreshIcon color="primary" />
-            </IconButton>
+            </IconButton> */}
          </div>
          <div className={classes.container__checkbox}>
             <CategoryCheckBox

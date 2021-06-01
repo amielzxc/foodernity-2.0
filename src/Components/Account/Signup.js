@@ -11,6 +11,7 @@ import { Icon } from '@iconify/react'
 import googleIcon from '@iconify-icons/flat-color-icons/google'
 import { useForm, Controller } from 'react-hook-form'
 import BackgroundImage from './signup-backgroundimage.png'
+import Axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -63,6 +64,29 @@ function Signup() {
    const classes = useStyles()
    function onSubmit(data) {
       console.log(data)
+
+      if (data.password !== data.confirmPassword) {
+         console.log("password and confirm password didn't match")
+      } else {
+         const obj = {
+            email: data.emailAddress,
+            password: data.password,
+            firstname: data.firstName,
+            surname: data.lastName,
+            dateOfReg: `${
+               new Date().getMonth() + 1
+            }/${new Date().getDate()}/${new Date().getFullYear()}`,
+            userType: 'individual',
+            userStatus: 'active',
+         }
+
+         console.log(obj)
+         Axios.post('http://localhost:3001/user/add', obj).then((err, res) => {
+            if (err) {
+            } else {
+            }
+         })
+      }
    }
 
    return (
@@ -179,7 +203,7 @@ function EmailInput(props) {
    return (
       <Grid item xs={12}>
          <Controller
-            name="emailAdress"
+            name="emailAddress"
             control={props.control}
             defaultValue=""
             rules={{ required: 'Email required' }}

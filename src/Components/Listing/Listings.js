@@ -28,6 +28,10 @@ export const useFilterStore = create((set) => ({
    setFoodCategory: (object) => {
       set((state) => ({ foodCategory: (state.foodCategory = object) }))
    },
+   listingData: null,
+   setListingData: (items) => {
+      set((state) => ({ listingItem: (state.listingData = items) }))
+   },
 }))
 
 const useStyles = makeStyles({
