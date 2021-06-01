@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
    },
    container__distanceFilter: {
+      width: '100%',
       display: 'flex',
       flexDirection: 'column',
       margin: '0 auto',
@@ -71,20 +72,63 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
    },
 }))
+
 // returns a left drawer that is used to filter the listings
 // this drawer uses the left drawer component in Common folder
 export function FilterDrawer() {
    const classes = useStyles()
+
+   const setFilterButton = useFilterStore((state) => state.setFilterButton)
+   const setUserLocation = useFilterStore((state) => state.setUserLocation)
+   const setDistance = useFilterStore((state) => state.setDistance)
+   const setFoodCategory = useFilterStore((state) => state.setFoodCategory)
+
+   const [filterButton, setTempFilterButton] = useState(
+      useFilterStore((state) => state.filterButton)
+   )
+
+   const [userLocation, setTempUserLocation] = useState(
+      useFilterStore((state) => state.userLocation)
+   )
+
+   const [distance, setTempDistance] = useState(
+      useFilterStore((state) => state.distance)
+   )
+
+   const [foodCategory, setTempFoodCategory] = useState(
+      useFilterStore((state) => state.foodCategory)
+   )
+
+   const handleUpdateChanges = () => {
+      setFilterButton(filterButton)
+      setUserLocation(userLocation)
+      setDistance(distance)
+      setFoodCategory(foodCategory)
+   }
+
    return (
       <LeftDrawer>
          <Title />
-         <FilterButtons />
+         <FilterButtons
+            filterButton={filterButton}
+            setTempFilterButton={setTempFilterButton}
+         />
          <Divider className={classes.divider_margin} />
-         <CurrentLocation />
+         <CurrentLocation
+            userLocation={userLocation}
+            setTempUserLocation={setTempUserLocation}
+         />
          <Divider className={classes.divider_margin} />
-         <DistanceFilter />
+         <DistanceFilter
+            distance={distance}
+            setTempDistance={setTempDistance}
+         />
          <Divider className={classes.divider_margin} />
-         <FoodCategory />
+         <FoodCategory
+            foodCategory={foodCategory}
+            setTempFoodCategory={setTempFoodCategory}
+         />
+         <SaveChanges handleUpdateChanges={handleUpdateChanges} />
          <Footer />
       </LeftDrawer>
    )
@@ -93,17 +137,59 @@ export function FilterDrawer() {
 // this drawer uses dialog drawer component in Common folder
 export function FilterDrawerResponsive() {
    const classes = useStyles()
+
+   const setFilterButton = useFilterStore((state) => state.setFilterButton)
+   const setUserLocation = useFilterStore((state) => state.setUserLocation)
+   const setDistance = useFilterStore((state) => state.setDistance)
+   const setFoodCategory = useFilterStore((state) => state.setFoodCategory)
+
+   const [filterButton, setTempFilterButton] = useState(
+      useFilterStore((state) => state.filterButton)
+   )
+
+   const [userLocation, setTempUserLocation] = useState(
+      useFilterStore((state) => state.userLocation)
+   )
+
+   const [distance, setTempDistance] = useState(
+      useFilterStore((state) => state.distance)
+   )
+
+   const [foodCategory, setTempFoodCategory] = useState(
+      useFilterStore((state) => state.foodCategory)
+   )
+
+   const handleUpdateChanges = () => {
+      setFilterButton(filterButton)
+      setUserLocation(userLocation)
+      setDistance(distance)
+      setFoodCategory(foodCategory)
+   }
    return (
       <div className={classes.drawer__container_responsive}>
          <Title />
          <DialogDrawer buttonName="FILTER" dialogTitle="Listings Filter">
-            <FilterButtons />
+            <Title />
+            <FilterButtons
+               filterButton={filterButton}
+               setTempFilterButton={setTempFilterButton}
+            />
             <Divider className={classes.divider_margin} />
-            <CurrentLocation />
+            <CurrentLocation
+               userLocation={userLocation}
+               setTempUserLocation={setTempUserLocation}
+            />
             <Divider className={classes.divider_margin} />
-            <DistanceFilter />
+            <DistanceFilter
+               distance={distance}
+               setTempDistance={setTempDistance}
+            />
             <Divider className={classes.divider_margin} />
-            <FoodCategory />
+            <FoodCategory
+               foodCategory={foodCategory}
+               setTempFoodCategory={setTempFoodCategory}
+            />
+            <SaveChanges handleUpdateChanges={handleUpdateChanges} />
          </DialogDrawer>
       </div>
    )
@@ -124,15 +210,80 @@ function Title() {
       </div>
    )
 }
+
+// returns button group which filters the current listings according to the user's preference
+function FilterButtons(props) {
+   const classes = useStyles()
+   const { filterButton, setTempFilterButton } = props
+
+   return (
+      <div className={classes.container__buttonGroup}>
+         <ButtonGroup
+            color="primary"
+            variant="outlined"
+            aria-label="outlined primary button group"
+         >
+            <Button
+               variant={filterButton === 'Suggested' ? 'contained' : 'outlined'}
+               disableElevation={filterButton === 'Suggested' ? true : false}
+               size="small"
+               onClick={
+                  filterButton !== 'Suggested'
+                     ? () => {
+                          setTempFilterButton('Suggested')
+                       }
+                     : null
+               }
+            >
+               Suggested
+            </Button>
+            <Button
+               variant={
+                  filterButton === 'Available Now' ? 'contained' : 'outlined'
+               }
+               disableElevation={
+                  filterButton === 'Available Now' ? true : false
+               }
+               size="small"
+               onClick={
+                  filterButton !== 'Available Now'
+                     ? () => {
+                          setTempFilterButton('Available Now')
+                       }
+                     : null
+               }
+            >
+               Available Now
+            </Button>
+            <Button
+               variant={filterButton === 'Nearest' ? 'contained' : 'outlined'}
+               disableElevation={filterButton === 'Nearest' ? true : false}
+               size="small"
+               onClick={
+                  filterButton !== 'Nearest'
+                     ? () => {
+                          setTempFilterButton('Nearest')
+                       }
+                     : null
+               }
+            >
+               Nearest
+            </Button>
+         </ButtonGroup>
+      </div>
+   )
+}
 // returns the current location selected by the user
-function CurrentLocation() {
-   const userLocation = useFilterStore((state) => state.userLocation)
+function CurrentLocation(props) {
+   const classes = useStyles()
+
+   const { userLocation, setTempUserLocation } = props
    const [toggle, setToggle] = useState(false)
 
    const handleSetToggle = () => {
       setToggle(!toggle)
    }
-   const classes = useStyles()
+
    return (
       <div>
          <Typography variant="h6" className={classes.text_bold}>
@@ -152,71 +303,17 @@ function CurrentLocation() {
                />
             </IconButton>
          </div>
-         {toggle && <ChangeLocation toggle={handleSetToggle} />}
-      </div>
-   )
-}
-// returns button group which filters the current listings according to the user's preference
-function FilterButtons() {
-   const classes = useStyles()
-   const filter = useFilterStore((state) => state.filterButton)
-   const changeFilter = useFilterStore((state) => state.setFilterButton)
-
-   return (
-      <div className={classes.container__buttonGroup}>
-         <ButtonGroup
-            color="primary"
-            variant="outlined"
-            aria-label="outlined primary button group"
-         >
-            <Button
-               variant={filter === 'Suggested' ? 'contained' : 'outlined'}
-               disableElevation={filter === 'Suggested' ? true : false}
-               size="small"
-               onClick={
-                  filter !== 'Suggested'
-                     ? () => {
-                          changeFilter('Suggested')
-                       }
-                     : null
-               }
-            >
-               Suggested
-            </Button>
-            <Button
-               variant={filter === 'Available Now' ? 'contained' : 'outlined'}
-               disableElevation={filter === 'Available Now' ? true : false}
-               size="small"
-               onClick={
-                  filter !== 'Available Now'
-                     ? () => {
-                          changeFilter('Available Now')
-                       }
-                     : null
-               }
-            >
-               Available Now
-            </Button>
-            <Button
-               variant={filter === 'Nearest' ? 'contained' : 'outlined'}
-               disableElevation={filter === 'Nearest' ? true : false}
-               size="small"
-               onClick={
-                  filter !== 'Nearest'
-                     ? () => {
-                          changeFilter('Nearest')
-                       }
-                     : null
-               }
-            >
-               Nearest
-            </Button>
-         </ButtonGroup>
+         {toggle && (
+            <ChangeLocation
+               toggle={handleSetToggle}
+               setUserLocation={setTempUserLocation}
+            />
+         )}
       </div>
    )
 }
 // returns a slider that lets user adjust the visible listings according to the distance set.
-function DistanceFilter() {
+function DistanceFilter(props) {
    const classes = useStyles()
    const marks = [
       {
@@ -240,14 +337,16 @@ function DistanceFilter() {
          label: '5km',
       },
    ]
-   const distance = useFilterStore((state) => state.distance)
-   const setDistance = useFilterStore((state) => state.setDistance)
+
+   const { distance, setTempDistance } = props
+
    const [value, setvalue] = useState(distance)
    const handleChange = (event, value) => {
       setvalue(value)
+      handleSetDistance()
    }
    const handleSetDistance = () => {
-      setDistance(value)
+      setTempDistance(value)
    }
 
    return (
@@ -256,7 +355,7 @@ function DistanceFilter() {
             <Typography variant="h6" className={classes.text_bold}>
                Distance
             </Typography>
-            <IconButton onClick={handleSetDistance}>
+            <IconButton>
                <RefreshIcon color="primary" />
             </IconButton>
          </div>
@@ -276,9 +375,9 @@ function DistanceFilter() {
    )
 }
 // returns multiple checkbox that is used to filter the categories of individual listings
-function FoodCategory() {
-   const foodCategory = useFilterStore((state) => state.foodCategory)
-   const setFoodCategory = useFilterStore((state) => state.setFoodCategory)
+function FoodCategory(props) {
+   const { foodCategory, setTempFoodCategory } = props
+
    const [isChecked, setIsChecked] = useState({
       test1: foodCategory[0],
       test2: foodCategory[1],
@@ -292,54 +391,67 @@ function FoodCategory() {
    }
 
    const handleUpdateAllCheck = () => {
-      setFoodCategory(Object.values(isChecked))
+      setTempFoodCategory(Object.values(isChecked))
    }
 
    const classes = useStyles()
 
    return (
-      <div style={{ marginBottom: '1rem' }}>
-         <div className={classes.container__titleButton}>
-            <Typography variant="h6" className={classes.text_bold}>
-               Food Category
-            </Typography>
-            <IconButton onClick={handleUpdateAllCheck}>
-               <RefreshIcon color="primary" />
-            </IconButton>
+      <form onBlur={handleUpdateAllCheck}>
+         <div style={{ marginBottom: '1rem' }}>
+            <div className={classes.container__titleButton}>
+               <Typography variant="h6" className={classes.text_bold}>
+                  Food Category
+               </Typography>
+            </div>
+            <div className={classes.container__checkbox}>
+               <CategoryCheckBox
+                  label="Canned Goods"
+                  name="test1"
+                  checked={isChecked.test1}
+                  handleChange={handleSingleCheck}
+               />
+               <CategoryCheckBox
+                  label="Instant Noodles"
+                  name="test2"
+                  checked={isChecked.test2}
+                  handleChange={handleSingleCheck}
+               />
+               <CategoryCheckBox
+                  label="Biscuits"
+                  name="test3"
+                  checked={isChecked.test3}
+                  handleChange={handleSingleCheck}
+               />
+               <CategoryCheckBox
+                  label="Beverages"
+                  name="test4"
+                  checked={isChecked.test4}
+                  handleChange={handleSingleCheck}
+               />
+               <CategoryCheckBox
+                  label="Others"
+                  name="test5"
+                  checked={isChecked.test5}
+                  handleChange={handleSingleCheck}
+               />
+            </div>
          </div>
-         <div className={classes.container__checkbox}>
-            <CategoryCheckBox
-               label="Canned Goods"
-               name="test1"
-               checked={isChecked.test1}
-               handleChange={handleSingleCheck}
-            />
-            <CategoryCheckBox
-               label="Instant Noodles"
-               name="test2"
-               checked={isChecked.test2}
-               handleChange={handleSingleCheck}
-            />
-            <CategoryCheckBox
-               label="Biscuits"
-               name="test3"
-               checked={isChecked.test3}
-               handleChange={handleSingleCheck}
-            />
-            <CategoryCheckBox
-               label="Beverages"
-               name="test4"
-               checked={isChecked.test4}
-               handleChange={handleSingleCheck}
-            />
-            <CategoryCheckBox
-               label="Others"
-               name="test5"
-               checked={isChecked.test5}
-               handleChange={handleSingleCheck}
-            />
-         </div>
-      </div>
+      </form>
+   )
+}
+
+function SaveChanges(props) {
+   const { handleUpdateChanges } = props
+   return (
+      <Button
+         variant="contained"
+         color="primary"
+         fullWidth
+         onClick={handleUpdateChanges}
+      >
+         Save Changes
+      </Button>
    )
 }
 // returns a single checkbox
