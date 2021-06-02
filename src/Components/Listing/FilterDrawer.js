@@ -106,7 +106,7 @@ export function FilterDrawer() {
       setUserLocation(userLocation)
       setDistance(distance)
       setFoodCategory(foodCategory)
-      console.log(distance)
+
       const arrHolder = []
       const arr = [
          'Canned Goods',
@@ -121,11 +121,11 @@ export function FilterDrawer() {
          }
       }
       console.log(arrHolder)
-
+      console.log(distance)
       Geocode.setApiKey('AIzaSyDyn1Cs8FHCOEedwL6jWkq1EtWhulBUc70')
 
       Geocode.fromAddress(userLocation).then(
-         (response) => {
+         async (response) => {
             const coordinates = response.results[0].geometry.location
             console.log(coordinates)
             const obj = {
@@ -134,9 +134,12 @@ export function FilterDrawer() {
                coordinates: coordinates,
                radius: distance,
             }
-            Axios.post('http://localhost:3001/listingItem/get/filter', obj)
+            await Axios.post(
+               'http://localhost:3001/listingItem/get/filter',
+               obj
+            )
                .then((response) => {
-                  console.log(response)
+                  console.log(response.data)
                })
                .catch((error) => {
                   console.log(error)
@@ -410,6 +413,7 @@ function DistanceFilter(props) {
                   min={1}
                   max={5}
                   value={value}
+                  onChangeCommitted={handleChange}
                   onChange={handleChange}
                />
             </div>
