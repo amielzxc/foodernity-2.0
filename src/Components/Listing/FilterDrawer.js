@@ -21,6 +21,7 @@ import ChangeLocation from './ChangeLocation'
 import Footer from '../Common/Footer'
 import Geocode from 'react-geocode'
 import Axios from 'axios'
+import ListingItem from './ListingItem'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
@@ -100,7 +101,7 @@ export function FilterDrawer() {
    const [foodCategory, setTempFoodCategory] = useState(
       useFilterStore((state) => state.foodCategory)
    )
-
+   const setListingData = useFilterStore((state) => state.setListingData)
    const handleUpdateChanges = () => {
       setFilterButton(filterButton)
       setUserLocation(userLocation)
@@ -139,7 +140,18 @@ export function FilterDrawer() {
                obj
             )
                .then((response) => {
-                  console.log(response.data)
+                  setListingData(
+                     response.data.map((data) => (
+                        <ListingItem
+                           key={data.listingID}
+                           listingID={data.listingID}
+                           listingImage={data.imgLoc}
+                           donationName={data.donationName}
+                           distance={data.pickupLoc}
+                           postTime={data.postTime}
+                        />
+                     ))
+                  )
                })
                .catch((error) => {
                   console.log(error)
