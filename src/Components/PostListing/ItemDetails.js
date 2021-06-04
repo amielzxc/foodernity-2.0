@@ -196,11 +196,11 @@ function DonationRecipient(props) {
                   <MenuItem value="">
                      <em>None</em>
                   </MenuItem>
-                  <MenuItem value={'All'}>All</MenuItem>
+                  {/* <MenuItem value={'All'}>All</MenuItem> */}
                   <MenuItem value={'Food Banks'}>Food Banks</MenuItem>
-                  <MenuItem value={'Community Pantries'}>
+                  {/* <MenuItem value={'Community Pantries'}>
                      Community Pantries
-                  </MenuItem>
+                  </MenuItem> */}
                   <MenuItem value={'Individuals'}>Individuals</MenuItem>
                </Select>
             )}
