@@ -5,3 +5,5 @@ export const useStore = create((set) => ({
    isAuthenticated: true,
    setEmail: (email) => set((state) => (state.email = email)),
 }))
+
+// update
