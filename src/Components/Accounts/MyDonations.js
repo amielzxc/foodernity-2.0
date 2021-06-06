@@ -13,6 +13,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt'
 import ShareIcon from '@material-ui/icons/Share'
 import { grey } from '@material-ui/core/colors'
 import AddIcon from '@material-ui/icons/Add'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import { AccountMyDonationsData } from '../../Components/Common/MockData'
 
 function MyDonations() {
    return (
@@ -49,6 +51,393 @@ function MyDonations() {
             </Paper>
          </Grid>
       </Grid>
+   )
+}
+
+function DonationTabs() {
+   const classes = useStyles()
+   const [value, setValue] = useState(0)
+
+   const handleChange = (event, newValue) => {
+      setValue(newValue)
+   }
+
+   return (
+      <div className={classes.root}>
+         <Box boxShadow={1} borderRadius={5}>
+            <div className={classes.container__search}>
+               <Typography variant="h6" className={classes.text_bold}>
+                  My Donations
+               </Typography>
+               <SearchField />
+            </div>
+            <AppBar
+               position="static"
+               color="default"
+               elevation={0}
+               className={classes.appbar}
+            >
+               <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="scrollable"
+                  scrollButtons="auto"
+                  aria-label="scrollable auto tabs example"
+               >
+                  {/* <Tab label="All" /> */}
+                  <Tab label="Listed" />
+                  <Tab label="To Approve" />
+                  <Tab label="Ongoing" />
+                  <Tab label="Claimed" />
+                  <Tab label="Unlisted" />
+               </Tabs>
+            </AppBar>
+         </Box>
+         {/* <TabPanel value={value} index={0}>
+            
+         </TabPanel> */}
+         <TabPanel value={value} index={0}>
+            {AccountMyDonationsData.filter(
+               (donation) => donation.status === 'Listed'
+            ).map((donation) => (
+               <ListedDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+         <TabPanel value={value} index={1}>
+            {AccountMyDonationsData.filter(
+               (donation) => donation.status === 'Requested'
+            ).map((donation) => (
+               <ToApproveDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+         <TabPanel value={value} index={2}>
+            {AccountMyDonationsData.filter(
+               (donation) => donation.status === 'Ongoing'
+            ).map((donation) => (
+               <OngoingDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+         <TabPanel value={value} index={3}>
+            {AccountMyDonationsData.filter(
+               (donation) => donation.status === 'Claimed'
+            ).map((donation) => (
+               <ClaimedDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+         <TabPanel value={value} index={4}>
+            {AccountMyDonationsData.filter(
+               (donation) => donation.status === 'Unlisted'
+            ).map((donation) => (
+               <UnlistedDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+      </div>
+   )
+}
+
+function SearchField() {
+   const classes = useStyles()
+   return (
+      <div className={classes.search}>
+         <div className={classes.searchIcon}>
+            <SearchIcon />
+         </div>
+         <InputBase
+            placeholder="Search your listings"
+            classes={{
+               root: classes.inputRoot,
+               input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+         />
+      </div>
+   )
+}
+
+function ListedDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     Available for request •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Listed {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function ToApproveDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: 'red' }}>
+                        Waiting for your approval
+                     </span>{' '}
+                     •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Listed {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     color="secondary"
+                     className={classes.button_grey}
+                     startIcon={<ThumbUpIcon />}
+                  >
+                     Approve
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function OngoingDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#66BB6A' }}>
+                        Ongoing transaction
+                     </span>{' '}
+                     •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Listed {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View listing
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function ClaimedDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#8D6E63' }}>Completed</span> •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Claimed {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function UnlistedDonation(props) {
+   const { listingID, donationName, imgLoc } = props
+   const classes = useStyles()
+
+   return (
+      <Box
+         boxShadow={1}
+         borderRadius={5}
+         onClick={() => {
+            console.log(listingID)
+         }}
+      >
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#8D6E63' }}>
+                        Unlisted due to expiry limit
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ShareIcon />}
+                  >
+                     Share
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
    )
 }
 
@@ -148,8 +537,8 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '5px',
    },
    image__listingitem: {
-      height: 'auto',
       width: '100px',
+      height: '100px',
       borderRadius: '5px',
       marginRight: '15px',
    },
@@ -190,316 +579,4 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 
-function DonationTabs() {
-   const classes = useStyles()
-   const [value, setValue] = useState(0)
-
-   const handleChange = (event, newValue) => {
-      setValue(newValue)
-   }
-
-   return (
-      <div className={classes.root}>
-         <Box boxShadow={1} borderRadius={5}>
-            <div className={classes.container__search}>
-               <Typography variant="h6" className={classes.text_bold}>
-                  My Donations
-               </Typography>
-               <SearchField />
-            </div>
-            <AppBar
-               position="static"
-               color="default"
-               elevation={0}
-               className={classes.appbar}
-            >
-               <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  variant="scrollable"
-                  scrollButtons="auto"
-                  aria-label="scrollable auto tabs example"
-               >
-                  <Tab label="All" />
-                  <Tab label="Listed" />
-                  <Tab label="To Approve" />
-                  <Tab label="Ongoing" />
-                  <Tab label="Completed" />
-                  <Tab label="Unlisted" />
-               </Tabs>
-            </AppBar>
-         </Box>
-         <TabPanel value={value} index={0}>
-            <ListedDonation />
-            <ToApproveDonation />
-            <OngoingDonation />
-            <CompletedDonation />
-            <UnlistedDonation />
-         </TabPanel>
-         <TabPanel value={value} index={1}>
-            <ListedDonation />
-         </TabPanel>
-         <TabPanel value={value} index={2}>
-            <ToApproveDonation />
-         </TabPanel>
-         <TabPanel value={value} index={3}>
-            <OngoingDonation />
-         </TabPanel>
-         <TabPanel value={value} index={4}>
-            <CompletedDonation />
-         </TabPanel>
-         <TabPanel value={value} index={5}>
-            <UnlistedDonation />
-         </TabPanel>
-      </div>
-   )
-}
-
-function SearchField() {
-   const classes = useStyles()
-   return (
-      <div className={classes.search}>
-         <div className={classes.searchIcon}>
-            <SearchIcon />
-         </div>
-         <InputBase
-            placeholder="Search your listings"
-            classes={{
-               root: classes.inputRoot,
-               input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-         />
-      </div>
-   )
-}
-
-function ListedDonation() {
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     Available for request •{' '}
-                     <span style={{ fontWeight: '200' }}>Listed 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     startIcon={<ShareIcon />}
-                  >
-                     Share
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
-
-function ToApproveDonation() {
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: 'red' }}>
-                        Waiting for your approval
-                     </span>{' '}
-                     • <span style={{ fontWeight: '200' }}>Listed 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="outlined"
-                     color="secondary"
-                     // startIcon={<ShareIcon />}
-                  >
-                     Approve Donation
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
-
-function OngoingDonation() {
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: '#66BB6A' }}>
-                        Ongoing transaction
-                     </span>{' '}
-                     • <span style={{ fontWeight: '200' }}>Listed 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
-
-function CompletedDonation() {
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: '#8D6E63' }}>Completed</span> •{' '}
-                     <span style={{ fontWeight: '200' }}>Claimed 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     startIcon={<ShareIcon />}
-                  >
-                     Share
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
-
-function UnlistedDonation() {
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: '#8D6E63' }}>
-                        Unlisted due to expiry limit
-                     </span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     startIcon={<ShareIcon />}
-                  >
-                     Share
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
 export default MyDonations

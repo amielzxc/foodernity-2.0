@@ -15,6 +15,8 @@ import CancelIcon from '@material-ui/icons/Cancel'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import AddIcon from '@material-ui/icons/Add'
 import { MessageOutlined } from '@material-ui/icons'
+import { AccountRequestedDonationsData } from '../../Components/Common/MockData'
+
 function RequestedDonations() {
    return (
       <Grid container spacing={2}>
@@ -50,6 +52,277 @@ function RequestedDonations() {
             </Paper>
          </Grid>
       </Grid>
+   )
+}
+
+function DonationTabs() {
+   const classes = useStyles()
+   const [value, setValue] = useState(0)
+
+   const handleChange = (event, newValue) => {
+      setValue(newValue)
+   }
+
+   return (
+      <div className={classes.root}>
+         <Box boxShadow={1} borderRadius={5}>
+            <div className={classes.container__search}>
+               <Typography variant="h6" className={classes.text_bold}>
+                  Requested Donations
+               </Typography>
+               <SearchField />
+            </div>
+            <AppBar
+               position="static"
+               color="default"
+               elevation={0}
+               className={classes.appbar}
+            >
+               <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  centered
+                  scrollButtons="auto"
+                  aria-label="scrollable auto tabs example"
+               >
+                  {/* <Tab label="All" /> */}
+                  <Tab label="To Be Approved" />
+                  <Tab label="Ongoing" />
+                  <Tab label="Claimed" />
+               </Tabs>
+            </AppBar>
+         </Box>
+         {/* <TabPanel value={value} index={0}>
+            <ToBeApprovedDonation />
+            <OngoingDonation />
+            <CompletedDonation />
+         </TabPanel> */}
+         <TabPanel value={value} index={0}>
+            {AccountRequestedDonationsData.filter(
+               (donation) => donation.status === 'Requested'
+            ).map((donation) => (
+               <ToBeApprovedDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+         <TabPanel value={value} index={1}>
+            {AccountRequestedDonationsData.filter(
+               (donation) => donation.status === 'Ongoing'
+            ).map((donation) => (
+               <OngoingDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+         <TabPanel value={value} index={2}>
+            {AccountRequestedDonationsData.filter(
+               (donation) => donation.status === 'Claimed'
+            ).map((donation) => (
+               <ClaimedDonation
+                  key={donation.listingID}
+                  listingID={donation.listingID}
+                  donationName={donation.donationName}
+                  postDateTime={donation.postDateTime}
+                  imgLoc={donation.imgLoc}
+               />
+            ))}
+         </TabPanel>
+      </div>
+   )
+}
+
+function SearchField() {
+   const classes = useStyles()
+   return (
+      <div className={classes.search}>
+         <div className={classes.searchIcon}>
+            <SearchIcon />
+         </div>
+         <InputBase
+            placeholder="Search your listings"
+            classes={{
+               root: classes.inputRoot,
+               input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+         />
+      </div>
+   )
+}
+
+function ToBeApprovedDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const theme = useTheme()
+   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: 'orange' }}>
+                        Waiting for approval
+                     </span>{' '}
+                     •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Requested {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     style={{ marginRight: '.5rem' }}
+                     startIcon={<MessageOutlined />}
+                  >
+                     Message
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<CancelIcon />}
+                     size="small"
+                  >
+                     {responsiveLayout ? 'Cancel' : 'Cancel Request'}
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function OngoingDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const theme = useTheme()
+   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#66BB6A' }}>
+                        Ongoing transaction
+                     </span>{' '}
+                     •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Approved {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View listing
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_grey}
+                     startIcon={<ChatBubbleIcon />}
+                  >
+                     {responsiveLayout ? 'Message' : 'Send a message'}
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
+   )
+}
+
+function ClaimedDonation(props) {
+   const { listingID, donationName, postDateTime, imgLoc } = props
+   const classes = useStyles()
+
+   return (
+      <Box boxShadow={1} borderRadius={5}>
+         <div className={classes.container__listingitem}>
+            <img
+               className={classes.image__listingitem}
+               src={imgLoc}
+               alt="donation"
+            />
+            <div className={classes.container__listingdetail}>
+               <div>
+                  <Typography variant="body1" className={classes.text_bold}>
+                     {donationName}
+                  </Typography>
+                  <Typography variant="body2">
+                     <span style={{ color: '#8D6E63' }}>Completed</span> •{' '}
+                     <span style={{ fontWeight: '200' }}>
+                        Claimed {postDateTime}
+                     </span>
+                  </Typography>
+               </div>
+               <div className={classes.container__button}>
+                  <Button
+                     disableElevation
+                     variant="contained"
+                     className={classes.button_lightblue}
+                     startIcon={<ListAltIcon />}
+                     onClick={() => {
+                        console.log(listingID)
+                     }}
+                  >
+                     View Listing
+                  </Button>
+               </div>
+            </div>
+         </div>
+      </Box>
    )
 }
 
@@ -149,8 +422,8 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '5px',
    },
    image__listingitem: {
-      height: 'auto',
       width: '100px',
+      height: '100px',
       borderRadius: '5px',
       marginRight: '15px',
    },
@@ -189,231 +462,5 @@ const useStyles = makeStyles((theme) => ({
       },
    },
 }))
-
-function DonationTabs() {
-   const classes = useStyles()
-   const [value, setValue] = useState(0)
-
-   const handleChange = (event, newValue) => {
-      setValue(newValue)
-   }
-
-   return (
-      <div className={classes.root}>
-         <Box boxShadow={1} borderRadius={5}>
-            <div className={classes.container__search}>
-               <Typography variant="h6" className={classes.text_bold}>
-                  Requested Donations
-               </Typography>
-               <SearchField />
-            </div>
-            <AppBar
-               position="static"
-               color="default"
-               elevation={0}
-               className={classes.appbar}
-            >
-               <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  centered
-                  scrollButtons="auto"
-                  aria-label="scrollable auto tabs example"
-               >
-                  <Tab label="All" />
-                  <Tab label="To Be Approved" />
-                  <Tab label="Ongoing" />
-                  <Tab label="Completed" />
-               </Tabs>
-            </AppBar>
-         </Box>
-         <TabPanel value={value} index={0}>
-            <ToBeApprovedDonation />
-            <OngoingDonation />
-            <CompletedDonation />
-         </TabPanel>
-         <TabPanel value={value} index={1}>
-            <ToBeApprovedDonation />
-         </TabPanel>
-         <TabPanel value={value} index={2}>
-            <OngoingDonation />
-         </TabPanel>
-         <TabPanel value={value} index={3}>
-            <CompletedDonation />
-         </TabPanel>
-      </div>
-   )
-}
-
-function SearchField() {
-   const classes = useStyles()
-   return (
-      <div className={classes.search}>
-         <div className={classes.searchIcon}>
-            <SearchIcon />
-         </div>
-         <InputBase
-            placeholder="Search your listings"
-            classes={{
-               root: classes.inputRoot,
-               input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-         />
-      </div>
-   )
-}
-
-function ToBeApprovedDonation() {
-   const theme = useTheme()
-   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: 'orange' }}>
-                        Waiting for approval
-                     </span>{' '}
-                     •{' '}
-                     <span style={{ fontWeight: '200' }}>Requested 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     style={{ marginRight: '.5rem' }}
-                     startIcon={<CancelIcon />}
-                     size="small"
-                  >
-                     {responsiveLayout ? 'Cancel' : 'Cancel Request'}
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="outlined"
-                     color="primary"
-                     startIcon={<MessageOutlined />}
-                  >
-                     Message
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
-
-function OngoingDonation() {
-   const theme = useTheme()
-   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: '#66BB6A' }}>
-                        Ongoing transaction
-                     </span>{' '}
-                     •{' '}
-                     <span style={{ fontWeight: '200' }}>Approved 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     startIcon={<ChatBubbleIcon />}
-                  >
-                     {responsiveLayout ? 'Message' : 'Send a message'}
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
-
-function CompletedDonation() {
-   const classes = useStyles()
-   const imgsrc =
-      'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg'
-   return (
-      <Box boxShadow={1} borderRadius={5}>
-         <div className={classes.container__listingitem}>
-            <img
-               className={classes.image__listingitem}
-               src={imgsrc}
-               alt="donation"
-            />
-            <div className={classes.container__listingdetail}>
-               <div>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     Ligo Sardines
-                  </Typography>
-                  <Typography variant="body2">
-                     <span style={{ color: '#8D6E63' }}>Completed</span> •{' '}
-                     <span style={{ fontWeight: '200' }}>Claimed 1h ago</span>
-                  </Typography>
-               </div>
-               <div className={classes.container__button}>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_lightblue}
-                     startIcon={<ListAltIcon />}
-                  >
-                     View Listing
-                  </Button>
-               </div>
-            </div>
-         </div>
-      </Box>
-   )
-}
 
 export default RequestedDonations

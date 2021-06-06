@@ -102,7 +102,10 @@ const useStyles = makeStyles((theme) => ({
 //returns a drawer that is placed on the left side of the website.
 export function RequestDrawer() {
    const donationID = useMessageStore((state) => state.donationID)
-   const [donationDetails, setDonationDetails] = useState(null)
+   const donationDetails = useMessageStore((state) => state.donationDetails)
+   const setDonationDetails = useMessageStore(
+      (state) => state.setDonationDetails
+   )
 
    useEffect(() => {
       if (donationID) {
@@ -110,7 +113,7 @@ export function RequestDrawer() {
             DonationsData.filter((data) => data.donationID === donationID)
          )
       }
-   }, [donationID])
+   }, [donationID, setDonationDetails])
 
    if (donationDetails) {
       console.log(donationDetails)
@@ -140,8 +143,75 @@ export function RequestDrawer() {
                   <DonationName
                      donationName={donationDetails[0].donationName}
                   />
-                  <DistanceAway
-                     distanceAway={donationDetails[0].distanceAway}
+                  <ChipCategory
+                     donationCategory={donationDetails[0].donationCategory}
+                  />
+                  <DonationExpiry
+                     donationExpiry={donationDetails[0].donationExpiry}
+                  />
+                  <DonationNotes
+                     donationNote={donationDetails[0].donationNote}
+                  />
+                  <DonationPickupDetails
+                     pickupLoc={donationDetails[0].pickupLoc}
+                     pickupDate={donationDetails[0].pickupDate}
+                     pickupTime={donationDetails[0].pickupTime}
+                  />
+               </div>
+
+               <div
+                  style={{
+                     display: 'flex',
+                     flexDirection: 'column',
+                     marginTop: 'auto',
+                  }}
+               >
+                  <DonationActions status={donationDetails[0].status} />
+               </div>
+            </div>
+         ) : // <Typography
+         //    className={classes.title}
+         //    gutterBottom
+         //    variant="h5"
+         //    component="h2"
+         // >
+         //    Donation Details
+         // </Typography>
+         null}
+      </Drawer>
+   )
+}
+export function RequestDrawerResponsive() {
+   const donationID = useMessageStore((state) => state.donationID)
+   const donationDetails = useMessageStore((state) => state.donationDetails)
+   const setDonationDetails = useMessageStore(
+      (state) => state.setDonationDetails
+   )
+   console.log(donationDetails)
+
+   useEffect(() => {
+      if (donationID) {
+         setDonationDetails(
+            DonationsData.filter((data) => data.donationID === donationID)
+         )
+      }
+   }, [donationID, setDonationDetails])
+
+   const classes = useStyles()
+   return (
+      <DialogDrawer buttonName="DONATION DETAILS">
+         {donationDetails ? (
+            <div className={classes.drawer__container}>
+               <Title status={donationDetails[0].status} />
+               <Divider className={classes.divider_margin} />
+               <div className={classes.container__donationDetails}>
+                  <UserName
+                     donorName={donationDetails[0].donorName}
+                     doneeName={donationDetails[0].doneeName}
+                  />
+                  <Divider className={classes.divider_margin} />
+                  <DonationName
+                     donationName={donationDetails[0].donationName}
                   />
                   <ChipCategory
                      donationCategory={donationDetails[0].donationCategory}
@@ -169,29 +239,15 @@ export function RequestDrawer() {
                   <DonationActions status={donationDetails[0].status} />
                </div>
             </div>
-         ) : (
-            <Typography>please choose</Typography>
-         )}
-      </Drawer>
-   )
-}
-export function RequestDrawerResponsive() {
-   const classes = useStyles()
-   return (
-      <DialogDrawer
-         buttonName="DONATION REQUEST"
-         dialogTitle="Donation Request"
-      >
-         <DonationName />
-         <DistanceAway />
-         <ChipCategory />
-
-         <DonationExpiry />
-         <DonationNotes />
-         <DonationPickupDetails />
-         <Divider className={classes.divider_margin} />
-         <DeclineButton />
-         <ApproveButton />
+         ) : // <Typography
+         //    className={classes.title}
+         //    gutterBottom
+         //    variant="h5"
+         //    component="h2"
+         // >
+         //    Donation Details
+         // </Typography>
+         null}
       </DialogDrawer>
    )
 }
@@ -252,16 +308,6 @@ function DonationName(props) {
    )
 }
 
-// returns the distance from the user
-function DistanceAway(props) {
-   const classes = useStyles()
-   return (
-      <div className={classes.container__distance}>
-         <LocationOnIcon color="secondary" />
-         <Typography>{props.distanceAway} away</Typography>
-      </div>
-   )
-}
 // returns the food category of the donation
 function ChipCategory(props) {
    const classes = useStyles()

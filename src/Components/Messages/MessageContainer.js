@@ -51,8 +51,10 @@ function MessageContainer() {
    return (
       <MainContainer>
          <div className={classes.container__responsive}>
-            {responsiveLayout ? <MessagesDrawerResponsive /> : null}
-            {responsiveLayout2 ? <RequestDrawerResponsive /> : null}
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+               {responsiveLayout ? <MessagesDrawerResponsive /> : null}
+               {responsiveLayout2 ? <RequestDrawerResponsive /> : null}
+            </div>
             <MessageConversation />
          </div>
       </MainContainer>
