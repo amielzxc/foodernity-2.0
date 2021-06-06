@@ -1,6 +1,6 @@
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
-import { donations } from '../../Components/Common/MockData'
+
 const useStyles = makeStyles((theme) => ({
    root: {
       flexGrow: 1,
@@ -8,75 +8,84 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 
-function Monitor() {
+function ReportedDonations() {
    const classes = useStyles()
+
    return (
       <div className={classes.root}>
          <Grid container spacing={3}>
             <Grid item xs={12}>
                <Typography variant="h4" style={{ fontWeight: 'bold' }}>
-                  Donations Monitoring
+                  Reported Donations
                </Typography>
                <Typography>as of May 31, 2021</Typography>
             </Grid>
             <Grid item xs={12}>
-               <DonationsTable />
+               <ReportsTable />
             </Grid>
          </Grid>
       </div>
    )
 }
 
-const donationColumns = [
+const reportColumns = [
    {
       field: 'id',
       headerName: 'ID',
-      width: 100,
+      width: 150,
       type: 'number',
    },
    {
-      field: 'donationName',
-      headerName: 'Donation Name',
+      field: 'donorEmail',
+      headerName: 'Donor Email',
       width: 190,
    },
    {
-      field: 'donationCategory',
-      headerName: 'Category',
+      field: 'reporterEmail',
+      headerName: 'Reporter Email',
       width: 190,
    },
    {
-      field: 'donationRecipient',
-      headerName: 'Recipient',
+      field: 'dateReported',
+      headerName: 'Date Reported',
       width: 190,
    },
    {
-      field: 'pickupDate',
-      headerName: 'Pickup Date',
+      field: 'reportMessage',
+      headerName: 'Report Message',
       width: 190,
    },
    {
-      field: 'pickupLoc',
-      headerName: 'Pickup Location',
+      field: 'removeListing',
+      headerName: 'Remove Listing',
       width: 190,
+      sortable: false,
+      disableClickEventBubbing: true,
+      renderCell: (params) => {
+         return (
+            <Button variant="contained" color="primary" disableElevation>
+               Remove Listing
+            </Button>
+         )
+      },
    },
    {
-      field: 'donationExpiry',
-      headerName: 'Expiry',
+      field: 'suspendDonor',
+      headerName: 'Suspend Donor',
       width: 190,
+      sortable: false,
+      disableClickEventBubbing: true,
+      renderCell: (params) => {
+         return (
+            <Button variant="contained" color="primary" disableElevation>
+               Suspend Donor
+            </Button>
+         )
+      },
    },
    {
-      field: 'status',
-      headerName: 'Status',
-      width: 190,
-   },
-   {
-      field: 'postDate',
-      headerName: 'Date Posted',
-      width: 190,
-   },
-   {
-      field: 'expand',
-      headerName: 'View More',
+      field: 'view',
+      headerName: 'View Listing',
       width: 150,
       sortable: false,
       disableClickEventBubbing: true,
@@ -90,14 +99,24 @@ const donationColumns = [
    },
 ]
 
-function DonationsTable() {
+const data = [
+   {
+      id: 1,
+      donorEmail: 'fhillip@gmail.com',
+      reporterEmail: 'bagsic@gmail.com',
+      dateReported: '10/20/2020',
+      reportMessage: 'Contains vulgar messages on donation notes',
+   },
+]
+
+function ReportsTable() {
    return (
       <Paper elevation={0}>
          <div style={{ height: 600, width: '100%' }}>
             <DataGrid
                autoPageSize
-               rows={donations}
-               columns={donationColumns}
+               rows={data}
+               columns={reportColumns}
                pageSize={10}
                checkboxSelection
             />
@@ -105,5 +124,4 @@ function DonationsTable() {
       </Paper>
    )
 }
-
-export default Monitor
+export default ReportedDonations

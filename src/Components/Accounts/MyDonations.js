@@ -357,11 +357,11 @@ function ToApproveDonation() {
                   </Button>
                   <Button
                      disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     startIcon={<ShareIcon />}
+                     variant="outlined"
+                     color="secondary"
+                     // startIcon={<ShareIcon />}
                   >
-                     Share
+                     Approve Donation
                   </Button>
                </div>
             </div>
@@ -402,14 +402,6 @@ function OngoingDonation() {
                      startIcon={<ListAltIcon />}
                   >
                      View listing
-                  </Button>
-                  <Button
-                     disableElevation
-                     variant="contained"
-                     className={classes.button_grey}
-                     startIcon={<ShareIcon />}
-                  >
-                     Share
                   </Button>
                </div>
             </div>

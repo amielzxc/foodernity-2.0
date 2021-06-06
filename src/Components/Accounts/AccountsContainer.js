@@ -6,7 +6,7 @@ import MyDonations from './MyDonations'
 import RequestedDonations from './RequestedDonations'
 import MyProfile from './MyProfile'
 import EditProfile from './EditProfile'
-import Privacy from './Privacy'
+
 function AccountsContainer() {
    const theme = useTheme()
    //  used to determine whether the page should use components intended for responsive layout
@@ -30,9 +30,6 @@ function AccountsContainer() {
             </Route>
             <Route path={`${path}/editprofile`}>
                <EditProfile />
-            </Route>
-            <Route path={`${path}/dataprivacy`}>
-               <Privacy />
             </Route>
          </Switch>
       </MainContainer>

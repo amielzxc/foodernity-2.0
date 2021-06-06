@@ -22,6 +22,10 @@ import { Avatar } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import Monitor from './Monitor'
 import Users from './Users'
+import ListAltIcon from '@material-ui/icons/ListAlt'
+import LiveHelpIcon from '@material-ui/icons/LiveHelp'
+import ReportIcon from '@material-ui/icons/Report'
+import ReportedDonations from './ReportedDonations'
 
 const drawerWidth = 260
 
@@ -68,6 +72,11 @@ const NavItems = [
       link: '/monitor',
    },
    {
+      icon: <ReportIcon />,
+      label: 'Reported Donations',
+      link: '/reporteddonations',
+   },
+   {
       icon: <SupervisedUserCircleIcon />,
       label: 'Users',
       link: '/users',
@@ -78,6 +87,18 @@ const NavItems = [
       link: '',
    },
 ]
+
+const NavItemsTwo = [
+   {
+      icon: <ListAltIcon />,
+      label: 'Listings',
+   },
+   {
+      icon: <LiveHelpIcon />,
+      label: 'FAQs',
+   },
+]
+
 function Admin(props) {
    const { window } = props
    const classes = useStyles()
@@ -109,7 +130,7 @@ function Admin(props) {
                Fhillip Bagsic
             </Typography>
             <Typography color="textSecondary" variant="body2">
-               Admin
+               Super Admin
             </Typography>
          </div>
          <Divider />
@@ -121,6 +142,15 @@ function Admin(props) {
                   component={Link}
                   to={`${url}${item.link}`}
                >
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+               </ListItem>
+            ))}
+         </List>
+         <Divider />
+         <List>
+            {NavItemsTwo.map((item) => (
+               <ListItem button key={item.label}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                </ListItem>
@@ -190,6 +220,9 @@ function Admin(props) {
                </Route>
                <Route path={`${path}/monitor`}>
                   <Monitor />
+               </Route>
+               <Route path={`${path}/reporteddonations`}>
+                  <ReportedDonations />
                </Route>
                <Route path={`${path}/users`}>
                   <Users />
