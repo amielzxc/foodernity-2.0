@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Avatar, Button, makeStyles, Typography, fade } from '@material-ui/core'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import { grey, red } from '@material-ui/core/colors'
@@ -133,7 +133,6 @@ export function OngoingStatus() {
 
 export function CompletedStatus() {
    const classes = useStyles()
-   const [rating, setRating] = useState(2)
    const doneeImage =
       'https://images.pexels.com/photos/4016173/pexels-photo-4016173.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
    const doneeFirstName = 'Julia'

@@ -19,7 +19,7 @@ function AccountsContainer() {
          {/* displays whether the topics drawer dialog should be displayed or not depending on the variable */}
          {responsiveLayout && <NavigationDrawerResponsive />}
          <Switch>
-            <Route path={`${path}/mydonations`}>
+            <Route path={`${path}/`} exact>
                <MyDonations />
             </Route>
             <Route path={`${path}/requesteddonations`}>

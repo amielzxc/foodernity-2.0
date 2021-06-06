@@ -52,7 +52,6 @@ function DownloadMobile() {
             container
             item
             xs={11}
-            md={11}
             md={6}
             justify={sm ? 'center' : 'flex-start'}
          >
@@ -225,7 +224,6 @@ function Partnership() {
             container
             item
             xs={11}
-            md={11}
             md={6}
             justify={sm ? 'center' : 'flex-start'}
          >

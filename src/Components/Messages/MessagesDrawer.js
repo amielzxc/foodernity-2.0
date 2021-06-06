@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import LeftDrawer from '../Common/LeftDrawer'
 import {
    Avatar,
@@ -8,7 +9,11 @@ import {
    Button,
 } from '@material-ui/core'
 import DialogDrawer from '../Common/DialogDrawer'
-
+import { useMessageStore } from './Messages'
+import {
+   MyDonationsData,
+   MyRequestedData,
+} from '../../Components/Common/MockData'
 const useStyles = makeStyles((theme) => ({
    divider_margin: {
       margin: theme.spacing(2.5, 0),
@@ -24,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       margin: theme.spacing(1, 0),
       alignItems: 'center',
+      cursor: 'pointer',
    },
    avatar__message: {
       width: '50px',
@@ -35,39 +41,79 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 export function MessagesDrawer() {
-   const image = [
-      'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
-      'https://cf.shopee.com.my/file/090a18a75c04ad1d4e0f63421a5c8651',
-      'https://media.karousell.com/media/photos/products/2020/8/7/oishi_japanese_rice_1_sack_25k_1596774674_9992bf29_progressive.jpg',
-      'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
-   ]
+   const filterButton = useMessageStore((state) => state.filterButton)
+   const [messageItems, setMessageItems] = useState(null)
+
+   useEffect(() => {
+      if (filterButton === 'My Donations') {
+         setMessageItems(
+            MyDonationsData.map((donation) => (
+               <MessageItem
+                  key={donation.messageID}
+                  id={donation.messageID}
+                  name={donation.donationName}
+                  image={donation.imgLoc}
+               />
+            ))
+         )
+      } else if (filterButton === 'My Requested') {
+         setMessageItems(
+            MyRequestedData.map((donation) => (
+               <MessageItem
+                  key={donation.messageID}
+                  id={donation.messageID}
+                  name={donation.donationName}
+                  image={donation.imgLoc}
+               />
+            ))
+         )
+      }
+   }, [filterButton])
+
    const classes = useStyles()
    return (
       <LeftDrawer>
          <Title />
          <Divider className={classes.divider_margin} />
          <DonationButtons />
-         <MessageItem image={image[0]} name="Pancit Canton Noodles" />
-         <MessageItem image={image[1]} name="Argetina Canned Goods" />
-         <MessageItem image={image[2]} name="1 sack rice" />
-         <MessageItem image={image[3]} name="Pancit Canton" />
+         {messageItems}
       </LeftDrawer>
    )
 }
 export function MessagesDrawerResponsive() {
-   const image = [
-      'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
-      'https://cf.shopee.com.my/file/090a18a75c04ad1d4e0f63421a5c8651',
-      'https://media.karousell.com/media/photos/products/2020/8/7/oishi_japanese_rice_1_sack_25k_1596774674_9992bf29_progressive.jpg',
-      'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
-   ]
+   const filterButton = useMessageStore((state) => state.filterButton)
+   const [messageItems, setMessageItems] = useState(null)
+
+   useEffect(() => {
+      if (filterButton === 'My Donations') {
+         setMessageItems(
+            MyDonationsData.map((donation) => (
+               <MessageItem
+                  key={donation.messageID}
+                  id={donation.messageID}
+                  name={donation.donationName}
+                  image={donation.imgLoc}
+               />
+            ))
+         )
+      } else if (filterButton === 'My Requested') {
+         setMessageItems(
+            MyRequestedData.map((donation) => (
+               <MessageItem
+                  key={donation.messageID}
+                  id={donation.messageID}
+                  name={donation.donationName}
+                  image={donation.imgLoc}
+               />
+            ))
+         )
+      }
+   }, [filterButton])
 
    return (
       <DialogDrawer buttonName="MESSAGES" dialogTitle="Messages">
-         <MessageItem image={image[0]} name="Pancit Canton Noodles" />
-         <MessageItem image={image[1]} name="Argetina Canned Goods" />
-         <MessageItem image={image[2]} name="1 sack rice" />
-         <MessageItem image={image[3]} name="Pancit Canton" />
+         <DonationButtons />
+         {messageItems}
       </DialogDrawer>
    )
 }
@@ -89,26 +135,58 @@ function Title() {
 }
 
 function DonationButtons() {
+   const filterButton = useMessageStore((state) => state.filterButton)
+   const setFilterButton = useMessageStore((state) => state.setFilterButton)
+
    return (
       <ButtonGroup>
-         <Button variant="outlined" color="primary" disableElevation fullWidth>
+         <Button
+            variant={filterButton === 'My Donations' ? 'contained' : 'outlined'}
+            color="primary"
+            disableElevation
+            fullWidth
+            onClick={
+               filterButton !== 'My Donations'
+                  ? () => {
+                       setFilterButton('My Donations')
+                    }
+                  : null
+            }
+         >
             My Donations
          </Button>
-         <Button variant="contained" color="primary" disableElevation fullWidth>
+         <Button
+            variant={filterButton === 'My Requested' ? 'contained' : 'outlined'}
+            color="primary"
+            disableElevation
+            fullWidth
+            onClick={
+               filterButton !== 'My Requested'
+                  ? () => {
+                       setFilterButton('My Requested')
+                    }
+                  : null
+            }
+         >
             My Requested
          </Button>
       </ButtonGroup>
    )
 }
 function MessageItem(props) {
-   const { image, name } = props
+   const { id, image, name } = props
+   const setDonationID = useMessageStore((state) => state.setDonationID)
    const classes = useStyles()
+
+   const handleClick = () => {
+      setDonationID(parseInt(id))
+   }
    return (
-      <div className={classes.container__messageItem}>
+      <div className={classes.container__messageItem} onClick={handleClick}>
          <Avatar className={classes.avatar__message} src={image} />
          <div style={{ width: '10px' }} />
          <div className={classes.container__messageNameDesc}>
-            <Typography variant="body1" className={classes.text_bold}>
+            <Typography variant="body1" className={classes.text_bold} noWrap>
                {name}
             </Typography>
             <Typography variant="body2">New Message</Typography>

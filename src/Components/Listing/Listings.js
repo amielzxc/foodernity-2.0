@@ -46,12 +46,6 @@ export default function Listings() {
    //  used to determine whether the page should use components intended for responsive layout
    const responsiveLayout = useMediaQuery(theme.breakpoints.down('sm'))
 
-   const filterButton = useFilterStore((state) => state.filterButton)
-   const userLocation = useFilterStore((state) => state.userLocation)
-   const distance = useFilterStore((state) => state.distance)
-   const foodCategory = useFilterStore((state) => state.foodCategory)
-
-   // console.log(`${filterButton} ${userLocation} ${distance} ${foodCategory}`)
    return (
       <>
          <Helmet>
