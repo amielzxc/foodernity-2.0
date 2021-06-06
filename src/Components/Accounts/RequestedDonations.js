@@ -14,6 +14,7 @@ import { grey } from '@material-ui/core/colors'
 import CancelIcon from '@material-ui/icons/Cancel'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import AddIcon from '@material-ui/icons/Add'
+import { MessageOutlined } from '@material-ui/icons'
 function RequestedDonations() {
    return (
       <Grid container spacing={2}>
@@ -305,10 +306,19 @@ function ToBeApprovedDonation() {
                      disableElevation
                      variant="contained"
                      className={classes.button_grey}
+                     style={{ marginRight: '.5rem' }}
                      startIcon={<CancelIcon />}
                      size="small"
                   >
                      {responsiveLayout ? 'Cancel' : 'Cancel Request'}
+                  </Button>
+                  <Button
+                     disableElevation
+                     variant="outlined"
+                     color="primary"
+                     startIcon={<MessageOutlined />}
+                  >
+                     Message
                   </Button>
                </div>
             </div>

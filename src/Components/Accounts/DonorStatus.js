@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Avatar, Button, makeStyles, Typography, fade } from '@material-ui/core'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
-import Rating from '@material-ui/lab/Rating'
 import { grey, red } from '@material-ui/core/colors'
 export function AvailableStatus() {
    return (
@@ -183,20 +182,6 @@ export function CompletedStatus() {
                </div>
             </div>
          </div>
-         <Typography variant="body1" className={classes.text_bold}>
-            How would you rate {doneeFirstName}?
-         </Typography>
-         <Rating
-            name="simple-controlled"
-            value={rating}
-            onChange={(event, newValue) => {
-               setRating(newValue)
-            }}
-         />
-         <Typography variant="caption">
-            Your rate matters to make the community a better place to share food
-            with each other! :)
-         </Typography>
       </>
    )
 }

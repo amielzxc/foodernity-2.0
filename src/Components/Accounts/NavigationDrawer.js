@@ -43,15 +43,6 @@ const iconList2 = [
    },
 ]
 
-const iconList3 = [
-   {
-      label: 'Data and Privacy',
-      icon: <SecurityRoundedIcon />,
-      color: '#78909C',
-      link: '/dataprivacy',
-   },
-]
-
 const useStyles = makeStyles((theme) => ({
    title: {
       margin: theme.spacing(0.5, 0),
@@ -115,16 +106,6 @@ export function NavigationDrawer() {
             />
          ))}
 
-         <Subtitle title="Settings" color="#78909C" />
-         {iconList3.map((icon) => (
-            <Tab
-               key={icon.label}
-               label={icon.label}
-               icon={icon.icon}
-               color={icon.color}
-               link={icon.link}
-            />
-         ))}
          <Footer />
       </LeftDrawer>
    )
@@ -150,17 +131,6 @@ export function NavigationDrawerResponsive() {
 
             <Subtitle title="Profile" color="#2196F3" />
             {iconList2.map((icon) => (
-               <Tab
-                  key={icon.label}
-                  label={icon.label}
-                  icon={icon.icon}
-                  color={icon.color}
-                  link={icon.link}
-               />
-            ))}
-
-            <Subtitle title="Settings" color="#78909C" />
-            {iconList3.map((icon) => (
                <Tab
                   key={icon.label}
                   label={icon.label}

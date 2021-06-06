@@ -1,5 +1,4 @@
 import { Box, makeStyles, Typography, Grid } from '@material-ui/core'
-import StarRateRoundedIcon from '@material-ui/icons/StarRateRounded'
 import dummychart from './dummychart.png'
 import { Icon } from '@iconify/react'
 import bxsDonateHeart from '@iconify-icons/bx/bxs-donate-heart'
@@ -54,24 +53,12 @@ function UserInformation() {
 
 function UserStatistics() {
    const classes = useStyles()
-   const rating = '4.9'
    const totalDonations = '35'
    const totalDonationsReceived = '10'
 
    return (
       <Box boxShadow={1} borderRadius="5px">
          <div className={classes.container__statistics}>
-            <div className={classes.container__statistics_item}>
-               <StarRateRoundedIcon className={classes.icon__rating} />
-               <div>
-                  <Typography variant="body1" className={classes.text__grey}>
-                     My Rating
-                  </Typography>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     {rating}
-                  </Typography>
-               </div>
-            </div>
             <div className={classes.container__statistics_item}>
                <Icon
                   icon={bxsDonateHeart}
@@ -101,17 +88,6 @@ function UserStatistics() {
                   </Typography>
                </div>
             </div>
-            {/* <div className={classes.container__statistics_item}>
-               <StarRateRoundedIcon className={classes.icon__rating} />
-               <div>
-                  <Typography variant="body1" className={classes.text__grey}>
-                     My Rating
-                  </Typography>
-                  <Typography variant="body1" className={classes.text_bold}>
-                     4.9
-                  </Typography>
-               </div>
-            </div> */}
          </div>
       </Box>
    )
