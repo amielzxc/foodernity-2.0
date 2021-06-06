@@ -86,17 +86,6 @@ function UsersTable() {
       },
    ]
 
-   const rows = [
-      {
-         id: 1,
-         surname: 'Bagsic',
-         firstname: 'Fhillip',
-         userType: 'Individual',
-         emailAddress: 'fhillipbagsic@gmail.com',
-         dateOfReg: 'May 20, 2021',
-         userStatus: 'Active',
-      },
-   ]
    return (
       <Paper elevation={0}>
          <div style={{ height: 600, width: '100%' }}>

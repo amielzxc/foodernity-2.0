@@ -182,7 +182,7 @@ function DonationsPosted() {
                      Donations Posted
                   </Typography>
                   <Typography color="textPrimary" variant="h5">
-                     364
+                     1903
                   </Typography>
                </Grid>
                <Grid item>
@@ -219,7 +219,7 @@ function DonationsClaimed() {
                      Donations Claimed
                   </Typography>
                   <Typography color="textPrimary" variant="h5">
-                     364
+                     1741
                   </Typography>
                </Grid>
                <Grid item>
@@ -256,7 +256,7 @@ function DonationsSpoiled() {
                      Donations Spoiled
                   </Typography>
                   <Typography color="textPrimary" variant="h5">
-                     364
+                     162
                   </Typography>
                </Grid>
                <Grid item>
@@ -297,7 +297,7 @@ function RegisteredUsers() {
                      Registered Users
                   </Typography>
                   <Typography color="textPrimary" variant="h6">
-                     364
+                     810
                   </Typography>
                </Grid>
                <Grid item>
@@ -338,7 +338,7 @@ function RegisteredPartners() {
                      Registered Partners
                   </Typography>
                   <Typography color="textPrimary" variant="h6">
-                     364
+                     203
                   </Typography>
                </Grid>
                <Grid item>
@@ -379,7 +379,7 @@ function RegisteredDonors() {
                      Users who Donated
                   </Typography>
                   <Typography color="textPrimary" variant="h6">
-                     364
+                     637
                   </Typography>
                </Grid>
                <Grid item>
@@ -420,7 +420,7 @@ function SiteCount() {
                      Site Count
                   </Typography>
                   <Typography color="textPrimary" variant="h6">
-                     364
+                     1560
                   </Typography>
                </Grid>
                <Grid item>
