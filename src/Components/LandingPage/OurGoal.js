@@ -12,7 +12,6 @@ import { NavBar, Menu } from './NavBar'
 import waste from './waste.png'
 import hunger from './hunger.png'
 import community from './community.png'
-import phoneMockup from './phone_mockup.png'
 import planet from './planet-earth.png'
 import Footer from './Footer'
 function OurGoal() {
@@ -48,7 +47,7 @@ function Overview() {
          style={{ padding: '3rem 0', height: sm ? 'auto' : '94vh' }}
       >
          <Grid item xs={false} md={1} />
-         <Grid container item xs={11} md={11} md={7}>
+         <Grid container item xs={11} md={7}>
             <Grid item>
                <Hidden smDown>
                   <div

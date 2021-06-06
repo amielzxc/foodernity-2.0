@@ -5,8 +5,7 @@ const useStyles = makeStyles((theme) => ({
    content: {
       flexGrow: 1,
       padding: theme.spacing(3),
-      height: '100vh',
-      overflowX: 'hidden',
+      height: '93vh',
    },
 }))
 // returns a container used to display main contents of the page

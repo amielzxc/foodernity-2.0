@@ -55,7 +55,6 @@ function Hero() {
             container
             item
             xs={11}
-            md={11}
             md={6}
             justify={sm ? 'center' : 'flex-start'}
          >
@@ -190,7 +189,7 @@ function Goal() {
          xs={12}
          style={{ backgroundColor: 'black', marginBottom: '3rem' }}
       >
-         <Grid item justify="center">
+         <Grid item>
             <Typography
                variant="h5"
                style={{
@@ -204,7 +203,7 @@ function Goal() {
             </Typography>
          </Grid>
          <Grid item xs={12} />
-         <Grid item justify="center" xs={10}>
+         <Grid item xs={10}>
             <Typography
                variant="h4"
                style={{

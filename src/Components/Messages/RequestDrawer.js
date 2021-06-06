@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
    makeStyles,
    Drawer,
@@ -15,6 +15,9 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import DialogDrawer from '../Common/DialogDrawer'
 import { deepOrange } from '@material-ui/core/colors'
+import { useMessageStore } from './Messages'
+import { DonationsData } from '../../Components/Common/MockData'
+
 const drawerWidth = 350
 
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +101,20 @@ const useStyles = makeStyles((theme) => ({
 }))
 //returns a drawer that is placed on the left side of the website.
 export function RequestDrawer() {
+   const donationID = useMessageStore((state) => state.donationID)
+   const [donationDetails, setDonationDetails] = useState(null)
+
+   useEffect(() => {
+      if (donationID) {
+         setDonationDetails(
+            DonationsData.filter((data) => data.donationID === donationID)
+         )
+      }
+   }, [donationID])
+
+   if (donationDetails) {
+      console.log(donationDetails)
+   }
    const classes = useStyles()
 
    return (
@@ -110,34 +127,51 @@ export function RequestDrawer() {
          }}
       >
          <Toolbar />
-         <div className={classes.drawer__container}>
-            <Title />
-            <Divider className={classes.divider_margin} />
-            <div className={classes.container__donationDetails}>
-               <DoneeName />
+         {donationDetails ? (
+            <div className={classes.drawer__container}>
+               <Title status={donationDetails[0].status} />
                <Divider className={classes.divider_margin} />
-               <DonationName />
-               <DistanceFromDonee />
-               <ChipCategory />
-               <DonationQuantity />
-               <DonationExpiry />
-               <DonationNotes />
-               <DonationPickupDetails />
-            </div>
+               <div className={classes.container__donationDetails}>
+                  <UserName
+                     donorName={donationDetails[0].donorName}
+                     doneeName={donationDetails[0].doneeName}
+                  />
+                  <Divider className={classes.divider_margin} />
+                  <DonationName
+                     donationName={donationDetails[0].donationName}
+                  />
+                  <DistanceAway
+                     distanceAway={donationDetails[0].distanceAway}
+                  />
+                  <ChipCategory
+                     donationCategory={donationDetails[0].donationCategory}
+                  />
+                  <DonationExpiry
+                     donationExpiry={donationDetails[0].donationExpiry}
+                  />
+                  <DonationNotes
+                     donationNote={donationDetails[0].donationNote}
+                  />
+                  <DonationPickupDetails
+                     pickupLoc={donationDetails[0].pickupLoc}
+                     pickupDate={donationDetails[0].pickupDate}
+                     pickupTime={donationDetails[0].pickupTime}
+                  />
+               </div>
 
-            <div
-               style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  marginTop: 'auto',
-               }}
-            >
-               <Divider className={classes.divider_margin} />
-               <CancelButton />
-               {/* <DeclineButton />
-               <ApproveButton /> */}
+               <div
+                  style={{
+                     display: 'flex',
+                     flexDirection: 'column',
+                     marginTop: 'auto',
+                  }}
+               >
+                  <DonationActions status={donationDetails[0].status} />
+               </div>
             </div>
-         </div>
+         ) : (
+            <Typography>please choose</Typography>
+         )}
       </Drawer>
    )
 }
@@ -149,9 +183,9 @@ export function RequestDrawerResponsive() {
          dialogTitle="Donation Request"
       >
          <DonationName />
-         <DistanceFromDonee />
+         <DistanceAway />
          <ChipCategory />
-         <DonationQuantity />
+
          <DonationExpiry />
          <DonationNotes />
          <DonationPickupDetails />
@@ -162,8 +196,19 @@ export function RequestDrawerResponsive() {
    )
 }
 // returns the title of the right drawer
-function Title() {
+function Title(props) {
+   const { status } = props
+   let title
    const classes = useStyles()
+
+   if (status === 'Requested') {
+      title = 'Donation Request'
+   } else if (status === 'Ongoing') {
+      title = 'Donation Ongoing'
+   } else {
+      title = 'Donation Claimed'
+   }
+
    return (
       <div>
          <Typography
@@ -172,92 +217,85 @@ function Title() {
             variant="h5"
             component="h2"
          >
-            Donation Request
+            {title}
          </Typography>
       </div>
    )
 }
 
-function DoneeName() {
+function UserName(props) {
+   const { donorName, doneeName } = props
+   const filterButton = useMessageStore((state) => state.filterButton)
    const classes = useStyles()
+
    return (
       <>
-         <Typography>Listing by</Typography>
+         <Typography>
+            {filterButton === 'My Donations' ? 'Requested By' : 'Listed By'}
+         </Typography>
          <div className={classes.container__avatar}>
             <Avatar className={classes.avatar__color}>FB</Avatar>
             <Typography variant="body1" component="p">
-               Fhillip Bagsic
+               {filterButton === 'My Donations' ? doneeName : donorName}
             </Typography>
          </div>
       </>
    )
 }
 
-function DonationName() {
+function DonationName(props) {
    const classes = useStyles()
    return (
       <Typography variant="h6" className={classes.text_bold}>
-         Lucky Me Pancit Canton Noodles
+         {props.donationName}
       </Typography>
    )
 }
 
 // returns the distance from the user
-function DistanceFromDonee() {
+function DistanceAway(props) {
    const classes = useStyles()
    return (
       <div className={classes.container__distance}>
          <LocationOnIcon color="secondary" />
-         <Typography>3 kilometers away</Typography>
+         <Typography>{props.distanceAway} away</Typography>
       </div>
    )
 }
 // returns the food category of the donation
-function ChipCategory() {
+function ChipCategory(props) {
    const classes = useStyles()
    return (
       <div className={classes.container__category}>
-         <Chip label="Canned Goods" color="primary" />
+         <Chip label={props.donationCategory} color="primary" />
       </div>
    )
 }
-// returns the quantity of the donation
-function DonationQuantity() {
-   const classes = useStyles()
-   return (
-      <div className={classes.container__quantity}>
-         <Typography>
-            <span className={classes.text_bold}>Quantity:</span> 5 pieces
-         </Typography>
-      </div>
-   )
-}
-function DonationExpiry() {
+
+function DonationExpiry(props) {
    const classes = useStyles()
    return (
       <div className={classes.container__expiry}>
          <Typography>
-            <span className={classes.text_bold}>Expiry date:</span> June 07,
-            2021
+            <span className={classes.text_bold}>Expiry date:</span>{' '}
+            {props.donationExpiry}
          </Typography>
       </div>
    )
 }
-function DonationNotes() {
+function DonationNotes(props) {
    const classes = useStyles()
    return (
       <div className={classes.container__notes}>
          <Typography className={classes.text_bold}>Donation Notes</Typography>
-         <Typography>
-            If you are interested, text me on my number 09123456789 or message
-            me instead here.
-         </Typography>
+         <Typography>{props.donationNote}</Typography>
       </div>
    )
 }
 
 // returns pickup details - the pickup location, date, and time
-function DonationPickupDetails() {
+function DonationPickupDetails(props) {
+   const { pickupLoc, pickupDate, pickupTime } = props
    const classes = useStyles()
    return (
       <>
@@ -265,20 +303,45 @@ function DonationPickupDetails() {
             <LocationOnIcon className={classes.icon__location} />
             <Typography>
                <span className={`${classes.text_bold} ${classes.text_link}`}>
-                  Jhocson St., Sampaloc, Manila
+                  {pickupLoc}
                </span>
             </Typography>
          </div>
          <div className={classes.container__pickup}>
             <EventAvailableIcon className={`${classes.icon__date}`} />
-            <Typography>June 06, 2021</Typography>
+            <Typography>{pickupDate}</Typography>
          </div>
          <div className={classes.container__pickup}>
             <ScheduleIcon className={classes.icon__time} />
-            <Typography>between 12pm to 5pm</Typography>
+            <Typography>{pickupTime}</Typography>
          </div>
       </>
    )
+}
+
+function DonationActions(props) {
+   const classes = useStyles()
+   const filterButton = useMessageStore((state) => state.filterButton)
+   const { status } = props
+
+   if (filterButton === 'My Donations' && status === 'Requested') {
+      return (
+         <>
+            <Divider className={classes.divider_margin} />
+            <ApproveButton />
+            <DeclineButton />
+         </>
+      )
+   } else if (filterButton === 'My Requested' && status === 'Requested') {
+      return (
+         <>
+            <Divider className={classes.divider_margin} />
+            <CancelButton />
+         </>
+      )
+   } else {
+      return null
+   }
 }
 function CancelButton() {
    return (
@@ -299,7 +362,7 @@ function ApproveButton() {
       root: {
          backgroundColor: '#66BB6A',
          color: 'white',
-         marginTop: '10px',
+         marginBottom: '.5rem',
          '&:hover': {
             backgroundColor: '#60B064',
          },

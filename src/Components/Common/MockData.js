@@ -1,101 +1,206 @@
-import { v4 as uuid } from 'uuid'
+export const DonationsData = [
+   {
+      donationID: 1,
+      donorName: 'Fhillip Bagsic (Me)',
+      doneeName: 'Amiel Morilla',
+      donationName: 'Assorted 555 sardines',
+      donationNote: '5 pieces same expiry',
+      donationCategory: 'Canned Goods',
+      donationExpiry: 'October 03,2021',
+      pickupDate: 'June 21, 2021',
+      pickupTime: '3:00PM',
+      pickupLoc:
+         'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '3 kilometers',
+      status: 'Requested',
+   },
+   {
+      donationID: 2,
+      donorName: 'Fhillip Bagsic (Me)',
+      doneeName: 'Kenneth Dela Cruz',
+      donationName: 'Nissin Cup Noodles',
+      donationNote: '8 pieces assorted flavor.',
+      donationCategory: 'Instant Noodles',
+      donationExpiry: 'November 13, 2021',
+      pickupDate: 'June 08, 2021',
+      pickupTime: '12:30PM',
+      pickupLoc:
+         'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '1 kilometer',
+      status: 'Ongoing',
+   },
+   {
+      donationID: 3,
+      donorName: 'Fhillip Bagsic (Me)',
+      doneeName: 'Kenneth Dela Cruz',
+      donationName: 'Butter coconut',
+      donationNote: '3 pieces',
+      donationCategory: 'Biscuits & Snacks',
+      donationExpiry: 'August 13, 2021',
+      pickupDate: 'June 15, 2021',
+      pickupTime: '11:30AM',
+      pickupLoc:
+         'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '2 kilometers',
+      status: 'Requested',
+   },
+   {
+      donationID: 4,
+      donorName: 'Fhillip Bagsic (Me)',
+      doneeName: 'Carl Daniel Patio',
+      donationName: 'Nissin Wafer',
+      donationNote: '2 packs',
+      donationCategory: 'Biscuits & Snacks',
+      donationExpiry: 'September 14, 2021',
+      pickupDate: 'June 10, 2021',
+      pickupTime: '2:30PM',
+      pickupLoc:
+         'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '700 meters',
+      status: 'Completed',
+   },
+   {
+      donationID: 5,
+      donorName: 'Amiel Morilla',
+      doneeName: 'Fhillip Bagsic',
+      donationName: 'Pancit Canton Noodles',
+      donationNote: 'assorted flavors 5 pieces',
+      donationCategory: 'Instant Noodles',
+      donationExpiry: 'August 29, 2021',
+      pickupDate: 'June 21, 2021',
+      pickupTime: '10:30AM',
+      pickupLoc:
+         'Bustillos Market, Figueras Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '2 kilometers',
+      status: 'Ongoing',
+   },
+   {
+      donationID: 6,
+      donorName: 'Kenneth Dela Cruz',
+      doneeName: 'Carl Daniel Patio',
+      donationName: 'Argentina Canned Goods',
+      donationNote: '8 pieces assorted flavor, i am near mineski',
+      donationCategory: 'Canned Goods',
+      donationExpiry: 'November 15, 2021',
+      pickupDate: 'June 15, 2021',
+      pickupTime: '12:00PM',
+      pickupLoc:
+         'Mineski Infinity F. Jhocson, M.F. Jocson, Sampaloc, Manila, Metro Manila',
+      distanceAway: '500 meters',
+      status: 'Requested',
+   },
+   {
+      donationID: 7,
+      donorName: 'Carl Daniel Patio',
+      doneeName: 'Fhillip Bagsic',
+      donationName: '1 sack bigas',
+      donationNote: 'isang sako',
+      donationCategory: 'Others',
+      donationExpiry: 'December 05, 2021',
+      pickupDate: 'June 30, 2021',
+      pickupTime: '5:00PM',
+      pickupLoc:
+         'Far Eastern University, Nicanor Reyes Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '2 kilometers',
+      status: 'Ongoing',
+   },
+   {
+      donationID: 8,
+      donorName: 'Christian Grey',
+      doneeName: 'Anastasia Steele',
+      donationName: 'Pancit Canton Noodles',
+      donationNote: '1 piece only, kalamansi flavor',
+      donationCategory: 'Instant Noodles',
+      donationExpiry: 'July 15, 2021',
+      pickupDate: 'June 10, 2021',
+      pickupTime: '10:30AM',
+      pickupLoc:
+         'Pink Pantry of Floti Cafe, Inc., M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
+      distanceAway: '100 meters',
+      status: 'Completed',
+   },
+]
 
-export const ListingData = [
+export const MyDonationsData = [
    {
-      listingId: '1',
-      listingImage:
-         'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg',
-      listingName: 'Assorted Canned Goods',
-      distance: '1 kilometer away',
-      postTime: '10m ago',
+      messageID: '1',
+      donationName: 'Assorted 555 sardines',
+      imgLoc: 'https://cf.shopee.ph/file/1de15c2041b57d2b984eba80add22419',
    },
    {
-      listingId: '2',
-      listingImage:
-         'https://farm5.staticflickr.com/4877/44971912865_5278910b09.jpg',
-      listingName: 'Ligo Sardines',
-      distance: '500 meters away',
-      postTime: '35m ago',
+      messageID: '2',
+      donationName: 'Nissin Cup Noodles',
+      imgLoc:
+         'https://www.seriouseats.com/thmb/Zi-JOQSjIP1lgTkh-qNC4UBsmEk=/1500x1125/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2020__02__20200211-cup-noodles-vicky-wasik-3-2f0b82897f5e467589b2e7965105ef96.jpg',
    },
    {
-      listingId: '3',
-      listingImage:
-         'https://c1.staticflickr.com/5/4158/33593402264_bedafb79d1_c.jpg',
-      listingName: 'Lucky Me Pancit Canton',
-      distance: '3 kilometers away',
-      postTime: '50m ago',
+      messageID: '3',
+      donationName: 'Butter coconut',
+      imgLoc:
+         'https://ph-test-11.slatic.net/p/83cdc5012a6541bbef182c9eec0fba0e.jpg',
    },
    {
-      listingId: '4',
-      listingImage:
-         'https://cf.shopee.ph/file/be3e42ff04de23cebd0c1105e7ebd5b1',
-      listingName: 'Fibisco biscuits',
-      distance: '300 meters away',
-      postTime: '1h ago',
+      messageID: '4',
+      donationName: 'Nissin Wafer',
+      imgLoc: 'https://cf.shopee.ph/file/b7feafa6f3bce72377cb7168763ed3bb',
+   },
+]
+
+export const MyRequestedData = [
+   {
+      messageID: '5',
+      donationName: 'Pancit Canton Noodles',
+      imgLoc:
+         'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
    },
    {
-      listingId: '5',
-      listingImage:
-         'https://cf.shopee.ph/file/eddfe3c0c7cb0f291a029b01dc8e7984',
-      listingName: 'Organic eggs',
-      distance: '1 kilometer away',
-      postTime: '10m ago',
+      messageID: '6',
+      donationName: 'Argetina Canned Goods',
+      imgLoc: 'https://cf.shopee.com.my/file/090a18a75c04ad1d4e0f63421a5c8651',
    },
    {
-      listingId: '6',
-      listingImage:
-         'https://cf.shopee.ph/file/8b01c1f639a54c5dd54c02a35ac19ade',
-      listingName: 'Cadbury biscuit',
-      distance: '500 meters away',
-      postTime: '35m ago',
+      messageID: '7',
+      donationName: '1 sack bigas',
+      imgLoc:
+         'https://media.karousell.com/media/photos/products/2020/8/7/oishi_japanese_rice_1_sack_25k_1596774674_9992bf29_progressive.jpg',
    },
    {
-      listingId: '7',
-      listingImage:
-         'https://cf.shopee.ph/file/1cb31d68b5008a0e8c428427f67c5710',
-      listingName: 'Japonica Rice',
-      distance: '3 kilometers away',
-      postTime: '50m ago',
+      messageID: '8',
+      donationName: 'Pancit Canton noodles',
+      imgLoc: 'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
+   },
+]
+
+export const MessagesData = [
+   {
+      messageID: '1',
+      userID: '1000',
+      message: 'Hello',
    },
    {
-      listingId: '8',
-      listingImage:
-         'https://cf.shopee.ph/file/6ef4b658d3d25bda90dba4a23eabd9ef',
-      listingName: 'Assorted biscuits',
-      distance: '300 meters away',
-      postTime: '1h ago',
+      messageID: '1',
+      userID: '1000',
+      message: 'Ano oras pwede makuha yung donation?',
    },
    {
-      listingId: '9',
-      listingImage:
-         'https://cf.shopee.ph/file/54ea2d99554d33d52003ac756b3c602b',
-      listingName: '1 pack tender juicy',
-      distance: '1 kilometer away',
-      postTime: '10m ago',
+      messageID: '1',
+      userID: '1001',
+      message: 'Hi',
    },
    {
-      listingId: '10',
-      listingImage:
-         'https://cf.shopee.ph/file/2315296425618aa856b068e01307fbee',
-      listingName: 'Lucky me pancit canton',
-      distance: '500 meters away',
-      postTime: '35m ago',
+      messageID: '1',
+      userID: '1001',
+      message: 'Mga 10am po',
    },
    {
-      listingId: '11',
-      listingImage:
-         'https://cf.shopee.ph/file/02497683fcdb2296c145afdd7f50527c',
-      listingName: 'Assorted biscuits',
-      distance: '300 meters away',
-      postTime: '1h ago',
+      messageID: '1',
+      userID: '1000',
+      message: 'Mga 10am po',
    },
    {
-      listingId: '12',
-      listingImage:
-         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQapFieGJ2wKAH9Id3P1lqYJBP5JfUJpBN52sqPrfS928cmels4Mxl65KH-hRQypdI0g8U&usqp=CAU',
-      listingName: 'Max condiments',
-      distance: '3 kilometers away',
-      postTime: '50m ago',
+      messageID: '1',
+      userID: '1000',
+      message: 'Mga 10am po',
    },
 ]
 
@@ -2464,3 +2569,102 @@ export const donations = [
       status: 'Available',
    },
 ]
+
+// export const ListingData = [
+//    {
+//       listingId: '1',
+//       listingImage:
+//          'https://primer.com.ph/tips-guide/wp-content/uploads/sites/5/2015/12/canned-goods.jpg',
+//       listingName: 'Assorted Canned Goods',
+//       distance: '1 kilometer away',
+//       postTime: '10m ago',
+//    },
+//    {
+//       listingId: '2',
+//       listingImage:
+//          'https://farm5.staticflickr.com/4877/44971912865_5278910b09.jpg',
+//       listingName: 'Ligo Sardines',
+//       distance: '500 meters away',
+//       postTime: '35m ago',
+//    },
+//    {
+//       listingId: '3',
+//       listingImage:
+//          'https://c1.staticflickr.com/5/4158/33593402264_bedafb79d1_c.jpg',
+//       listingName: 'Lucky Me Pancit Canton',
+//       distance: '3 kilometers away',
+//       postTime: '50m ago',
+//    },
+//    {
+//       listingId: '4',
+//       listingImage:
+//          'https://cf.shopee.ph/file/be3e42ff04de23cebd0c1105e7ebd5b1',
+//       listingName: 'Fibisco biscuits',
+//       distance: '300 meters away',
+//       postTime: '1h ago',
+//    },
+//    {
+//       listingId: '5',
+//       listingImage:
+//          'https://cf.shopee.ph/file/eddfe3c0c7cb0f291a029b01dc8e7984',
+//       listingName: 'Organic eggs',
+//       distance: '1 kilometer away',
+//       postTime: '10m ago',
+//    },
+//    {
+//       listingId: '6',
+//       listingImage:
+//          'https://cf.shopee.ph/file/8b01c1f639a54c5dd54c02a35ac19ade',
+//       listingName: 'Cadbury biscuit',
+//       distance: '500 meters away',
+//       postTime: '35m ago',
+//    },
+//    {
+//       listingId: '7',
+//       listingImage:
+//          'https://cf.shopee.ph/file/1cb31d68b5008a0e8c428427f67c5710',
+//       listingName: 'Japonica Rice',
+//       distance: '3 kilometers away',
+//       postTime: '50m ago',
+//    },
+//    {
+//       listingId: '8',
+//       listingImage:
+//          'https://cf.shopee.ph/file/6ef4b658d3d25bda90dba4a23eabd9ef',
+//       listingName: 'Assorted biscuits',
+//       distance: '300 meters away',
+//       postTime: '1h ago',
+//    },
+//    {
+//       listingId: '9',
+//       listingImage:
+//          'https://cf.shopee.ph/file/54ea2d99554d33d52003ac756b3c602b',
+//       listingName: '1 pack tender juicy',
+//       distance: '1 kilometer away',
+//       postTime: '10m ago',
+//    },
+//    {
+//       listingId: '10',
+//       listingImage:
+//          'https://cf.shopee.ph/file/2315296425618aa856b068e01307fbee',
+//       listingName: 'Lucky me pancit canton',
+//       distance: '500 meters away',
+//       postTime: '35m ago',
+//    },
+//    {
+//       listingId: '11',
+//       listingImage:
+//          'https://cf.shopee.ph/file/02497683fcdb2296c145afdd7f50527c',
+//       listingName: 'Assorted biscuits',
+//       distance: '300 meters away',
+//       postTime: '1h ago',
+//    },
+//    {
+//       listingId: '12',
+//       listingImage:
+//          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQapFieGJ2wKAH9Id3P1lqYJBP5JfUJpBN52sqPrfS928cmels4Mxl65KH-hRQypdI0g8U&usqp=CAU',
+//       listingName: 'Max condiments',
+//       distance: '3 kilometers away',
+//       postTime: '50m ago',
+//    },
+// ]

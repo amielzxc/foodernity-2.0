@@ -53,7 +53,7 @@ function ListingContainer() {
             )
          }
       )
-   }, [])
+   }, [setListingData])
 
    const theme = useTheme()
    //  used to determine whether the page should use components intended for responsive layout

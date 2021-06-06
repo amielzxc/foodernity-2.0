@@ -93,45 +93,16 @@ function NavigationButtons() {
          <Button component={Link} to="/listings">
             Listings
          </Button>
-         <Button component={Link} to="messages">
+         <Button component={Link} to="/messages">
             Messages
          </Button>
-         <Button component={Link} to="faqs">
+         <Button component={Link} to="/faqs">
             FAQs &amp; Guidelines
          </Button>
       </div>
    )
 }
-// returns the avatar of the user
-// function AvatarButton(props) {
-//    const [anchorEl, setAnchorEl] = useState(null)
-//    function handleClick(event) {
-//       setAnchorEl(event.currentTarget)
-//    }
-//    function handleClose() {
-//       setAnchorEl(null)
-//    }
 
-//    return (
-//       <>
-//          <IconButton onClick={handleClick}>
-//             <Avatar className={props.className}>FB</Avatar>
-//          </IconButton>
-//          <Menu
-//             id="avatarButton"
-//             anchorEl={anchorEl}
-//             keepMounted
-//             open={Boolean(anchorEl)}
-//             onClose={handleClose}
-//          >
-//             <MenuItem onClick={handleClose}>Transactions</MenuItem>
-//             <MenuItem onClick={handleClose}>Profile</MenuItem>
-//             <MenuItem onClick={handleClose}>Settings</MenuItem>
-//             <MenuItem onClick={handleClose}>Logout</MenuItem>
-//          </Menu>
-//       </>
-//    )
-// }
 // returns the menu button when the page reaches the responsive layout
 function MenuButton() {
    const [anchorEl, setAnchorEl] = useState(null)

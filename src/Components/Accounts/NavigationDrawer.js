@@ -4,7 +4,6 @@ import LeftDrawer from '../Common/LeftDrawer'
 import ReceiptIcon from '@material-ui/icons/Receipt'
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded'
 import EditRoundedIcon from '@material-ui/icons/EditRounded'
-import SecurityRoundedIcon from '@material-ui/icons/SecurityRounded'
 import { Link, useRouteMatch } from 'react-router-dom'
 import create from 'zustand'
 import Footer from '../Common/Footer'
@@ -19,7 +18,7 @@ const iconList1 = [
       label: 'My Donations',
       icon: <ReceiptIcon />,
       color: '#66BB6A',
-      link: '/mydonations',
+      link: '',
    },
    {
       label: 'Requested Donations',
