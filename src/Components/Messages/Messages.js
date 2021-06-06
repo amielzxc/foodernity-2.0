@@ -21,6 +21,10 @@ export const useMessageStore = create((set) => ({
    setDonationID: (id) => {
       set((state) => ({ donationID: (state.donationID = id) }))
    },
+   donationDetails: null,
+   setDonationDetails: (details) => {
+      set((state) => ({ donationDetails: (state.donationDetails = details) }))
+   },
 }))
 
 const useStyles = makeStyles((theme) => ({

@@ -7,6 +7,8 @@ import {
    makeStyles,
    ButtonGroup,
    Button,
+   useTheme,
+   useMediaQuery,
 } from '@material-ui/core'
 import DialogDrawer from '../Common/DialogDrawer'
 import { useMessageStore } from './Messages'
@@ -135,42 +137,54 @@ function Title() {
 }
 
 function DonationButtons() {
+   const setDonationDetails = useMessageStore(
+      (state) => state.setDonationDetails
+   )
    const filterButton = useMessageStore((state) => state.filterButton)
    const setFilterButton = useMessageStore((state) => state.setFilterButton)
-
+   const theme = useTheme()
+   const responsiveLayout = useMediaQuery(theme.breakpoints.down('sm'))
    return (
-      <ButtonGroup>
-         <Button
-            variant={filterButton === 'My Donations' ? 'contained' : 'outlined'}
-            color="primary"
-            disableElevation
-            fullWidth
-            onClick={
-               filterButton !== 'My Donations'
-                  ? () => {
-                       setFilterButton('My Donations')
-                    }
-                  : null
-            }
-         >
-            My Donations
-         </Button>
-         <Button
-            variant={filterButton === 'My Requested' ? 'contained' : 'outlined'}
-            color="primary"
-            disableElevation
-            fullWidth
-            onClick={
-               filterButton !== 'My Requested'
-                  ? () => {
-                       setFilterButton('My Requested')
-                    }
-                  : null
-            }
-         >
-            My Requested
-         </Button>
-      </ButtonGroup>
+      <div style={{ alignSelf: 'center', marginBottom: '1rem' }}>
+         <ButtonGroup fullWidth={responsiveLayout ? true : false}>
+            <Button
+               variant={
+                  filterButton === 'My Donations' ? 'contained' : 'outlined'
+               }
+               color="primary"
+               disableElevation
+               fullWidth
+               onClick={
+                  filterButton !== 'My Donations'
+                     ? () => {
+                          setDonationDetails(null)
+                          setFilterButton('My Donations')
+                       }
+                     : null
+               }
+            >
+               My Donations
+            </Button>
+            <Button
+               variant={
+                  filterButton === 'My Requested' ? 'contained' : 'outlined'
+               }
+               color="primary"
+               disableElevation
+               fullWidth
+               onClick={
+                  filterButton !== 'My Requested'
+                     ? () => {
+                          setDonationDetails(null)
+                          setFilterButton('My Requested')
+                       }
+                     : null
+               }
+            >
+               My Requested
+            </Button>
+         </ButtonGroup>
+      </div>
    )
 }
 function MessageItem(props) {

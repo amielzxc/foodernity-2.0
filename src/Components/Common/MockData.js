@@ -11,7 +11,6 @@ export const DonationsData = [
       pickupTime: '3:00PM',
       pickupLoc:
          'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '3 kilometers',
       status: 'Requested',
    },
    {
@@ -26,7 +25,6 @@ export const DonationsData = [
       pickupTime: '12:30PM',
       pickupLoc:
          'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '1 kilometer',
       status: 'Ongoing',
    },
    {
@@ -41,7 +39,6 @@ export const DonationsData = [
       pickupTime: '11:30AM',
       pickupLoc:
          'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '2 kilometers',
       status: 'Requested',
    },
    {
@@ -56,8 +53,7 @@ export const DonationsData = [
       pickupTime: '2:30PM',
       pickupLoc:
          'National University-Manila, M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '700 meters',
-      status: 'Completed',
+      status: 'Claimed',
    },
    {
       donationID: 5,
@@ -71,7 +67,6 @@ export const DonationsData = [
       pickupTime: '10:30AM',
       pickupLoc:
          'Bustillos Market, Figueras Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '2 kilometers',
       status: 'Ongoing',
    },
    {
@@ -86,7 +81,6 @@ export const DonationsData = [
       pickupTime: '12:00PM',
       pickupLoc:
          'Mineski Infinity F. Jhocson, M.F. Jocson, Sampaloc, Manila, Metro Manila',
-      distanceAway: '500 meters',
       status: 'Requested',
    },
    {
@@ -101,13 +95,12 @@ export const DonationsData = [
       pickupTime: '5:00PM',
       pickupLoc:
          'Far Eastern University, Nicanor Reyes Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '2 kilometers',
       status: 'Ongoing',
    },
    {
       donationID: 8,
-      donorName: 'Christian Grey',
-      doneeName: 'Anastasia Steele',
+      donorName: 'Anastasia Steele',
+      doneeName: 'Fhillip Bagsic',
       donationName: 'Pancit Canton Noodles',
       donationNote: '1 piece only, kalamansi flavor',
       donationCategory: 'Instant Noodles',
@@ -116,8 +109,7 @@ export const DonationsData = [
       pickupTime: '10:30AM',
       pickupLoc:
          'Pink Pantry of Floti Cafe, Inc., M.F. Jhocson Street, Sampaloc, Manila, Metro Manila',
-      distanceAway: '100 meters',
-      status: 'Completed',
+      status: 'Claimed',
    },
 ]
 
@@ -143,6 +135,87 @@ export const MyDonationsData = [
       messageID: '4',
       donationName: 'Nissin Wafer',
       imgLoc: 'https://cf.shopee.ph/file/b7feafa6f3bce72377cb7168763ed3bb',
+   },
+]
+
+export const AccountMyDonationsData = [
+   {
+      listingID: 1,
+      donationName: 'Assorted 555 sardines',
+      imgLoc: 'https://cf.shopee.ph/file/1de15c2041b57d2b984eba80add22419',
+      postDateTime: '1hr ago',
+      status: 'Requested',
+   },
+   {
+      listingID: 2,
+      donationName: 'Nissin Cup Noodles',
+      imgLoc:
+         'https://www.seriouseats.com/thmb/Zi-JOQSjIP1lgTkh-qNC4UBsmEk=/1500x1125/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2020__02__20200211-cup-noodles-vicky-wasik-3-2f0b82897f5e467589b2e7965105ef96.jpg',
+      postDateTime: '2hr ago',
+      status: 'Ongoing',
+   },
+   {
+      listingID: 3,
+      donationName: 'Butter coconut',
+      imgLoc:
+         'https://ph-test-11.slatic.net/p/83cdc5012a6541bbef182c9eec0fba0e.jpg',
+      postDateTime: '1d ago',
+      status: 'Requested',
+   },
+   {
+      listingID: 4,
+      donationName: 'Nissin Wafer',
+      imgLoc: 'https://cf.shopee.ph/file/b7feafa6f3bce72377cb7168763ed3bb',
+      postDateTime: '2d ago',
+      status: 'Claimed',
+   },
+   {
+      listingID: 9,
+      donationName: '1 tray of egg',
+      imgLoc: 'https://cf.shopee.ph/file/4626df065c89d76a7d0b6ad567f2d059',
+      postDateTime: '4d ago',
+      status: 'Listed',
+   },
+   {
+      listingID: 10,
+      donationName: 'Nissin eggnog',
+      imgLoc:
+         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp_KIe61jOe0l-KeN7CRhjz83I-1_xNgDZLQ&usqp=CAU',
+      postDateTime: '1w ago',
+      status: 'Unlisted',
+   },
+]
+
+export const AccountRequestedDonationsData = [
+   {
+      listingID: 5,
+      donationName: 'Pancit Canton Noodles',
+      imgLoc:
+         'https://i.pinimg.com/originals/3a/01/1d/3a011d76e93823db300009c39a039af4.jpg',
+      postDateTime: '1d ago',
+      status: 'Ongoing',
+   },
+   {
+      listingID: 6,
+      donationName: 'Argentina Canned Goods',
+      imgLoc: 'https://cf.shopee.com.my/file/090a18a75c04ad1d4e0f63421a5c8651',
+      postDateTime: '1h ago',
+      status: 'Requested',
+   },
+   {
+      listingID: 7,
+      donationName: '1 sack bigas',
+      imgLoc:
+         'https://media.karousell.com/media/photos/products/2020/8/7/oishi_japanese_rice_1_sack_25k_1596774674_9992bf29_progressive.jpg',
+      postDateTime: '2d ago',
+      status: 'Ongoing',
+   },
+   {
+      listingID: 8,
+      donationName: 'Pancit Canton noodles',
+      imgLoc: 'https://pbs.twimg.com/media/EVjO5EMUYAAfKYM.jpg',
+      postDateTime: '1month ago',
+      status: 'Claimed',
    },
 ]
 
