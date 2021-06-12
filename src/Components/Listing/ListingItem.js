@@ -45,7 +45,7 @@ function ListingItem(props) {
                   <Typography variant="h6" component="h4" noWrap>
                      {donationName}
                   </Typography>
-                  <Grid container alignItems="center">
+                  <Grid container alignItems="center" direction="row">
                      <LocationOnIcon
                         fontSize="small"
                         className={classes.icon__location}
