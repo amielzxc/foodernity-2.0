@@ -32,7 +32,7 @@ export default function Signin() {
             if (res.data) {
                console.log('hello')
                console.log(res.data)
-               history.replace('/listings')
+               history.replace('/donations')
                console.log('userID: ' + res.data.userID)
                localStorage.setItem('userID', res.data.userID)
             }

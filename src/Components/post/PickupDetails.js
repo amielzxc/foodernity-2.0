@@ -4,12 +4,11 @@ import { Controller, useForm } from 'react-hook-form'
 import MomentUtils from '@date-io/moment'
 import {
    MuiPickersUtilsProvider,
-   KeyboardTimePicker,
    KeyboardDatePicker,
 } from '@material-ui/pickers'
 import { usePostStore } from '../../store/PostStore'
 import GoogleMap from './GoogleMap'
-import ScheduleIcon from '@material-ui/icons/Schedule'
+
 const useStyles = makeStyles((theme) => ({
    root: {
       maxWidth: '700px',
@@ -56,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 // returns pickup details to be filled up by the user
-function PickupDetails() {
+export default function PickupDetails() {
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
    const setPickupDate = usePostStore((state) => state.setPickupDate)
@@ -191,5 +190,3 @@ function PickupDate(props) {
 //       </>
 //    )
 // }
-
-export default PickupDetails

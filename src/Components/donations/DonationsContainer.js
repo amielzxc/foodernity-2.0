@@ -14,34 +14,32 @@ export default function DonationsContainer() {
    const donationsData = useDonationStore((state) => state.donationsData)
    const setDonationsData = useDonationStore((state) => state.setDonationsData)
 
-   // useEffect(() => {
-   //    const obj = { userID: localStorage.getItem('userID') }
-   //    Axios.post('http://localhost:3001/listingItem/get', obj).then(
-   //       (response, err) => {
-   //          if (err) {
-   //             console.log(err)
-   //          }
-   //          console.log(response.data)
-   //          setDonationsData(
-   //             response.data.map((data) => (
-   //                <DonationItem
-   //                   key={data.listingID}
-   //                   listingID={data.listingID}
-   //                   imgLoc={data.imgLoc}
-   //                   donationName={data.donationName}
-   //                   distance={data.pickupLoc}
-   //                   postTime={data.postTime}
-   //                />
-   //             ))
-   //          )
-   //       }
-   //    )
-   // }, [setDonationsData])
+   useEffect(() => {
+      const obj = { userID: localStorage.getItem('userID') }
+      Axios.post('http://localhost:3001/listingItem/get', obj).then(
+         (response, err) => {
+            if (err) {
+               console.log(err)
+            }
+            console.log(response.data)
+            setDonationsData(
+               response.data.map((data) => (
+                  <DonationItem
+                     key={data.listingID}
+                     listingID={data.listingID}
+                     imgLoc={data.imgLoc}
+                     donationName={data.donationName}
+                     distance={data.pickupLoc}
+                     postTime={data.postTime}
+                  />
+               ))
+            )
+         }
+      )
+   }, [])
 
    // useEffect(() => {
-   //    setDonationsData(
-
-   //    )
+   //    setDonationsData()
    // })
 
    return (
@@ -52,7 +50,8 @@ export default function DonationsContainer() {
                   Available donations near you
                </Typography>
             </Grid>
-            {data.map((item) => (
+            {donationsData}
+            {/* {data.map((item) => (
                <DonationItem
                   key={item.listingID}
                   listingID={item.listingID}
@@ -61,7 +60,7 @@ export default function DonationsContainer() {
                   distance={item.distance}
                   postTime={item.postTime}
                />
-            ))}
+            ))} */}
          </Grid>
          <ScrollTop />
       </MainContainer>
