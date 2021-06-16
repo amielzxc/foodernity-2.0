@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import {
    AppBar,
    Toolbar,
@@ -10,8 +9,8 @@ import {
    useTheme,
    useMediaQuery,
 } from '@material-ui/core'
-import gpbadge from './gpbadge.png'
-import apbadge from './apbadge.png'
+import gpbadge from '../../assets/landingpage/gpbadge.png'
+import apbadge from '../../assets/landingpage/apbadge.png'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 import { Link } from 'react-router-dom'
@@ -83,18 +82,6 @@ export function NavBar(props) {
                         >
                            Get Involved
                         </Typography>
-                        {/* <Typography
-                           component={Link}
-                           to="/aboutus"
-                           style={{
-                              fontFamily: 'Inter',
-                              marginRight: '1rem',
-                              textDecoration: 'none',
-                              color: 'black',
-                           }}
-                        >
-                           About Us
-                        </Typography> */}
                         <Typography
                            component={Link}
                            to="/contactus"
@@ -119,19 +106,6 @@ export function NavBar(props) {
                            }}
                         >
                            Signin
-                        </Typography>
-
-                        <Typography
-                           component={Link}
-                           to="/signup"
-                           style={{
-                              fontFamily: 'Inter',
-                              marginRight: '1rem',
-                              textDecoration: 'none',
-                              color: 'black',
-                           }}
-                        >
-                           Signup
                         </Typography>
                      </div>
                   </Grid>
@@ -206,19 +180,6 @@ export function Menu() {
             >
                Get Involved
             </Typography>
-            {/* <Typography
-               component={Link}
-               to="/aboutus"
-               variant="h6"
-               style={{
-                  fontFamily: 'Inter',
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: 'black',
-               }}
-            >
-               About Us
-            </Typography> */}
             <Typography
                component={Link}
                to="/contactus"
@@ -232,7 +193,6 @@ export function Menu() {
             >
                Contact Us
             </Typography>
-
             <Typography
                component={Link}
                to="/signin"
@@ -245,20 +205,6 @@ export function Menu() {
                }}
             >
                Signin
-            </Typography>
-
-            <Typography
-               component={Link}
-               to="/signup"
-               variant="h6"
-               style={{
-                  fontFamily: 'Inter',
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: 'black',
-               }}
-            >
-               Signup
             </Typography>
          </div>
       </Hidden>
