@@ -1,101 +1,65 @@
-import React, { Suspense, lazy } from 'react'
+import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import shadows from './Components/utils/shadows'
-import Fallback from './Components/etc/Fallback'
-import Accounts from './Components/Accounts/Accounts'
-import DonationStatus from './Components/Accounts/DonationStatus'
+import { ThemeProvider } from '@material-ui/core'
+import theme from './theme/index'
 
-import LandingPage from './Components/LandingPage/LandingPage'
+import LandingPage from './pages/LandingPage'
+import Error404 from './components/shared/Error404'
 
-const AboutUs = lazy(() => import('./Components/LandingPage/AboutUs'))
-const GetInvolved = lazy(() => import('./Components/LandingPage/GetInvolved'))
-const OurGoal = lazy(() => import('./Components/LandingPage/OurGoal'))
-const ContactUs = lazy(() => import('./Components/LandingPage/ContactUs'))
-const Signin = lazy(() => import('./Components/Account/Signin'))
-const Signup = lazy(() => import('./Components/Account/Signup'))
-const ForgotPassword = lazy(() => import('./Components/Account/ForgotPassword'))
-const Listings = lazy(() => import('./Components/Listing/Listings'))
-const Error = lazy(() => import('./Components/etc/Error'))
-const Post = lazy(() => import('./Components/PostListing/Post'))
-const ListingDetail = lazy(() => import('./Components/Listing/ListingDetail'))
-const Messages = lazy(() => import('./Components/Messages/Messages'))
-const FAQs = lazy(() => import('./Components/FAQs&Guidelines/FAQs'))
-const Admin = lazy(() => import('./Components/Admin/Admin'))
-const theme = createMuiTheme({
-   palette: {
-      primary: {
-         main: '#2196F3',
-      },
-      default: '#FFFFFF',
-   },
-   shadows,
-})
-
-const App = () => {
+const OurGoal = lazy(() => import('./components/landingpage/OurGoal'))
+const GetInvolved = lazy(() => import('./components/landingpage/GetInvolved'))
+const ContactUs = lazy(() => import('./components/landingpage/ContactUs'))
+const Signin = lazy(() => import('./pages/Signin'))
+const Signup = lazy(() => import('./pages/Signup'))
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
+const Donations = lazy(() => import('./pages/Donations'))
+const DonationDetails = lazy(() =>
+   import('./components/donations/DonationDetails')
+)
+const Post = lazy(() => import('./pages/Post'))
+const Requests = lazy(() => import('./pages/Requests'))
+const RequestDetails = lazy(() =>
+   import('./components/requests/RequestDetails')
+)
+const Request = lazy(() => import('./pages/Request'))
+const FAQs = lazy(() => import('./pages/FAQs'))
+const Account = lazy(() => import('./pages/Account'))
+const Admin = lazy(() => import('./pages/Admin'))
+export default function App() {
    return (
       <Router>
-         <Suspense fallback={<Fallback />}>
+         <Suspense fallback={<div />}>
             <ThemeProvider theme={theme}>
                <Switch>
-                  <Route path="/" exact>
-                     <LandingPage />
-                  </Route>
-                  <Route path="/aboutus">
-                     <AboutUs />
-                  </Route>
-                  <Route path="/ourgoal">
-                     <OurGoal />
-                  </Route>
-                  <Route path="/getinvolved">
-                     <GetInvolved />
-                  </Route>
-                  <Route path="/contactus">
-                     <ContactUs />
-                  </Route>
-                  <Route path="/signin">
-                     <Signin />
-                  </Route>
-                  <Route path="/signup">
-                     <Signup />
-                  </Route>
-                  <Route path="/forgotpassword">
-                     <ForgotPassword />
-                  </Route>
-                  <Route path="/listings" exact>
-                     <Listings />
-                  </Route>
-                  <Route path="/listings/:listingId">
-                     <ListingDetail />
-                  </Route>
-                  <Route path="/post">
-                     <Post />
-                  </Route>
-                  <Route path="/messages">
-                     <Messages />
-                  </Route>
-                  <Route path="/faqs">
-                     <FAQs />
-                  </Route>
-                  <Route path="/account">
-                     <Accounts />
-                  </Route>
-                  <Route path="/donationstatus">
-                     <DonationStatus />
-                  </Route>
-                  <Route path="/listingdetail">
-                     <ListingDetail />
-                  </Route>
-                  <Route path="/admin">
-                     <Admin />
-                  </Route>
+                  <Route path="/" exact component={LandingPage} />
+                  <Route path="/ourgoal" component={OurGoal} />
+                  <Route path="/getinvolved" component={GetInvolved} />
+                  <Route path="/contactus" component={ContactUs} />
 
-                  <Route path="" component={Error} />
+                  <Route path="/signin" component={Signin} />
+                  <Route path="/signup" component={Signup} />
+                  <Route path="/forgotpassword" component={ForgotPassword} />
+
+                  <Route path="/donations" component={Donations} exact />
+                  <Route
+                     path="/donations/item/:id"
+                     component={DonationDetails}
+                  />
+                  <Route path="/postdonation" component={Post} />
+
+                  <Route path="/requests" component={Requests} exact />
+                  <Route path="/requests/item/:id" component={RequestDetails} />
+                  <Route path="/requestdonation" component={Request} />
+
+                  <Route path="/faqsguidelines" component={FAQs} />
+
+                  <Route path="/account" component={Account} />
+
+                  <Route path="/admin" component={Admin} />
+                  <Route path="" component={Error404} />
                </Switch>
             </ThemeProvider>
          </Suspense>
       </Router>
    )
 }
-
-export default App

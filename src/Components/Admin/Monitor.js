@@ -1,6 +1,6 @@
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
-import { donations } from '../../Components/Common/MockData'
+import { donations } from '../../__mock__/MonitorData'
 const useStyles = makeStyles((theme) => ({
    root: {
       flexGrow: 1,
@@ -93,7 +93,7 @@ const donationColumns = [
 function DonationsTable() {
    return (
       <Paper elevation={0}>
-         <div style={{ height: 600, width: '100%' }}>
+         <div style={{ height: '70vh', width: '100%' }}>
             <DataGrid
                autoPageSize
                rows={donations}

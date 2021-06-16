@@ -10,27 +10,33 @@ import {
 } from '@material-ui/core'
 import { useState } from 'react'
 import { NavBar, Menu } from './NavBar'
-import phoneMockup from './phone_mockup.png'
-import laptopMockup from './laptop_mockup.png'
-import foodBank from './food-bank.png'
-import gpbadge from './gpbadge.png'
-import apbadge from './apbadge.png'
+import phoneMockup from '../../assets/landingpage/phone_mockup.png'
+import laptopMockup from '../../assets/landingpage/laptop_mockup.png'
+import foodBank from '../../assets/landingpage/food-bank.png'
+import gpbadge from '../../assets/landingpage/gpbadge.png'
+import apbadge from '../../assets/landingpage/apbadge.png'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 function GetInvolved() {
    const [openMenu, setOpenMenu] = useState(false)
    return (
-      <Grid container justify="center">
-         <CssBaseline />
-         <NavBar openMenu={openMenu} setOpenMenu={setOpenMenu} />
-         <Toolbar />
-         {openMenu && <Menu />}
-         <DownloadMobile />
-         <ContinueWeb />
-         <Partnership />
-         <Footer />
-      </Grid>
+      <>
+         <Helmet>
+            <title>Get Involved | Foodernity</title>
+         </Helmet>
+         <Grid container justify="center">
+            <CssBaseline />
+            <NavBar openMenu={openMenu} setOpenMenu={setOpenMenu} />
+            <Toolbar />
+            {openMenu && <Menu />}
+            <DownloadMobile />
+            <ContinueWeb />
+            <Partnership />
+            <Footer />
+         </Grid>
+      </>
    )
 }
 

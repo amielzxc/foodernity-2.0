@@ -17,18 +17,24 @@ import ScheduleIcon from '@material-ui/icons/Schedule'
 import EmailRoundedIcon from '@material-ui/icons/EmailRounded'
 import CallRoundedIcon from '@material-ui/icons/CallRounded'
 import Footer from './Footer'
+import { Helmet } from 'react-helmet'
 
 function ContactUs() {
    const [openMenu, setOpenMenu] = useState(false)
    return (
-      <Grid container justify="center">
-         <CssBaseline />
-         <NavBar openMenu={openMenu} setOpenMenu={setOpenMenu} />
-         <Toolbar />
-         {openMenu && <Menu />}
-         <Form />
-         <Footer />
-      </Grid>
+      <>
+         <Helmet>
+            <title>Contact Us | Foodernity</title>
+         </Helmet>
+         <Grid container justify="center">
+            <CssBaseline />
+            <NavBar openMenu={openMenu} setOpenMenu={setOpenMenu} />
+            <Toolbar />
+            {openMenu && <Menu />}
+            <Form />
+            <Footer />
+         </Grid>
+      </>
    )
 }
 

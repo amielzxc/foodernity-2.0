@@ -1,5 +1,16 @@
-import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
-import { users } from '../../Components/Common/MockData'
+import React, { useState } from 'react'
+import {
+   Button,
+   Dialog,
+   DialogContent,
+   DialogTitle,
+   Grid,
+   makeStyles,
+   Paper,
+   TextField,
+   Typography,
+} from '@material-ui/core'
+import { users } from '../../__mock__/UsersData'
 import { DataGrid } from '@material-ui/data-grid'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -10,6 +21,24 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 function Users() {
+   const [open, setOpen] = useState(false)
+   const [open2, setOpen2] = useState(false)
+   const handleOpen = () => {
+      setOpen(true)
+   }
+
+   const handleClose = () => {
+      setOpen(false)
+   }
+
+   const handleOpen2 = () => {
+      setOpen2(true)
+   }
+
+   const handleClose2 = () => {
+      setOpen2(false)
+   }
+
    const classes = useStyles()
    return (
       <div className={classes.root}>
@@ -28,23 +57,21 @@ function Users() {
                   <Typography>as of May 31, 2021</Typography>
                </Grid>
                <Grid item>
-                  <Button color="primary" style={{ marginRight: '1rem' }}>
-                     Export
-                  </Button>
-
                   <Button
                      variant="outlined"
                      color="primary"
                      style={{ marginRight: '1rem' }}
                      disableElevation
+                     onClick={handleOpen}
                   >
-                     Create Admin
+                     Register an Admin
                   </Button>
                   <Button
                      variant="contained"
                      color="primary"
                      disableElevation
                      startIcon={<AddIcon />}
+                     onClick={handleOpen2}
                   >
                      Add Partner User
                   </Button>
@@ -54,6 +81,8 @@ function Users() {
                <UsersTable />
             </Grid>
          </Grid>
+         <CreateAdmin open={open} handleClose={handleClose} />
+         <AddPartnerUser open={open2} handleClose={handleClose2} />
       </div>
    )
 }
@@ -88,7 +117,7 @@ function UsersTable() {
 
    return (
       <Paper elevation={0}>
-         <div style={{ height: 600, width: '100%' }}>
+         <div style={{ height: '70vh', width: '100%' }}>
             <DataGrid
                autoPageSize
                rows={users}
@@ -98,6 +127,104 @@ function UsersTable() {
             />
          </div>
       </Paper>
+   )
+}
+
+function CreateAdmin(props) {
+   const { open, handleClose } = props
+   return (
+      <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="xs">
+         <DialogTitle>Create an Admin</DialogTitle>
+         <DialogContent dividers>
+            <Grid container spacing={2}>
+               <Grid item xs={12} md={6}>
+                  <TextField variant="outlined" label="First Name" fullWidth />
+               </Grid>
+               <Grid item xs={12} md={6}>
+                  <TextField variant="outlined" label="Last Name" fullWidth />
+               </Grid>
+               <Grid item xs={12}>
+                  <TextField
+                     type="email"
+                     variant="outlined"
+                     label="Email Address"
+                     fullWidth
+                  />
+               </Grid>
+               <Grid item xs={12}>
+                  <TextField
+                     type="email"
+                     variant="outlined"
+                     label="Password"
+                     fullWidth
+                  />
+               </Grid>
+               <Grid item xs={12}>
+                  <TextField
+                     type="email"
+                     variant="outlined"
+                     label="Confirm Password"
+                     fullWidth
+                  />
+               </Grid>
+               <Grid item xs={12}>
+                  <Button variant="contained" color="primary" fullWidth>
+                     Register Admin
+                  </Button>
+               </Grid>
+            </Grid>
+         </DialogContent>
+      </Dialog>
+   )
+}
+
+function AddPartnerUser(props) {
+   const { open, handleClose } = props
+   return (
+      <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="xs">
+         <DialogTitle>Add Partner User</DialogTitle>
+         <DialogContent dividers>
+            <Grid container spacing={2}>
+               <Grid item xs={12}>
+                  <TextField
+                     variant="outlined"
+                     label="Partner Name"
+                     fullWidth
+                  />
+               </Grid>
+
+               <Grid item xs={12}>
+                  <TextField
+                     type="email"
+                     variant="outlined"
+                     label="Email Address"
+                     fullWidth
+                  />
+               </Grid>
+               <Grid item xs={12}>
+                  <TextField
+                     type="email"
+                     variant="outlined"
+                     label="Password"
+                     fullWidth
+                  />
+               </Grid>
+               <Grid item xs={12}>
+                  <TextField
+                     type="email"
+                     variant="outlined"
+                     label="Confirm Password"
+                     fullWidth
+                  />
+               </Grid>
+               <Grid item xs={12}>
+                  <Button variant="contained" color="primary" fullWidth>
+                     Register Admin
+                  </Button>
+               </Grid>
+            </Grid>
+         </DialogContent>
+      </Dialog>
    )
 }
 export default Users
