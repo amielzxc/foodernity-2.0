@@ -29,7 +29,11 @@ export default function Signin() {
       console.log(obj)
       Axios.post('http://localhost:3001/login', obj)
          .then((res) => {
-            if (res.data) {
+            if (res.data == 'Wrong email/password!') {
+               console.log('Wrong email/password!')
+            } else if (res.data == 'No account matched!') {
+               console.log('No account matched!')
+            } else {
                console.log('hello')
                console.log(res.data)
                history.replace('/donations')

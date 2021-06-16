@@ -99,7 +99,7 @@ export function FilterDrawer() {
    const [foodCategory, setTempFoodCategory] = useState(
       useDonationStore((state) => state.foodCategory)
    )
-   const setListingData = useDonationStore((state) => state.setListingData)
+   const setDonationsData = useDonationStore((state) => state.setDonationsData)
    const handleUpdateChanges = () => {
       setFilterButton(filterButton)
       setUserLocation(userLocation)
@@ -110,59 +110,59 @@ export function FilterDrawer() {
       console.log(userLocation)
       console.log(distance)
       console.log(foodCategory)
-      // const arrHolder = []
-      // const arr = [
-      //    'Canned Goods',
-      //    'Instant Noodles',
-      //    'Biscuits',
-      //    'Beverages',
-      //    'Others',
-      // ]
-      // for (let i = 0; i < arr.length; i++) {
-      //    if (foodCategory[i] === true) {
-      //       arrHolder.push(arr[i])
-      //    }
-      // }
-      // console.log(arrHolder)
-      // console.log(distance)
-      // Geocode.setApiKey('AIzaSyDyn1Cs8FHCOEedwL6jWkq1EtWhulBUc70')
+      const arrHolder = []
+      const arr = [
+         'Canned Goods',
+         'Instant Noodles',
+         'Biscuits',
+         'Beverages',
+         'Others',
+      ]
+      for (let i = 0; i < arr.length; i++) {
+         if (foodCategory[i] === true) {
+            arrHolder.push(arr[i])
+         }
+      }
+      console.log(arrHolder)
+      console.log(distance)
+      Geocode.setApiKey('AIzaSyDyn1Cs8FHCOEedwL6jWkq1EtWhulBUc70')
 
-      // Geocode.fromAddress(userLocation).then(
-      //    async (response) => {
-      //       const coordinates = response.results[0].geometry.location
-      //       console.log(coordinates)
-      //       const obj = {
-      //          userID: localStorage.getItem('userID'),
-      //          categoryFilters: arrHolder,
-      //          coordinates: coordinates,
-      //          radius: distance,
-      //       }
-      //       await Axios.post(
-      //          'http://localhost:3001/listingItem/get/filter',
-      //          obj
-      //       )
-      //          .then((response) => {
-      //             setListingData(
-      //                response.data.map((data) => (
-      //                   <DonationItem
-      //                      key={data.listingID}
-      //                      listingID={data.listingID}
-      //                      listingImage={data.imgLoc}
-      //                      donationName={data.donationName}
-      //                      distance={data.pickupLoc}
-      //                      postTime={data.postTime}
-      //                   />
-      //                ))
-      //             )
-      //          })
-      //          .catch((error) => {
-      //             console.log(error)
-      //          })
-      //    },
-      //    (error) => {
-      //       console.error(error)
-      //    }
-      // )
+      Geocode.fromAddress(userLocation).then(
+         async (response) => {
+            const coordinates = response.results[0].geometry.location
+            console.log(coordinates)
+            const obj = {
+               userID: localStorage.getItem('userID'),
+               categoryFilters: arrHolder,
+               coordinates: coordinates,
+               radius: distance,
+            }
+            await Axios.post(
+               'http://localhost:3001/listingItem/get/filter',
+               obj
+            )
+               .then((response) => {
+                  setDonationsData(
+                     response.data.map((data) => (
+                        <DonationItem
+                           key={data.listingID}
+                           listingID={data.listingID}
+                           imgLoc={data.imgLoc}
+                           donationName={data.donationName}
+                           distance={data.pickupLoc}
+                           // postTime={data.postTime}
+                        />
+                     ))
+                  )
+               })
+               .catch((error) => {
+                  console.log(error)
+               })
+         },
+         (error) => {
+            console.error(error)
+         }
+      )
       // console.log(coordinates)
    }
 

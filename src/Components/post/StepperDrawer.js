@@ -170,7 +170,8 @@ function VerticalStepper() {
                console.log(response.data.secure_url)
 
                const obj = {
-                  donorID: localStorage.getItem('userID'),
+                  listingOwnerID: localStorage.getItem('userID'),
+                  listingType: 'Donate',
                   postDate: `${
                      new Date().getMonth() + 1
                   }/${new Date().getDate()}/${new Date().getFullYear()}`,
@@ -178,10 +179,10 @@ function VerticalStepper() {
                   donationName: donationName,
                   donationNotes: donationNotes,
                   donationCategory: donationCategory,
-                  donationRecipient: donationRecipient,
+                  donationQuantity: 15,
+                  donationRecipient: 'individual',
                   donationExpiry: donationExpiry,
                   pickupDate: pickupDate,
-                  pickupTime: pickupTime,
                   pickupLocation: pickupLocation,
                   pickupLocationCoordinate: pickupLocationCoordinate,
                   donationImage: response.data.secure_url,
@@ -195,7 +196,7 @@ function VerticalStepper() {
                   }
                )
                console.log('umabot ako dito pakyu')
-               history.replace('/listings')
+               history.replace('/donations')
             } else {
                console.log(err)
             }

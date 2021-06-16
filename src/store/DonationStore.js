@@ -19,6 +19,6 @@ export const useDonationStore = create((set) => ({
    },
    donationsData: null,
    setDonationsData: (items) => {
-      set((state) => ({ listingItem: (state.listingData = items) }))
+      set((state) => ({ donationsData: (state.donationsData = items) }))
    },
 }))
