@@ -1,26 +1,15 @@
 import React, { useState } from 'react'
 import {
-   Box,
    Button,
-   ButtonGroup,
    Card,
    CardActions,
    CardContent,
    CardMedia,
-   Chip,
-   Dialog,
-   DialogActions,
-   DialogContent,
-   DialogTitle,
    Grid,
-   LinearProgress,
    makeStyles,
-   TextField,
    Typography,
 } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
-import RemoveIcon from '@material-ui/icons/Remove'
-import AddIcon from '@material-ui/icons/Add'
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -58,18 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function RequestItem(props) {
-   const { requestID, imgLoc, requestName, distance, postTime, max } = props
-
-   const [openDialog, setOpenDialog] = useState(false)
-
-   const handleOpen = () => {
-      setOpenDialog(true)
-   }
-
-   const handleClose = () => {
-      setOpenDialog(!openDialog)
-   }
-
+   const { requestID, imgLoc, requestName, distance, postTime } = props
    const classes = useStyles()
 
    return (
@@ -132,21 +110,21 @@ export default function RequestItem(props) {
    )
 }
 
-function LinearProgressWithLabel(props) {
-   return (
-      <Box display="flex" alignItems="center">
-         <Box width="100%" mr={1}>
-            <LinearProgress variant="determinate" value={50} />
-         </Box>
-         <Box width="50px">
-            <Typography
-               variant="body2"
-               color="textSecondary"
-            >{` ${props.value} / 10`}</Typography>
-         </Box>
-      </Box>
-   )
-}
+// function LinearProgressWithLabel(props) {
+//    return (
+//       <Box display="flex" alignItems="center">
+//          <Box width="100%" mr={1}>
+//             <LinearProgress variant="determinate" value={50} />
+//          </Box>
+//          <Box width="50px">
+//             <Typography
+//                variant="body2"
+//                color="textSecondary"
+//             >{` ${props.value} / 10`}</Typography>
+//          </Box>
+//       </Box>
+//    )
+// }
 
 // function Donate(props) {
 //    const classes = useStyles()

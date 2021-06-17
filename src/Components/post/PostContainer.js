@@ -1,6 +1,5 @@
 import React from 'react'
-import { useTheme, useMediaQuery, Grid } from '@material-ui/core'
-import { StepperDrawerResponsive } from './StepperDrawer'
+import { Grid } from '@material-ui/core'
 import { usePostStore } from '../../store/PostStore'
 import Guidelines from './Guidelines'
 import MainContainer from '../shared/MainContainer'

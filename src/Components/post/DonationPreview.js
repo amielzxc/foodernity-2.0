@@ -2,7 +2,6 @@ import { Grid, makeStyles, Chip, Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import EventAvailableIcon from '@material-ui/icons/EventAvailable'
-import ScheduleIcon from '@material-ui/icons/Schedule'
 import { usePostStore } from '../../store/PostStore'
 import MapPreview from './MapPreview'
 
@@ -214,14 +213,10 @@ function DonationNotes(props) {
 function Pickup() {
    const classes = useStyles()
    const pickupLocation = usePostStore((state) => state.pickupLocation)
-   const pickupTime = usePostStore((state) => state.pickupTime)
    const pickupDate = usePostStore((state) => state.pickupDate)
 
    let date = Date.parse(pickupDate)
    let newDate = new Date(date)
-
-   let time = Date.parse(pickupTime)
-   let newTime = new Date(time)
 
    return (
       <>
@@ -268,34 +263,6 @@ function Pickup() {
          </div> */}
       </>
    )
-}
-
-function convertTime(a, b) {
-   let hour
-   let minute
-   let day
-
-   if (a === 0) {
-      hour = 12
-      day = 'AM'
-   } else if (a === 12) {
-      hour = 12
-      day = 'PM'
-   } else if (a > 12) {
-      hour = a - 12
-      day = 'PM'
-   } else {
-      hour = a
-      day = 'AM'
-   }
-
-   if (b < 10) {
-      minute = '0' + b.toString()
-   } else {
-      minute = b
-   }
-
-   return `${hour}:${minute}${day}`
 }
 
 function MonthToWord(month) {

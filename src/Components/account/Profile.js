@@ -1,5 +1,4 @@
 import {
-   Box,
    makeStyles,
    Typography,
    Grid,
@@ -8,7 +7,6 @@ import {
    Avatar,
    Divider,
 } from '@material-ui/core'
-import FastfoodIcon from '@material-ui/icons/Fastfood'
 import { Icon } from '@iconify/react'
 import bxsDonateHeart from '@iconify-icons/bx/bxs-donate-heart'
 import {
@@ -23,19 +21,19 @@ const largeCards = [
       title: 'Donations Posted',
       count: '18',
       color: '#FF7043',
-      icon: <FastfoodIcon />,
+      icon: <Icon icon={bxsDonateHeart} />,
    },
    {
       title: 'Donations Received',
       count: '6',
       color: '#66BB6A',
-      icon: <FastfoodIcon />,
+      icon: <Icon icon={bxsDonateHeart} />,
    },
    {
       title: 'Donations Requested',
       count: '5',
       color: '#E35141',
-      icon: <FastfoodIcon />,
+      icon: <Icon icon={bxsDonateHeart} />,
    },
 ]
 

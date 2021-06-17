@@ -24,12 +24,7 @@ import { deepOrange } from '@material-ui/core/colors'
 import MainContainer from '../shared/MainContainer'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LocationPreview from '../shared/LocationPreview'
-import { Controller } from 'react-hook-form'
-import {
-   DatePicker,
-   KeyboardDatePicker,
-   MuiPickersUtilsProvider,
-} from '@material-ui/pickers'
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 
 export default function DonationDetails() {

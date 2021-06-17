@@ -1,6 +1,5 @@
 import {
    Divider,
-   Grid,
    makeStyles,
    Typography,
    ListItem,
@@ -9,9 +8,7 @@ import {
 } from '@material-ui/core'
 import DialogDrawer from '../shared/DialogDrawer'
 import LeftDrawer from '../shared/LeftDrawer'
-import ReceiptIcon from '@material-ui/icons/Receipt'
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded'
-import EditRoundedIcon from '@material-ui/icons/EditRounded'
 import { Link, useRouteMatch } from 'react-router-dom'
 
 const DonationItems = [

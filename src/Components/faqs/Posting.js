@@ -46,6 +46,7 @@ export default function Posting() {
          </Grid>
          {steps.map((step) => (
             <Item
+               key={step.step}
                step={step.step}
                instruction={step.instruction}
                image={step.image}

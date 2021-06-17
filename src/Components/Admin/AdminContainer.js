@@ -1,4 +1,3 @@
-import { Grid, Typography } from '@material-ui/core'
 import { Route, Switch, useRouteMatch } from 'react-router'
 import MainContainer from '../shared/MainContainer'
 import Monitor from './Monitor'
@@ -17,9 +16,6 @@ export default function AdminContainer() {
             <Route path={`${path}/monitor`}>
                <Monitor />
             </Route>
-            {/* <Route path={`${path}/reporteddonations`}>
-               <Typography>Reported donation</Typography>
-            </Route> */}
             <Route path={`${path}/users`}>
                <Users />
             </Route>

@@ -232,46 +232,46 @@ function LargeCard(props) {
    )
 }
 
-function SmallCard(props) {
-   const { title, count, color, icon } = props
-   const classes = useStyles()
+// function SmallCard(props) {
+//    const { title, count, color, icon } = props
+//    const classes = useStyles()
 
-   return (
-      <Card>
-         <CardContent>
-            <Grid
-               container
-               spacing={3}
-               component="div"
-               display="flex"
-               justify="space-between"
-            >
-               <Grid item>
-                  <Typography
-                     color="textSecondary"
-                     gutterBottom
-                     variant="body2"
-                  >
-                     {title}
-                  </Typography>
-                  <Typography color="textPrimary" variant="h6">
-                     {count}
-                  </Typography>
-               </Grid>
-               <Grid item>
-                  <Avatar
-                     className={classes.icon__avatar_small}
-                     style={{
-                        backgroundColor: color,
-                     }}
-                  >
-                     {icon}
-                  </Avatar>
-               </Grid>
-            </Grid>
-         </CardContent>
-      </Card>
-   )
-}
+//    return (
+//       <Card>
+//          <CardContent>
+//             <Grid
+//                container
+//                spacing={3}
+//                component="div"
+//                display="flex"
+//                justify="space-between"
+//             >
+//                <Grid item>
+//                   <Typography
+//                      color="textSecondary"
+//                      gutterBottom
+//                      variant="body2"
+//                   >
+//                      {title}
+//                   </Typography>
+//                   <Typography color="textPrimary" variant="h6">
+//                      {count}
+//                   </Typography>
+//                </Grid>
+//                <Grid item>
+//                   <Avatar
+//                      className={classes.icon__avatar_small}
+//                      style={{
+//                         backgroundColor: color,
+//                      }}
+//                   >
+//                      {icon}
+//                   </Avatar>
+//                </Grid>
+//             </Grid>
+//          </CardContent>
+//       </Card>
+//    )
+// }
 
 export default Reports
