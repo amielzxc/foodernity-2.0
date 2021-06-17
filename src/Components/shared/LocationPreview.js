@@ -13,9 +13,10 @@ const containerStyle = {
 }
 
 function MapContainer(props) {
+   // console.log(`${props.lat} ${props.lng}`)
    const pickupLocationCoordinate = {
-      lat: 14.6043164,
-      lng: 120.9946287,
+      lat: props.lat,
+      lng: props.lng,
    }
 
    return (

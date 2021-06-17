@@ -48,10 +48,10 @@ export default function DonationItem(props) {
                      {donationName}
                   </Typography>
                   <Grid container alignItems="center">
-                     <LocationOnIcon
+                     {/* <LocationOnIcon
                         fontSize="small"
                         className={classes.icon__location}
-                     />
+                     /> */}
                      <Typography
                         variant="body1"
                         color="textSecondary"

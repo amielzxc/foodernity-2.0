@@ -142,6 +142,7 @@ export function FilterDrawer() {
                obj
             )
                .then((response) => {
+                  // console.log(response)
                   setDonationsData(
                      response.data.map((data) => (
                         <DonationItem
@@ -150,7 +151,7 @@ export function FilterDrawer() {
                            imgLoc={data.imgLoc}
                            donationName={data.donationName}
                            distance={data.pickupLoc}
-                           // postTime={data.postTime}
+                           postTime={data.postTime}
                         />
                      ))
                   )

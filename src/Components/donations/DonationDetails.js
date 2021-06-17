@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
    Avatar,
    Box,
@@ -26,10 +26,14 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LocationPreview from '../shared/LocationPreview'
 // import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 // import MomentUtils from '@date-io/moment'
+import Axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 export default function DonationDetails() {
    const theme = useTheme()
    const responsive = useMediaQuery(theme.breakpoints.down('sm'))
+   const { id } = useParams()
+
    return (
       <>
          <Helmet>
@@ -44,7 +48,7 @@ export default function DonationDetails() {
             <CssBaseline />
             <StyledAppBar />
             <ActionDrawer />
-            <DetailsContainer />
+            <DetailsContainer id={id} />
          </div>
       </>
    )
@@ -74,16 +78,16 @@ function ActionDrawer() {
             </Grid> */}
             <Divider className={classes.divider_margin1} />
             <ReceiveButton />
-            <ReportButton />
+            {/* <ReportButton /> */}
          </LeftDrawer>
          <DialogDrawer buttonName="FILTER">
             <Title />
             <Divider className={classes.divider_margin1} />
             <RequestorAvatar />
             <Divider className={classes.divider_margin1} />
-            <DonationProgess />
-            <Divider className={classes.divider_margin1} />
-            <Grid container spacing={1} justify="center">
+            {/* <DonationProgess /> */}
+            {/* <Divider className={classes.divider_margin1} /> */}
+            {/* <Grid container spacing={1} justify="center">
                <Grid item xs={5}>
                   <QuantityInput />
                </Grid>
@@ -93,10 +97,10 @@ function ActionDrawer() {
                      * max of 10 quantity can only be received
                   </Typography>
                </Grid>
-            </Grid>
-            <Divider className={classes.divider_margin1} />
+            </Grid> */}
+            {/* <Divider className={classes.divider_margin1} /> */}
             <ReceiveButton />
-            <ReportButton />
+            {/* <ReportButton /> */}
          </DialogDrawer>
       </>
    )
@@ -144,50 +148,50 @@ function RequestorAvatar() {
    )
 }
 
-function DonationProgess(props) {
-   const classes = useStyles()
-   return (
-      <Box>
-         <Typography variant="body1" className={classes.text_bold}>
-            Remaining quantity left
-         </Typography>
-         <Box display="flex" alignItems="center">
-            <Box width="100%" mr={1}>
-               <LinearProgress variant="determinate" value={72} />
-            </Box>
-            <Box width="80px">
-               <Typography
-                  variant="body2"
-                  color="textSecondary"
-               >{` 72 / 100`}</Typography>
-            </Box>
-         </Box>
-      </Box>
-   )
-}
+// function DonationProgess(props) {
+//    const classes = useStyles()
+//    return (
+//       <Box>
+//          <Typography variant="body1" className={classes.text_bold}>
+//             Remaining quantity left
+//          </Typography>
+//          <Box display="flex" alignItems="center">
+//             <Box width="100%" mr={1}>
+//                <LinearProgress variant="determinate" value={72} />
+//             </Box>
+//             <Box width="80px">
+//                <Typography
+//                   variant="body2"
+//                   color="textSecondary"
+//                >{` 72 / 100`}</Typography>
+//             </Box>
+//          </Box>
+//       </Box>
+//    )
+// }
 
-function QuantityInput(props) {
-   const [quantity, setQuantity] = useState(0)
-   const handleAdd = () => {
-      if (quantity < 10) {
-         setQuantity(quantity + 1)
-      }
-   }
+// function QuantityInput(props) {
+//    const [quantity, setQuantity] = useState(0)
+//    const handleAdd = () => {
+//       if (quantity < 10) {
+//          setQuantity(quantity + 1)
+//       }
+//    }
 
-   const handleSubtract = () => {
-      if (quantity > 0) {
-         setQuantity(quantity - 1)
-      }
-   }
+//    const handleSubtract = () => {
+//       if (quantity > 0) {
+//          setQuantity(quantity - 1)
+//       }
+//    }
 
-   return (
-      <ButtonGroup size="large" fullWidth style={{ height: '100%' }}>
-         {quantity > 0 && <Button onClick={handleSubtract}>-</Button>}
-         {quantity > 0 && <Button disabled>{quantity}</Button>}
-         {quantity < 10 && <Button onClick={handleAdd}>+</Button>}
-      </ButtonGroup>
-   )
-}
+//    return (
+//       <ButtonGroup size="large" fullWidth style={{ height: '100%' }}>
+//          {quantity > 0 && <Button onClick={handleSubtract}>-</Button>}
+//          {quantity > 0 && <Button disabled>{quantity}</Button>}
+//          {quantity < 10 && <Button onClick={handleAdd}>+</Button>}
+//       </ButtonGroup>
+//    )
+// }
 
 // returns input field for expiry date of the donation
 // function DonationExpiry(props) {
@@ -219,163 +223,189 @@ function ReceiveButton() {
 }
 
 // returns a button that allows user to report what the user thinks is deemed to be reported
-function ReportButton(props) {
-   const { handleOpen } = props
-   const classes = useStyles()
-   return (
-      <Button
-         onClick={handleOpen}
-         color="secondary"
-         variant="outlined"
-         fullWidth
-         className={classes.button__report}
-      >
-         See something wrong?
-      </Button>
-   )
-}
+// function ReportButton(props) {
+//    const { handleOpen } = props
+//    const classes = useStyles()
+//    return (
+//       <Button
+//          onClick={handleOpen}
+//          color="secondary"
+//          variant="outlined"
+//          fullWidth
+//          className={classes.button__report}
+//       >
+//          See something wrong?
+//       </Button>
+//    )
+// }
 
-function DetailsContainer() {
+function DetailsContainer({ id }) {
    const classes = useStyles()
    const theme = useTheme()
    const responsive = useMediaQuery(theme.breakpoints.only('xs'))
+
+   const [donationDetails, setDonationDetails] = useState(null)
+   useEffect(() => {
+      const num = Number(id)
+      Axios.post(`http://localhost:3001/listingItem/get/${num}`).then(
+         (response) => {
+            console.log(response.data)
+            setDonationDetails(response.data)
+         }
+      )
+   }, [])
+
    return (
-      <MainContainer>
-         <Paper
-            style={{ margin: responsive ? '0' : '2rem 2rem', padding: '1rem' }}
-         >
-            <Grid container spacing={1} justify="center">
-               <Grid
-                  container
-                  item
-                  xs={12}
-                  lg={6}
-                  justify="center"
-                  alignItems="center"
-                  // style={{ backgroundColor: 'red' }}
+      <>
+         {donationDetails !== null && (
+            <MainContainer>
+               <Paper
+                  style={{
+                     margin: responsive ? '0' : '2rem 2rem',
+                     padding: '1rem',
+                  }}
                >
-                  <div
-                     style={{
-                        borderRadius: '5px',
-                        // backgroundColor: 'grey',
-                        width: '80%',
-                        height: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                     }}
-                  >
-                     <img
-                        src="https://c1.staticflickr.com/5/4158/33593402264_bedafb79d1_c.jpg"
-                        alt="donation"
-                        style={{
-                           maxWidth: '100%',
+                  <Grid container spacing={1} justify="center">
+                     <Grid
+                        container
+                        item
+                        xs={12}
+                        lg={6}
+                        justify="center"
+                        alignItems="center"
+                        // style={{ backgroundColor: 'red' }}
+                     >
+                        <div
+                           style={{
+                              borderRadius: '5px',
+                              // backgroundColor: 'grey',
+                              width: '80%',
+                              height: '100%',
+                              display: 'flex',
+                              justifyContent: 'center',
+                           }}
+                        >
+                           <img
+                              src={donationDetails[0].imgLoc}
+                              alt="donation"
+                              style={{
+                                 maxWidth: '100%',
 
-                           height: '100%',
-                           objectFit: 'contain',
-                        }}
-                     />
-                  </div>
-               </Grid>
-               <Grid container item xs={12} lg={6} spacing={1}>
-                  <Grid item>
-                     <Typography variant="h6" className={classes.text_bold}>
-                        Lucky Me Pancit Canton Noodles
-                     </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                     <Box display="flex">
-                        <LocationOnIcon color="secondary" />
-                        <Typography>3 kilometers away</Typography>
-                     </Box>
-                  </Grid>
-                  <Grid item xs={12} style={{ margin: '5px 0' }}>
-                     <Box display="flex">
-                        <Chip label="Instant Noodles" color="primary" />
-                     </Box>
-                  </Grid>
+                                 height: '100%',
+                                 objectFit: 'contain',
+                              }}
+                           />
+                        </div>
+                     </Grid>
+                     <Grid container item xs={12} lg={6} spacing={1}>
+                        <Grid item>
+                           <Typography
+                              variant="h6"
+                              className={classes.text_bold}
+                           >
+                              {donationDetails[0].donationName}
+                           </Typography>
+                        </Grid>
+                        {/* <Grid item xs={12}>
+                  <Box display="flex">
+                     <LocationOnIcon color="secondary" />
+                     <Typography>3 kilometers away</Typography>
+                  </Box>
+               </Grid> */}
+                        <Grid item xs={12} style={{ margin: '5px 0' }}>
+                           <Box display="flex">
+                              <Chip
+                                 label={donationDetails[0].donationCategory}
+                                 color="primary"
+                              />
+                           </Box>
+                        </Grid>
 
-                  <Grid item xs={6}>
-                     <Typography
-                        className={classes.text_bold}
-                        style={{ textAlign: 'center' }}
-                     >
-                        Total quantity
-                     </Typography>
-                     <Typography>
-                        <Typography
-                           variant="body2"
-                           style={{ textAlign: 'center' }}
-                        >
-                           12 pieces
-                        </Typography>
-                     </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                     <Typography
-                        className={classes.text_bold}
-                        style={{ textAlign: 'center' }}
-                     >
-                        Expiry Date
-                     </Typography>
-                     <Typography
-                        variant="body2"
-                        style={{ textAlign: 'center' }}
-                     >
-                        September 15, 2021
-                     </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                     <Typography className={classes.text_bold}>
-                        Donation Notes
-                     </Typography>
-                     <Typography variant="body2">
-                        i have 12 pieces of lucky me pancit canton noodles.
-                        assorted flavors will be given to you.
-                     </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                     <Divider className={classes.divider_margin} />
-                  </Grid>
-                  <Grid item xs={12}>
-                     <LocationPreview />
-                  </Grid>
-                  <Grid item xs={12}>
-                     <Divider className={classes.divider_margin} />
-                  </Grid>
-                  <Grid container item xs={12}>
-                     <Grid item xs={6}>
-                        <Typography
-                           className={classes.text_bold}
-                           style={{ textAlign: 'center' }}
-                        >
-                           Pickup location
-                        </Typography>
-                        <Typography
-                           variant="body2"
-                           style={{ textAlign: 'center' }}
-                        >
-                           National University-Manila
-                        </Typography>
+                        <Grid item xs={6}>
+                           <Typography
+                              className={classes.text_bold}
+                              style={{ textAlign: 'center' }}
+                           >
+                              Total quantity
+                           </Typography>
+
+                           <Typography
+                              variant="body2"
+                              style={{ textAlign: 'center' }}
+                           >
+                              {donationDetails[0].donationQuantity} pieces
+                           </Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                           <Typography
+                              className={classes.text_bold}
+                              style={{ textAlign: 'center' }}
+                           >
+                              Expiry Date
+                           </Typography>
+                           <Typography
+                              variant="body2"
+                              style={{ textAlign: 'center' }}
+                           >
+                              {donationDetails[0].donationExpiry}
+                           </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                           <Typography className={classes.text_bold}>
+                              Donation Notes
+                           </Typography>
+                           <Typography variant="body2">
+                              {donationDetails[0].donationNote}
+                           </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                           <Divider className={classes.divider_margin} />
+                        </Grid>
+                        <Grid item xs={12}>
+                           <LocationPreview
+                              lat={donationDetails[0].lat}
+                              lng={donationDetails[0].lng}
+                           />
+                        </Grid>
+                        <Grid item xs={12}>
+                           <Divider className={classes.divider_margin} />
+                        </Grid>
+                        <Grid container item xs={12}>
+                           <Grid item xs={6}>
+                              <Typography
+                                 className={classes.text_bold}
+                                 style={{ textAlign: 'center' }}
+                              >
+                                 Pickup location
+                              </Typography>
+                              <Typography
+                                 variant="body2"
+                                 style={{ textAlign: 'center' }}
+                              >
+                                 {donationDetails[0].pickupLoc}
+                              </Typography>
+                           </Grid>
+                           <Grid item xs={6}>
+                              <Typography
+                                 className={classes.text_bold}
+                                 style={{ textAlign: 'center' }}
+                              >
+                                 Pickup date
+                              </Typography>
+                              <Typography
+                                 variant="body2"
+                                 style={{ textAlign: 'center' }}
+                              >
+                                 {donationDetails[0].pickupDate}
+                              </Typography>
+                           </Grid>
+                        </Grid>
                      </Grid>
-                     <Grid item xs={6}>
-                        <Typography
-                           className={classes.text_bold}
-                           style={{ textAlign: 'center' }}
-                        >
-                           Pickup date
-                        </Typography>
-                        <Typography
-                           variant="body2"
-                           style={{ textAlign: 'center' }}
-                        >
-                           July 03, 2021
-                        </Typography>
-                     </Grid>
                   </Grid>
-               </Grid>
-            </Grid>
-         </Paper>
-      </MainContainer>
+               </Paper>
+            </MainContainer>
+         )}
+      </>
    )
 }
 

@@ -20,6 +20,7 @@ export default function DonationsContainer() {
                console.log(err)
             }
             // console.log(response.data)
+            // console.log(response.distance)
             setDonationsData(
                response.data.map((data) => (
                   <DonationItem
@@ -28,7 +29,7 @@ export default function DonationsContainer() {
                      imgLoc={data.imgLoc}
                      donationName={data.donationName}
                      distance={data.pickupLoc}
-                     // postTime={data.postTime}
+                     postTime={data.postTime}
                   />
                ))
             )
@@ -36,7 +37,7 @@ export default function DonationsContainer() {
       )
    }, [])
    if (donationsData) {
-      console.log(donationsData)
+      // console.log(donationsData)
    }
 
    // useEffect(() => {

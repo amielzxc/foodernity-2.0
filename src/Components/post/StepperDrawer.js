@@ -17,6 +17,8 @@ import DialogDrawer from '../shared/DialogDrawer'
 import MuiAlert from '@material-ui/lab/Alert'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import moment from 'moment'
+
 const useStyles = makeStyles((theme) => ({
    root: {
       width: '100%',
@@ -117,7 +119,7 @@ function VerticalStepper() {
    const donationImage = usePostStore((state) => state.donationImage) // null
    const donationName = usePostStore((state) => state.donationName) // ''
    const donationNotes = usePostStore((state) => state.donationNotes) // ''
-   const donationRecipient = usePostStore((state) => state.donationRecipient) // ''
+   // const donationRecipient = usePostStore((state) => state.donationRecipient) // ''
    const donationCategory = usePostStore((state) => state.donationCategory) // ''
    const donationExpiry = usePostStore((state) => state.donationExpiry) // ''
    const pickupDate = usePostStore((state) => state.pickupDate)
@@ -125,19 +127,28 @@ function VerticalStepper() {
    const pickupLocationCoordinate = usePostStore(
       (state) => state.pickupLocationCoordinate
    ) // null
+   const donationQuantity = usePostStore((state) => state.donationQuantity)
 
    const history = useHistory()
 
    const arr = [
       donationImage,
       donationName,
-      donationRecipient,
+      donationQuantity,
       donationCategory,
       pickupLocation,
    ]
 
    const [activeStep, setActiveStep] = useState(current)
    const steps = getSteps()
+
+   const checkRecipient = (donationQuantity) => {
+      if (donationQuantity > 15) {
+         return 'foodbank'
+      } else {
+         return 'individual'
+      }
+   }
 
    const handleNext = () => {
       if (current === 0) {
@@ -171,17 +182,15 @@ function VerticalStepper() {
                const obj = {
                   listingOwnerID: localStorage.getItem('userID'),
                   listingType: 'Donate',
-                  postDate: `${
-                     new Date().getMonth() + 1
-                  }/${new Date().getDate()}/${new Date().getFullYear()}`,
-                  postTime: `${new Date().getHours()}:${new Date().getMinutes()}`,
+                  postDate: moment(new Date()).format('MM/DD/YYYY'),
+                  postTime: moment(new Date()).format('HH:mm'),
                   donationName: donationName,
                   donationNotes: donationNotes,
                   donationCategory: donationCategory,
-                  donationQuantity: 15,
-                  donationRecipient: 'individual',
-                  donationExpiry: donationExpiry,
-                  pickupDate: pickupDate,
+                  donationQuantity: donationQuantity,
+                  donationRecipient: checkRecipient(donationQuantity),
+                  donationExpiry: moment(donationExpiry).format('MM/DD/YYYY'),
+                  pickupDate: moment(pickupDate).format('MM/DD/YYYY'),
                   pickupLocation: pickupLocation,
                   pickupLocationCoordinate: pickupLocationCoordinate,
                   donationImage: response.data.secure_url,
