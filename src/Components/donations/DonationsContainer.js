@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { Typography, Grid } from '@material-ui/core'
-import { FilterDrawerResponsive } from './FilterDrawer'
 import DonationItem from './DonationItem'
 import MainContainer from '../shared/MainContainer'
 import Axios from 'axios'
 import { useDonationStore } from '../../store/DonationStore'
-import data from '../../__mock__/donationsData'
 // import ScrollTop from '../components/shared/ScrollTop'
 import ScrollTop from '../shared/ScrollTop'
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { makeStyles, fade } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
 import {
+   Hidden,
+   Paper,
+   makeStyles,
+   fade,
+   AppBar,
+   Tabs,
+   Tab,
+   Typography,
+   Box,
    Button,
    Chip,
    Dialog,
@@ -14,20 +17,22 @@ import {
    Divider,
    Grid,
 } from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search'
-import InputBase from '@material-ui/core/InputBase'
+// import SearchIcon from '@material-ui/icons/Search'
+// import InputBase from '@material-ui/core/InputBase'
 import ListAltIcon from '@material-ui/icons/ListAlt'
-import ShareIcon from '@material-ui/icons/Share'
 import { grey } from '@material-ui/core/colors'
-import AddIcon from '@material-ui/icons/Add'
 import LocationPreview from '../shared/LocationPreview'
 import { data } from '../../__mock__/requestData'
+import { Link } from 'react-router-dom'
 
 export default function Requested() {
    return (
-      <Grid container>
+      <Grid container spacing={2}>
          <Grid item xs={12} lg={9}>
             <DonationTabs />
+         </Grid>
+         <Grid item xs={false} lg={3}>
+            <Help />
          </Grid>
       </Grid>
    )
@@ -72,24 +77,69 @@ function DonationTabs() {
          </Box>
 
          <TabPanel value={value} index={0}>
-            {data.map((item) => (
-               <RequestItem
-                  listingID={item.listingID}
-                  imgLoc={item.imgLoc}
-                  requestName={item.requestName}
-                  postDateTime={item.postDateTime}
-               />
-            ))}
+            {data
+               .filter((data) => data.status === 'Requested')
+               .map((item) => (
+                  <RequestItem
+                     key={item.imgLoc}
+                     listingID={item.listingID}
+                     imgLoc={item.imgLoc}
+                     requestName={item.requestName}
+                     postDateTime={item.postDateTime}
+                     status={item.status}
+                  />
+               ))}
          </TabPanel>
-         <TabPanel value={value} index={1}></TabPanel>
-         {/* <TabPanel value={value} index={0}></TabPanel> */}
-         {/* <TabPanel value={value} index={0}></TabPanel>
-         <TabPanel value={value} index={}>
-            <Typography>unfulfilled</Typography>
-         </TabPanel> */}
+         <TabPanel value={value} index={1}>
+            {data
+               .filter((data) => data.status === 'Unfulfilled')
+               .map((item) => (
+                  <RequestItem
+                     key={item.imgLoc}
+                     listingID={item.listingID}
+                     imgLoc={item.imgLoc}
+                     requestName={item.requestName}
+                     postDateTime={item.postDateTime}
+                     status={item.status}
+                  />
+               ))}
+         </TabPanel>
+         <TabPanel value={value} index={2}>
+            {data
+               .filter((data) => data.status === 'Ongoing')
+               .map((item) => (
+                  <RequestItem
+                     key={item.imgLoc}
+                     listingID={item.listingID}
+                     imgLoc={item.imgLoc}
+                     requestName={item.requestName}
+                     postDateTime={item.postDateTime}
+                     status={item.status}
+                     pickupDate={item.pickupDate}
+                     pickupLocation={item.pickupLocation}
+                  />
+               ))}
+         </TabPanel>
+         <TabPanel value={value} index={3}>
+            {data
+               .filter((data) => data.status === 'Fulfilled')
+               .map((item) => (
+                  <RequestItem
+                     key={item.imgLoc}
+                     listingID={item.listingID}
+                     imgLoc={item.imgLoc}
+                     requestName={item.requestName}
+                     postDateTime={item.postDateTime}
+                     status={item.status}
+                     pickupDate={item.pickupDate}
+                     pickupLocation={item.pickupLocation}
+                  />
+               ))}
+         </TabPanel>
       </div>
    )
 }
+
 function TabPanel(props) {
    const { children, value, index, ...other } = props
 
@@ -106,27 +156,35 @@ function TabPanel(props) {
    )
 }
 
-function SearchField() {
-   const classes = useStyles()
-   return (
-      <div className={classes.search}>
-         <div className={classes.searchIcon}>
-            <SearchIcon />
-         </div>
-         <InputBase
-            placeholder="Search for donations"
-            classes={{
-               root: classes.inputRoot,
-               input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-         />
-      </div>
-   )
-}
+// function SearchField() {
+//    const classes = useStyles()
+//    return (
+//       <div className={classes.search}>
+//          <div className={classes.searchIcon}>
+//             <SearchIcon />
+//          </div>
+//          <InputBase
+//             placeholder="Search for donations"
+//             classes={{
+//                root: classes.inputRoot,
+//                input: classes.inputInput,
+//             }}
+//             inputProps={{ 'aria-label': 'search' }}
+//          />
+//       </div>
+//    )
+// }
 
 function RequestItem(props) {
-   const { listingID, imgLoc, requestName, postDateTime } = props
+   const {
+      listingID,
+      imgLoc,
+      requestName,
+      postDateTime,
+      status,
+      pickupDate,
+      pickupLocation,
+   } = props
    const classes = useStyles()
 
    const [open, setOpen] = useState(false)
@@ -151,9 +209,12 @@ function RequestItem(props) {
                   <Typography variant="body1" className={classes.text_bold}>
                      {requestName}
                   </Typography>
-                  <Typography variant="body2" style={{ fontWeight: '200' }}>
-                     Requested {postDateTime}
-                  </Typography>
+                  <Label
+                     status={status}
+                     postDateTime={postDateTime}
+                     pickupLocation={pickupLocation}
+                     pickupDate={pickupDate}
+                  />
                </div>
                <div className={classes.container__button}>
                   <Button
@@ -177,6 +238,39 @@ function RequestItem(props) {
    )
 }
 
+function Label(props) {
+   const { status, postDateTime, pickupDate, pickupLocation } = props
+
+   if (status === 'Requested') {
+      return (
+         <Typography variant="body2" style={{ fontWeight: '200' }}>
+            Requested {postDateTime}
+         </Typography>
+      )
+   } else if (status === 'Unfulfilled') {
+      return (
+         <Typography variant="body2" style={{ fontWeight: '200' }}>
+            Unfulfilled due to past pickup date
+         </Typography>
+      )
+   } else if (status === 'Ongoing') {
+      return (
+         <Typography variant="body2" style={{ fontWeight: '300' }}>
+            Pickup on <span style={{ fontWeight: '400' }}> {pickupDate}</span>{' '}
+            at <span style={{ color: '#2196F3' }}>{pickupLocation}</span>
+         </Typography>
+      )
+   } else if (status === 'Fulfilled') {
+      return (
+         <Typography variant="body2" style={{ fontWeight: '200' }}>
+            Request fulfilled by you
+         </Typography>
+      )
+   } else {
+      console.log('status not found')
+   }
+}
+
 function DonationDetails(props) {
    const classes = useStyles()
    const { handleClose, open, listingID } = props
@@ -188,9 +282,6 @@ function DonationDetails(props) {
       )
    }, [listingID])
 
-   if (donationDetails) {
-      console.log(donationDetails)
-   }
    return (
       <>
          {donationDetails !== null && (
@@ -210,7 +301,6 @@ function DonationDetails(props) {
                         md={6}
                         justify="center"
                         alignItems="center"
-                        // style={{ backgroundColor: 'red' }}
                      >
                         <div
                            style={{
@@ -329,6 +419,37 @@ function DonationDetails(props) {
             </Dialog>
          )}
       </>
+   )
+}
+
+function Help() {
+   return (
+      <Hidden mdDown>
+         <Paper>
+            <Box p={2}>
+               <Typography variant="h6">Need Help?</Typography>
+               <Box display="flex" m={2}>
+                  <ListAltIcon style={{ marginRight: '.7rem' }} />
+                  <Typography
+                     component={Link}
+                     to="/faqsguidelines"
+                     target="_blank"
+                     style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                     Browse all topics
+                  </Typography>
+               </Box>
+               <Button
+                  variant="contained"
+                  color="primary"
+                  // startIcon={<AddIcon />}
+                  fullWidth
+               >
+                  Request a Donation
+               </Button>
+            </Box>
+         </Paper>
+      </Hidden>
    )
 }
 

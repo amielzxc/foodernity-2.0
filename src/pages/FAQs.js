@@ -1,4 +1,3 @@
-import { Route, Switch } from 'react-router'
 import { CssBaseline, useMediaQuery, useTheme } from '@material-ui/core'
 import { Helmet } from 'react-helmet'
 import StyledAppBar from '../components/shared/StyledAppBar'

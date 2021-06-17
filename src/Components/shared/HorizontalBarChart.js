@@ -1,14 +1,7 @@
-import {
-   Button,
-   Card,
-   CardActions,
-   CardContent,
-   CardHeader,
-   Divider,
-} from '@material-ui/core'
+import { Card, CardContent, CardHeader, Divider } from '@material-ui/core'
 import { Bar } from 'react-chartjs-2'
-import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
-function HorizontalBarChart(props) {
+
+export default function HorizontalBarChart(props) {
    const { data, chartLabel, index } = props
 
    return (
@@ -48,4 +41,3 @@ function HorizontalBarChart(props) {
       </Card>
    )
 }
-export default HorizontalBarChart

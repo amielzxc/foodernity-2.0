@@ -120,7 +120,6 @@ function VerticalStepper() {
    const donationRecipient = usePostStore((state) => state.donationRecipient) // ''
    const donationCategory = usePostStore((state) => state.donationCategory) // ''
    const donationExpiry = usePostStore((state) => state.donationExpiry) // ''
-   const pickupTime = usePostStore((state) => state.pickupTime)
    const pickupDate = usePostStore((state) => state.pickupDate)
    const pickupLocation = usePostStore((state) => state.pickupLocation) // null
    const pickupLocationCoordinate = usePostStore(
@@ -244,8 +243,9 @@ function VerticalStepper() {
                               }
                               onClick={handleNext}
                               className={
-                                 activeStep === steps.length - 1 &&
-                                 classes.button_green
+                                 activeStep === steps.length - 1
+                                    ? classes.button_green
+                                    : null
                               }
                            >
                               {activeStep === steps.length - 1

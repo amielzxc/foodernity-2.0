@@ -24,13 +24,8 @@ import { deepOrange } from '@material-ui/core/colors'
 import MainContainer from '../shared/MainContainer'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LocationPreview from '../shared/LocationPreview'
-import { Controller } from 'react-hook-form'
-import {
-   DatePicker,
-   KeyboardDatePicker,
-   MuiPickersUtilsProvider,
-} from '@material-ui/pickers'
-import MomentUtils from '@date-io/moment'
+// import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
+// import MomentUtils from '@date-io/moment'
 
 export default function DonationDetails() {
    const theme = useTheme()
@@ -195,24 +190,24 @@ function QuantityInput(props) {
 }
 
 // returns input field for expiry date of the donation
-function DonationExpiry(props) {
-   const [selectedDate, handleDateChange] = useState(new Date())
+// function DonationExpiry(props) {
+//    const [selectedDate, handleDateChange] = useState(new Date())
 
-   return (
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-         <DatePicker
-            disablePast
-            autoOk
-            inputVariant="outlined"
-            label="Expiry Date"
-            format="L"
-            value={selectedDate}
-            onChange={handleDateChange}
-            InputProps={{ readOnly: true }}
-         />
-      </MuiPickersUtilsProvider>
-   )
-}
+//    return (
+//       <MuiPickersUtilsProvider utils={MomentUtils}>
+//          <DatePicker
+//             disablePast
+//             autoOk
+//             inputVariant="outlined"
+//             label="Expiry Date"
+//             format="L"
+//             value={selectedDate}
+//             onChange={handleDateChange}
+//             InputProps={{ readOnly: true }}
+//          />
+//       </MuiPickersUtilsProvider>
+//    )
+// }
 function ReceiveButton() {
    const classes = useStyles()
 

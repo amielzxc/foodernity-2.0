@@ -1,14 +1,7 @@
-import {
-   Button,
-   Card,
-   CardActions,
-   CardContent,
-   CardHeader,
-   Divider,
-} from '@material-ui/core'
+import { Card, CardContent, CardHeader, Divider } from '@material-ui/core'
 import { Pie } from 'react-chartjs-2'
-import GetAppRoundedIcon from '@material-ui/icons/GetAppRounded'
-function Piechart(props) {
+
+export default function Piechart(props) {
    const { data, chartLabel } = props
 
    return (
@@ -47,5 +40,3 @@ function Piechart(props) {
       </Card>
    )
 }
-
-export default Piechart

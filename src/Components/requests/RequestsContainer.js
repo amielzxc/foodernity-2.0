@@ -23,6 +23,7 @@ export default function RequestsContainer() {
             </Grid>
             {data.map((item) => (
                <RequestItem
+                  key={item.requestID}
                   requestID={item.requestID}
                   imgLoc={item.imgLoc}
                   requestName={item.requestName}

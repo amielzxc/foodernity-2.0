@@ -11,8 +11,6 @@ import {
    Select,
    TextField,
    Typography,
-   useMediaQuery,
-   useTheme,
 } from '@material-ui/core'
 import {
    KeyboardDatePicker,
@@ -159,8 +157,6 @@ function RequestQuantity(props) {
 // returns select field that allows donor to choose the donation's food category
 function RequestCategory(props) {
    const requestCategory = useRequestStore((state) => state.requestCategory)
-   const theme = useTheme()
-   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
 
    return (
       <FormControl variant="outlined" fullWidth required margin="normal">

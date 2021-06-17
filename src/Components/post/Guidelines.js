@@ -92,7 +92,7 @@ export default function Guidelines() {
 }
 
 function AccordionItem(props) {
-   const { name, label, description } = props.guideline
+   const { name, label } = props.guideline
    const { checked, handleChange } = props
    return (
       <Accordion>
@@ -228,7 +228,32 @@ function GuidelinesDescription(props) {
    } else if (name === 'guidelines3') {
       return (
          <>
-            <Typography>3</Typography>
+            <Grid container direction="column" spacing={1}>
+               <Grid item>
+                  <Typography>
+                     • Donated foods may be stored in a private home away from
+                     pests, pets, and household chemicals.
+                  </Typography>
+               </Grid>
+               <Grid item>
+                  <Typography>
+                     • Packaged food should be donated in its original, unopened
+                     packaging with ingredient labels.
+                  </Typography>
+               </Grid>
+               <Grid item>
+                  <Typography>
+                     • Check canned goods for damage. Can damage is shown by
+                     swelling, leakage, punctures, holes, fractures, extensive
+                     deep rusting, or crushing or denting severe enough to
+                     prevent normal stacking or opening with a manual,
+                     wheel-type can opener.
+                  </Typography>
+               </Grid>
+               <Grid item>
+                  <Typography>•</Typography>
+               </Grid>
+            </Grid>
          </>
       )
    }

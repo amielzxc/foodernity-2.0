@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
    Grid,
    makeStyles,
@@ -13,8 +13,6 @@ import {
    Tooltip,
    useTheme,
    useMediaQuery,
-   Input,
-   OutlinedInput,
    InputAdornment,
 } from '@material-ui/core'
 import { Controller, useForm } from 'react-hook-form'
@@ -62,10 +60,9 @@ const useStyles = makeStyles((theme) => ({
    },
 }))
 // returns the donation details fields to be filled up by the user
-function ItemDetails() {
+export default function ItemDetails() {
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
-   const recipientHelper = 'this is recipient helper'
 
    const setDonationName = usePostStore((state) => state.setDonationName)
    const setDonationCategory = usePostStore(
@@ -329,4 +326,3 @@ function Helper(props) {
       </Tooltip>
    )
 }
-export default ItemDetails

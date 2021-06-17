@@ -13,25 +13,30 @@ import {
    DialogTitle,
    Divider,
    Grid,
+   Hidden,
    useMediaQuery,
    useTheme,
+   Paper,
 } from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search'
-import InputBase from '@material-ui/core/InputBase'
+// import SearchIcon from '@material-ui/icons/Search'
+// import InputBase from '@material-ui/core/InputBase'
 import ListAltIcon from '@material-ui/icons/ListAlt'
-import ShareIcon from '@material-ui/icons/Share'
 import { grey } from '@material-ui/core/colors'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import { useMessageStore } from '../../store/MessageStore'
 import { donationsData } from '../../__mock__/PostedDonationsData'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LocationPreview from '../shared/LocationPreview'
+import AddIcon from '@material-ui/icons/Add'
+import { Link } from 'react-router-dom'
 
 export default function Posted() {
    return (
       <Grid container>
          <Grid item xs={12} lg={9}>
             <DonationTabs />
+         </Grid>
+         <Grid item xs={false} lg={3}>
+            <Help />
          </Grid>
       </Grid>
    )
@@ -158,24 +163,24 @@ function TabPanel(props) {
    )
 }
 
-function SearchField() {
-   const classes = useStyles()
-   return (
-      <div className={classes.search}>
-         <div className={classes.searchIcon}>
-            <SearchIcon />
-         </div>
-         <InputBase
-            placeholder="Search for donations"
-            classes={{
-               root: classes.inputRoot,
-               input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-         />
-      </div>
-   )
-}
+// function SearchField() {
+//    const classes = useStyles()
+//    return (
+//       <div className={classes.search}>
+//          <div className={classes.searchIcon}>
+//             <SearchIcon />
+//          </div>
+//          <InputBase
+//             placeholder="Search for donations"
+//             classes={{
+//                root: classes.inputRoot,
+//                input: classes.inputInput,
+//             }}
+//             inputProps={{ 'aria-label': 'search' }}
+//          />
+//       </div>
+//    )
+// }
 
 function DonationItem(props) {
    const {
@@ -478,6 +483,37 @@ function DonationDetails(props) {
             </Dialog>
          )}
       </>
+   )
+}
+
+function Help() {
+   return (
+      <Hidden mdDown>
+         <Paper>
+            <Box p={2}>
+               <Typography variant="h6">Need Help?</Typography>
+               <Box display="flex" m={2}>
+                  <ListAltIcon style={{ marginRight: '.7rem' }} />
+                  <Typography
+                     component={Link}
+                     to="/faqsguidelines"
+                     target="_blank"
+                     style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                     Browse all topics
+                  </Typography>
+               </Box>
+               <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<AddIcon />}
+                  fullWidth
+               >
+                  Post a Donation
+               </Button>
+            </Box>
+         </Paper>
+      </Hidden>
    )
 }
 

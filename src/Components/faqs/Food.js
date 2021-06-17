@@ -22,9 +22,9 @@ export default function Food() {
             </Typography>
             <Typography variant="h6">
                These guidelines are for food DONORS and REQUESTORS. By following
-               these guidelines, food DONORS and REQUESTOR will be able to
-               safely prepare, handle, and provide food that can be accepted by
-               DONATED FOOD DISTRIBUTING ORGANIZATIONS.
+               these guidelines, food DONORS and REQUESTORS will be able to
+               safely request, prepare, handle, and provide food that can be
+               accepted by INDIVIDUALS and FOOD DISTRIBUTING ORGANIZATIONS.
             </Typography>
          </Grid>
          <Grid item xs={12}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
    Typography,
    makeStyles,
@@ -14,9 +14,8 @@ import DesktopMacIcon from '@material-ui/icons/DesktopMac'
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
 import LeftDrawer from '../shared/LeftDrawer'
 import DialogDrawer from '../shared/DialogDrawer'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import ReportIcon from '@material-ui/icons/Report'
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
+
 const useStyles = makeStyles((theme) => ({
    drawer__container_responsive: {
       display: 'flex',

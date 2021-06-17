@@ -9,7 +9,6 @@ import {
    Checkbox,
    Slider,
    makeStyles,
-   Hidden,
 } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import EditIcon from '@material-ui/icons/Edit'
@@ -97,7 +96,7 @@ export function FilterDrawer() {
    const [foodCategory, setTempFoodCategory] = useState(
       useRequestStore((state) => state.foodCategory)
    )
-   const setListingData = useRequestStore((state) => state.setListingData)
+   // const setListingData = useRequestStore((state) => state.setListingData)
    const handleUpdateChanges = () => {
       setFilterButton(filterButton)
       setUserLocation(userLocation)
