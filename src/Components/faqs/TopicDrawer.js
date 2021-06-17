@@ -2,17 +2,10 @@ import DialogDrawer from '../shared/DialogDrawer'
 import LeftDrawer from '../shared/LeftDrawer'
 import {
    Typography,
-   IconButton,
-   Button,
-   ButtonGroup,
    Divider,
-   FormControlLabel,
-   Checkbox,
-   Slider,
    makeStyles,
    ListItem,
    ListItemText,
-   ListItemIcon,
    List,
 } from '@material-ui/core'
 

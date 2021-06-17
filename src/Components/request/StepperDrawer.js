@@ -181,8 +181,9 @@ function VerticalStepper() {
                                     : 'primary'
                               }
                               className={
-                                 activeStep === steps.length - 1 &&
-                                 classes.button_green
+                                 activeStep === steps.length - 1
+                                    ? classes.button_green
+                                    : null
                               }
                               onClick={handleNext}
                               // className={classes.button}

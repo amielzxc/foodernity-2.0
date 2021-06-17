@@ -90,7 +90,7 @@ export default function Guidelines() {
 }
 
 function AccordionItem(props) {
-   const { name, label, description } = props.guideline
+   const { name, label } = props.guideline
    const { checked, handleChange } = props
    return (
       <Accordion>

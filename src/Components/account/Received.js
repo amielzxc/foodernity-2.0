@@ -160,8 +160,6 @@ function DonationItem(props) {
       postDateTime,
       type,
    } = props
-   const theme = useTheme()
-   const responsiveLayout = useMediaQuery(theme.breakpoints.down('xs'))
    const classes = useStyles()
    const [open, setOpen] = useState(false)
 
@@ -221,7 +219,6 @@ function DonationItem(props) {
 }
 
 function Label(props) {
-   const classes = useStyles()
    const { status, postDateTime, pickupLocation, pickupDate } = props
 
    if (status === 'Ongoing') {
