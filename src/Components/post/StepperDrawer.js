@@ -203,7 +203,7 @@ function VerticalStepper() {
                      }
                   }
                )
-               console.log('umabot ako dito pakyu')
+               console.log('Donation successfully posted')
                history.replace('/donations')
             } else {
                console.log(err)

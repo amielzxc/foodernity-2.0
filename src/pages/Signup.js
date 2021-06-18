@@ -47,11 +47,11 @@ export default function Signup() {
             // console.log(obj)
             Axios.post('http://localhost:3001/user/add', obj)
                .then((res) => {
-                  if (String(res.data) == 'email is already taken') {
+                  if (String(res.data) === 'email is already taken') {
                      setEmailTaken(true)
                      //put the notification/alert code here if the email is already taken.
                   } else if (
-                     String(res.data) == 'new user added successfully'
+                     String(res.data) === 'new user added successfully'
                   ) {
                      setSuccessfulRegister(true)
                      setEmailTaken(false)
