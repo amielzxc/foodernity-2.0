@@ -77,6 +77,8 @@ export default function Signup() {
       }
       setPasswordMismatch(false)
       setInvalidPassword(false)
+      setEmailTaken(false)
+      setSuccessfulRegister(false)
    }
 
    return (
@@ -135,6 +137,8 @@ export default function Signup() {
          </Grid>
          <PasswordMismatchAlert open={passwordMismatch} close={handleClose} />
          <InvalidPasswordAlert open={invalidPassword} close={handleClose} />
+         <EmailTakenAlert open={emailTaken} close={handleClose} />
+         <SuccessfulAlert open={successfulRegister} close={handleClose} />
       </>
    )
 }
