@@ -30,9 +30,6 @@ export default function Signup() {
                password: data.password,
                firstname: data.firstName,
                surname: data.lastName,
-               // dateOfReg: `${
-               //    new Date().getMonth() + 1
-               // }/${new Date().getDate()}/${new Date().getFullYear()}`,
                dateOfReg: moment(new Date()).format('MM/DD/YYYY'),
                userType: 'individual',
                userStatus: 'active',
@@ -41,6 +38,11 @@ export default function Signup() {
             // console.log(obj)
             Axios.post('http://localhost:3001/user/add', obj)
                .then((res) => {
+                  if (res.data == 'email is already taken') {
+                     //put the notification/alert code here if the email is already taken.
+                  } else if (res.data == 'new user added successfully') {
+                     //put the notification/alert code here if the user successfully registered.
+                  }
                   console.log(res.data)
                })
                .catch((error) => {
