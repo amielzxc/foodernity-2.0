@@ -13,6 +13,7 @@ import { useForm, Controller } from 'react-hook-form'
 import BackgroundImage from '../assets/account/signup-background.png'
 import Axios from 'axios'
 import { Helmet } from 'react-helmet'
+import moment from 'moment'
 
 export default function Signup() {
    const { handleSubmit, control } = useForm()
@@ -20,29 +21,36 @@ export default function Signup() {
    function onSubmit(data) {
       // console.log(data)
 
-      if (data.password !== data.confirmPassword) {
-         console.log("password and confirm password didn't match")
-      } else {
-         const obj = {
-            email: data.emailAddress,
-            password: data.password,
-            firstname: data.firstName,
-            surname: data.lastName,
-            dateOfReg: `${
-               new Date().getMonth() + 1
-            }/${new Date().getDate()}/${new Date().getFullYear()}`,
-            userType: 'individual',
-            userStatus: 'active',
-         }
+      if (String(data.password).length >= 8) {
+         if (data.password !== data.confirmPassword) {
+            console.log('Password and confirm password did not match.')
+         } else {
+            const obj = {
+               email: data.emailAddress,
+               password: data.password,
+               firstname: data.firstName,
+               surname: data.lastName,
+               // dateOfReg: `${
+               //    new Date().getMonth() + 1
+               // }/${new Date().getDate()}/${new Date().getFullYear()}`,
+               dateOfReg: moment(new Date()).format('MM/DD/YYYY'),
+               userType: 'individual',
+               userStatus: 'active',
+            }
 
-         // console.log(obj)
-         Axios.post('http://localhost:3001/user/add', obj)
-            .then((res) => {
-               console.log(res.data)
-            })
-            .catch((error) => {
-               console.log(error)
-            })
+            // console.log(obj)
+            Axios.post('http://localhost:3001/user/add', obj)
+               .then((res) => {
+                  console.log(res.data)
+               })
+               .catch((error) => {
+                  console.log(error)
+               })
+         }
+      } else {
+         console.log(
+            'Password too short. Please make it at least 8 characters long.'
+         )
       }
    }
 
