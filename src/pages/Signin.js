@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import {
    Grid,
    CssBaseline,
@@ -5,6 +6,7 @@ import {
    Typography,
    Button,
    makeStyles,
+   Snackbar,
 } from '@material-ui/core'
 import { Icon } from '@iconify/react'
 import googleIcon from '@iconify-icons/flat-color-icons/google'
@@ -14,8 +16,12 @@ import { useForm, Controller } from 'react-hook-form'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import MuiAlert from '@material-ui/lab/Alert'
 
 export default function Signin() {
+   const [wrongCredentials, setWrongCredentials] = useState(false)
+   const [noAccount, setNoAccount] = useState(false)
+
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
    const history = useHistory()
@@ -30,8 +36,10 @@ export default function Signin() {
       Axios.post('http://localhost:3001/login', obj)
          .then((res) => {
             if (res.data === 'Wrong email/password!') {
+               setWrongCredentials(true)
                console.log('Wrong email/password!')
             } else if (res.data === 'No account matched!') {
+               setNoAccount(true)
                console.log('No account matched!')
             } else {
                console.log('hello')
@@ -44,6 +52,14 @@ export default function Signin() {
          .catch((error) => {
             console.log(error)
          })
+   }
+
+   const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+         return
+      }
+      setWrongCredentials(false)
+      setNoAccount(false)
    }
 
    return (
@@ -127,9 +143,12 @@ export default function Signin() {
                </div>
             </Grid>
          </Grid>
+         <WrongCredentialsAlert open={wrongCredentials} close={handleClose} />
+         <NoAccountAlert open={noAccount} close={handleClose} />
       </>
    )
 }
+
 // returns the contact number input field
 function EmailInput(props) {
    return (
@@ -211,6 +230,40 @@ function GoogleSignInButton() {
       >
          SIGN IN WITH GOOGLE
       </Button>
+   )
+}
+
+function Alert(props) {
+   return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
+function WrongCredentialsAlert(props) {
+   const { close, open } = props
+   const message = 'Wrong email/password!'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
+   )
+}
+
+function NoAccountAlert(props) {
+   const { close, open } = props
+   const message = 'No account matched!'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
    )
 }
 
