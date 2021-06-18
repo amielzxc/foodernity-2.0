@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
    Grid,
    CssBaseline,
@@ -6,6 +7,7 @@ import {
    TextField,
    Button,
    makeStyles,
+   Snackbar,
 } from '@material-ui/core'
 import { Icon } from '@iconify/react'
 import googleIcon from '@iconify-icons/flat-color-icons/google'
@@ -14,8 +16,12 @@ import BackgroundImage from '../assets/account/signup-background.png'
 import Axios from 'axios'
 import { Helmet } from 'react-helmet'
 import moment from 'moment'
+import MuiAlert from '@material-ui/lab/Alert'
 
 export default function Signup() {
+   const [passwordMismatch, setPasswordMismatch] = useState(false)
+   const [invalidPassword, setInvalidPassword] = useState(false)
+
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
    function onSubmit(data) {
@@ -24,6 +30,7 @@ export default function Signup() {
       if (String(data.password).length >= 8) {
          if (data.password !== data.confirmPassword) {
             console.log('Password and confirm password did not match.')
+            setPasswordMismatch(true)
          } else {
             const obj = {
                email: data.emailAddress,
@@ -47,11 +54,22 @@ export default function Signup() {
                   console.log(error)
                })
          }
+         setPasswordMismatch(false)
+         setInvalidPassword(false)
       } else {
+         setInvalidPassword(true)
          console.log(
             'Password too short. Please make it at least 8 characters long.'
          )
       }
+   }
+
+   const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+         return
+      }
+      setPasswordMismatch(false)
+      setInvalidPassword(false)
    }
 
    return (
@@ -108,6 +126,8 @@ export default function Signup() {
             </Grid>
             <Grid item xs={false} md={2} lg={3} />
          </Grid>
+         <PasswordMismatchAlert open={passwordMismatch} close={handleClose} />
+         <InvalidPasswordAlert open={invalidPassword} close={handleClose} />
       </>
    )
 }
@@ -290,6 +310,41 @@ function GoogleSignUpButton(props) {
       >
          SIGN UP WITH GOOGLE
       </Button>
+   )
+}
+
+function Alert(props) {
+   return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
+function PasswordMismatchAlert(props) {
+   const { close, open } = props
+   const message = 'Password and confirm password did not match.'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
+   )
+}
+
+function InvalidPasswordAlert(props) {
+   const { close, open } = props
+   const message =
+      'Password too short. Please make it at least 8 characters long.'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
    )
 }
 
