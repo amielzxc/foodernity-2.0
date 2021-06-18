@@ -42,6 +42,8 @@ export default function Signin() {
                setNoAccount(true)
                console.log('No account matched!')
             } else {
+               setWrongCredentials(false)
+               setNoAccount(false)
                console.log('hello')
                console.log(res.data)
                history.replace('/donations')
