@@ -25,6 +25,7 @@ export default function Signin() {
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
    const history = useHistory()
+
    function onSubmit(data) {
       // console.log(data)
       const obj = {
@@ -47,8 +48,8 @@ export default function Signin() {
                console.log('hello')
                console.log(res.data)
                history.replace('/donations')
-               console.log('userID: ' + res.data.userID)
-               localStorage.setItem('userID', res.data.userID)
+               console.log('token: ' + res.data.userID)
+               localStorage.setItem('token', res.data.userID)
             }
          })
          .catch((error) => {
