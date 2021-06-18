@@ -340,7 +340,7 @@ function DetailsContainer() {
                      <Divider className={classes.divider_margin} />
                   </Grid>
                   <Grid item xs={12}>
-                     <LocationPreview />
+                     <LocationPreview lat={14.6043164} lng={120.9946287} />
                   </Grid>
                   <Grid item xs={12}>
                      <Divider className={classes.divider_margin} />
