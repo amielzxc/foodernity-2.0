@@ -21,6 +21,8 @@ import MuiAlert from '@material-ui/lab/Alert'
 export default function Signup() {
    const [passwordMismatch, setPasswordMismatch] = useState(false)
    const [invalidPassword, setInvalidPassword] = useState(false)
+   const [emailTaken, setEmailTaken] = useState(false)
+   const [successfulRegister, setSuccessfulRegister] = useState(false)
 
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
@@ -45,9 +47,14 @@ export default function Signup() {
             // console.log(obj)
             Axios.post('http://localhost:3001/user/add', obj)
                .then((res) => {
-                  if (res.data == 'email is already taken') {
+                  if (res.data === 'email is already taken') {
+                     setEmailTaken(true)
                      //put the notification/alert code here if the email is already taken.
-                  } else if (res.data == 'new user added successfully') {
+                  } else if (res.data === 'new user added successfully') {
+                     setSuccessfulRegister(true)
+                     setEmailTaken(false)
+                     setPasswordMismatch(false)
+                     setInvalidPassword(false)
                      //put the notification/alert code here if the user successfully registered.
                   }
                   console.log(res.data)
@@ -56,8 +63,6 @@ export default function Signup() {
                   console.log(error)
                })
          }
-         setPasswordMismatch(false)
-         setInvalidPassword(false)
       } else {
          setInvalidPassword(true)
          console.log(
@@ -343,6 +348,36 @@ function InvalidPasswordAlert(props) {
       <>
          <Snackbar open={open} autoHideDuration={2000} onClose={close}>
             <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
+   )
+}
+
+function EmailTakenAlert(props) {
+   const { close, open } = props
+   const message = 'Email is already taken.'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="error">
+               {message}
+            </Alert>
+         </Snackbar>
+      </>
+   )
+}
+
+function SuccessfulAlert(props) {
+   const { close, open } = props
+   const message = 'New user added successfully.'
+
+   return (
+      <>
+         <Snackbar open={open} autoHideDuration={2000} onClose={close}>
+            <Alert onClose={close} severity="success">
                {message}
             </Alert>
          </Snackbar>
