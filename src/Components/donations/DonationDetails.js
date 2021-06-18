@@ -226,7 +226,6 @@ function ReceiveButton() {
 }
 
 function MessageButton() {
-   const classes = useStyles()
    const setOpenMessage = useMessageStore((state) => state.setOpenMessage)
 
    return (
