@@ -3,31 +3,30 @@ import {
    Avatar,
    Box,
    Button,
-   ButtonGroup,
    Chip,
    CssBaseline,
    Divider,
    Grid,
-   LinearProgress,
    makeStyles,
    Paper,
    Typography,
    useMediaQuery,
    useTheme,
 } from '@material-ui/core'
-
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import { Helmet } from 'react-helmet'
 import DialogDrawer from '../shared/DialogDrawer'
 import LeftDrawer from '../shared/LeftDrawer'
 import StyledAppBar from '../shared/StyledAppBar'
 import { deepOrange } from '@material-ui/core/colors'
 import MainContainer from '../shared/MainContainer'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LocationPreview from '../shared/LocationPreview'
 // import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 // import MomentUtils from '@date-io/moment'
 import Axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { useMessageStore } from '../../store/MessageStore'
+import Message from '../shared/Message'
 
 export default function DonationDetails() {
    const theme = useTheme()
@@ -49,6 +48,7 @@ export default function DonationDetails() {
             <StyledAppBar />
             <ActionDrawer />
             <DetailsContainer id={id} />
+            <Message />
          </div>
       </>
    )
@@ -78,6 +78,7 @@ function ActionDrawer() {
             </Grid> */}
             <Divider className={classes.divider_margin1} />
             <ReceiveButton />
+            <MessageButton />
             {/* <ReportButton /> */}
          </LeftDrawer>
          <DialogDrawer buttonName="FILTER">
@@ -100,6 +101,7 @@ function ActionDrawer() {
             </Grid> */}
             {/* <Divider className={classes.divider_margin1} /> */}
             <ReceiveButton />
+            <MessageButton />
             {/* <ReportButton /> */}
          </DialogDrawer>
       </>
@@ -212,12 +214,33 @@ function RequestorAvatar() {
 //       </MuiPickersUtilsProvider>
 //    )
 // }
+
 function ReceiveButton() {
    const classes = useStyles()
 
    return (
       <Button variant="contained" fullWidth className={classes.button_green}>
          Receive the donation
+      </Button>
+   )
+}
+
+function MessageButton() {
+   const classes = useStyles()
+   const setOpenMessage = useMessageStore((state) => state.setOpenMessage)
+
+   return (
+      <Button
+         variant="outlined"
+         color="primary"
+         fullWidth
+         startIcon={<ChatBubbleIcon />}
+         style={{ marginTop: '1rem' }}
+         onClick={() => {
+            setOpenMessage(true)
+         }}
+      >
+         Message Donor
       </Button>
    )
 }
