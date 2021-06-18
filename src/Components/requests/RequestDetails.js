@@ -15,7 +15,7 @@ import {
    useMediaQuery,
    useTheme,
 } from '@material-ui/core'
-
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import { Helmet } from 'react-helmet'
 import DialogDrawer from '../shared/DialogDrawer'
 import LeftDrawer from '../shared/LeftDrawer'
@@ -26,6 +26,8 @@ import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LocationPreview from '../shared/LocationPreview'
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
+import { useMessageStore } from '../../store/MessageStore'
+import Message from '../shared/Message'
 
 export default function RequestDetails() {
    const theme = useTheme()
@@ -45,6 +47,7 @@ export default function RequestDetails() {
             <StyledAppBar />
             <ActionDrawer />
             <DetailsContainer />
+            <Message />
          </div>
       </>
    )
@@ -76,7 +79,8 @@ function ActionDrawer() {
             </Grid> */}
             <Divider className={classes.divider_margin} />
             <DonateButton />
-            <ReportButton />
+            <MessageButton />
+            {/* <ReportButton /> */}
          </LeftDrawer>
          <DialogDrawer buttonName="FILTER">
             <Title />
@@ -100,8 +104,8 @@ function ActionDrawer() {
             </Grid>
             <Divider className={classes.divider_margin} />
             <DonateButton />
-
-            <ReportButton />
+            <MessageButton />
+            {/* <ReportButton /> */}
          </DialogDrawer>
       </>
    )
@@ -223,22 +227,41 @@ function DonateButton() {
    )
 }
 
-// returns a button that allows user to report what the user thinks is deemed to be reported
-function ReportButton(props) {
-   const { handleOpen } = props
-   const classes = useStyles()
+function MessageButton() {
+   const setOpenMessage = useMessageStore((state) => state.setOpenMessage)
+
    return (
       <Button
-         onClick={handleOpen}
-         color="secondary"
          variant="outlined"
+         color="primary"
          fullWidth
-         className={classes.button__report}
+         startIcon={<ChatBubbleIcon />}
+         style={{ marginTop: '1rem' }}
+         onClick={() => {
+            setOpenMessage(true)
+         }}
       >
-         See something wrong?
+         Message Donor
       </Button>
    )
 }
+
+// returns a button that allows user to report what the user thinks is deemed to be reported
+// function ReportButton(props) {
+//    const { handleOpen } = props
+//    const classes = useStyles()
+//    return (
+//       <Button
+//          onClick={handleOpen}
+//          color="secondary"
+//          variant="outlined"
+//          fullWidth
+//          className={classes.button__report}
+//       >
+//          See something wrong?
+//       </Button>
+//    )
+// }
 
 function DetailsContainer() {
    const classes = useStyles()
