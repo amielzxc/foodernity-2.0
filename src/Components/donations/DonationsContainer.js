@@ -13,7 +13,7 @@ export default function DonationsContainer() {
    const setDonationsData = useDonationStore((state) => state.setDonationsData)
 
    useEffect(() => {
-      const obj = { userID: localStorage.getItem('userID') }
+      const obj = { userID: localStorage.getItem('token') }
       Axios.post('http://localhost:3001/listingItem/get', obj).then(
          (response, err) => {
             if (err) {
@@ -36,13 +36,6 @@ export default function DonationsContainer() {
          }
       )
    }, [])
-   if (donationsData) {
-      // console.log(donationsData)
-   }
-
-   // useEffect(() => {
-   //    setDonationsData()
-   // })
 
    return (
       <MainContainer>

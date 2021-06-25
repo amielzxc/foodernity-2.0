@@ -180,7 +180,7 @@ function VerticalStepper() {
                console.log(response.data.secure_url)
 
                const obj = {
-                  listingOwnerID: localStorage.getItem('userID'),
+                  listingOwnerID: localStorage.getItem('token'),
                   listingType: 'Donate',
                   postDate: moment(new Date()).format('MM/DD/YYYY'),
                   postTime: moment(new Date()).format('HH:mm'),

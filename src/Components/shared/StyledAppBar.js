@@ -20,6 +20,7 @@ import { deepOrange } from '@material-ui/core/colors'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 import { useAdminStore } from '../../store/AdminStore'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
    navbar: {
@@ -188,6 +189,7 @@ function NavigationButtons() {
    )
 }
 function MenuListComposition() {
+   const history = useHistory()
    const classes = useStyles()
    const [open, setOpen] = React.useState(false)
    const anchorRef = React.useRef(null)
@@ -209,6 +211,9 @@ function MenuListComposition() {
          event.preventDefault()
          setOpen(false)
       }
+   }
+   function refreshPage() {
+      window.location.reload()
    }
 
    // return focus to the button when we transitioned from !open -> open

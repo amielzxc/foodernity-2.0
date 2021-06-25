@@ -25,7 +25,9 @@ export default function Signup() {
    const [successfulRegister, setSuccessfulRegister] = useState(false)
 
    const { handleSubmit, control } = useForm()
+
    const classes = useStyles()
+
    function onSubmit(data) {
       // console.log(data)
 
@@ -57,6 +59,7 @@ export default function Signup() {
                      setEmailTaken(false)
                      setPasswordMismatch(false)
                      setInvalidPassword(false)
+
                      //put the notification/alert code here if the user successfully registered.
                   }
                   console.log(res.data)
@@ -395,6 +398,7 @@ const useStyles = makeStyles((theme) => ({
    root: {
       background: `url(${BackgroundImage})  no-repeat center center fixed`,
       backgroundSize: 'cover',
+      height: '100vh',
    },
    container: {
       margin: theme.spacing(5, 0),

@@ -132,7 +132,7 @@ export function FilterDrawer() {
             const coordinates = response.results[0].geometry.location
             console.log(coordinates)
             const obj = {
-               userID: localStorage.getItem('userID'),
+               userID: localStorage.getItem('token'),
                categoryFilters: arrHolder,
                coordinates: coordinates,
                radius: distance,
