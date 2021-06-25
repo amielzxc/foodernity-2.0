@@ -142,7 +142,7 @@ function RequestorAvatar() {
                Fhillip Bagsic
             </Typography>
             <Typography variant="body2">
-               Requestor Name •{' '}
+               Donee Name •{' '}
                <span style={{ fontWeight: '300', fontSize: '13px' }}>
                   {' '}
                   Posted 3h ago

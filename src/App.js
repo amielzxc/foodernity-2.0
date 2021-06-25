@@ -41,6 +41,7 @@ export default function App() {
                   <Route path="/forgotpassword" component={ForgotPassword} />
 
                   <Route path="/donations" component={Donations} exact />
+
                   <Route
                      path="/donations/item/:id"
                      component={DonationDetails}

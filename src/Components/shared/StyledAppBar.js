@@ -259,7 +259,13 @@ function MenuListComposition() {
                               <MenuItem component={Link} to="/account">
                                  My account
                               </MenuItem>
-                              <MenuItem component={Link} to="/signin">
+                              <MenuItem
+                                 component={Link}
+                                 to="/signin"
+                                 onClick={() => {
+                                    window.location.reload()
+                                 }}
+                              >
                                  Logout
                               </MenuItem>
                            </MenuList>
