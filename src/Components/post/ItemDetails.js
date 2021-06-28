@@ -250,7 +250,12 @@ function DonationCategory(props) {
                   </MenuItem>
                   <MenuItem value={'Canned Goods'}>Canned Goods</MenuItem>
                   <MenuItem value={'Instant Noodles'}>Instant Noodles</MenuItem>
-                  <MenuItem value={'Biscuits'}>Biscuits</MenuItem>
+                  <MenuItem value={'Vegetables'}>Vegetables</MenuItem>
+                  <MenuItem value={'Eggs'}>Eggs</MenuItem>
+                  <MenuItem value={'Uncooked Rice'}>Uncooked Rice</MenuItem>
+                  <MenuItem value={'Bread'}>Bread &amp; Pastry</MenuItem>
+                  <MenuItem value={'Fruits'}>Fruits</MenuItem>
+                  <MenuItem value={'Biscuits'}>Biscuits &amp; Snacks</MenuItem>
                   <MenuItem value={'Beverages'}>Beverages</MenuItem>
                   <MenuItem value={'Others'}>Others</MenuItem>
                </Select>

@@ -12,16 +12,10 @@ const ContactUs = lazy(() => import('./components/landingpage/ContactUs'))
 const Signin = lazy(() => import('./pages/Signin'))
 const Signup = lazy(() => import('./pages/Signup'))
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
-const Donations = lazy(() => import('./pages/Donations'))
-const DonationDetails = lazy(() =>
-   import('./components/donations/DonationDetails')
-)
+const Inventory = lazy(() => import('./pages/Inventory'))
+
 const Post = lazy(() => import('./pages/Post'))
-const Requests = lazy(() => import('./pages/Requests'))
-const RequestDetails = lazy(() =>
-   import('./components/requests/RequestDetails')
-)
-const Request = lazy(() => import('./pages/Request'))
+const CallForDonations = lazy(() => import('./pages/CallForDonations'))
 const FAQs = lazy(() => import('./pages/FAQs'))
 const Account = lazy(() => import('./pages/Account'))
 const Admin = lazy(() => import('./pages/Admin'))
@@ -40,17 +34,12 @@ export default function App() {
                   <Route path="/signup" component={Signup} />
                   <Route path="/forgotpassword" component={ForgotPassword} />
 
-                  <Route path="/donations" component={Donations} exact />
-
+                  <Route path="/inventory" component={Inventory} exact />
                   <Route
-                     path="/donations/item/:id"
-                     component={DonationDetails}
+                     path="/callfordonations"
+                     component={CallForDonations}
                   />
                   <Route path="/postdonation" component={Post} />
-
-                  <Route path="/requests" component={Requests} exact />
-                  <Route path="/requests/item/:id" component={RequestDetails} />
-                  <Route path="/requestdonation" component={Request} />
 
                   <Route path="/faqsguidelines" component={FAQs} />
 

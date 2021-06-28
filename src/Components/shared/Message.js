@@ -24,17 +24,14 @@ export default function Message() {
    }
    const classes = useStyles()
 
-   const receivermessage1 = 'Hello!'
-   const receivermessage2 = 'Ano oras pwede makuha yung pagkain?'
-   const sendermessage1 = 'Hi'
-   const sendermessage2 = 'Mga 10 ganon'
-   const receivermessage3 = 'Ok thanks, yung address ba malapit sa mineski?'
-   const sendermessage3 = 'oo'
-   const receivermessage4 = 'ahhhhh'
-   const receivermessage5 = 'Siguro nandyan na ko mga 4:30pm'
-   const sendermessage4 =
-      'Sige. I-text mo nalang ako 09123456789 number ko globe yan'
-   const receivermessage6 = 'Ok salamat'
+   const receivermessage1 =
+      'Good day Mr. Fhillip Bagsic! We would first like to thank you for donating goods. Regarding the pick up time po, what time would you prefer for your donation to be picked up po?'
+   // const receivermessage2 = 'Ano oras pwede makuha yung pagkain?'
+   const sendermessage1 = 'Hello! Around 12:30PM po pwede ipick up '
+
+   const receivermessage3 =
+      'Thank you Sir! Our rider will get your donations po on July 1 at around 12:30PM.'
+   const sendermessage3 = 'No worries po.'
 
    return (
       <div
@@ -58,11 +55,11 @@ export default function Message() {
                <Avatar
                   style={{ marginRight: '1rem' }}
                   alt="user"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU"
+                  src="https://assets2.rappler.com/2021/04/community-pantry-April-17-2021-1618630874667.jpg"
                />
                <Box>
                   <Typography className={classes.text_bold}>
-                     Bryne Morgan
+                     Maginhawa Community Pantry
                   </Typography>
                </Box>
             </Box>
@@ -97,24 +94,8 @@ export default function Message() {
             }}
             boxShadow={2}
          >
-            <ReceiverMessage message={receivermessage6} />
-            <ReceiverMessage message={receivermessage5} />
-            <SenderMessage message={sendermessage4} />
             <SenderMessage message={sendermessage3} />
-            <ReceiverMessage message={receivermessage4} />
-            <SenderMessage message={sendermessage2} />
             <ReceiverMessage message={receivermessage3} />
-            <ReceiverMessage message={receivermessage2} />
-            <SenderMessage message={sendermessage1} />
-            <ReceiverMessage message={receivermessage1} />
-            <ReceiverMessage message={receivermessage6} />
-            <ReceiverMessage message={receivermessage5} />
-            <SenderMessage message={sendermessage4} />
-            <SenderMessage message={sendermessage3} />
-            <ReceiverMessage message={receivermessage4} />
-            <SenderMessage message={sendermessage2} />
-            <ReceiverMessage message={receivermessage3} />
-            <ReceiverMessage message={receivermessage2} />
             <SenderMessage message={sendermessage1} />
             <ReceiverMessage message={receivermessage1} />
          </Box>

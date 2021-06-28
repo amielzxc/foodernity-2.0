@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'none',
    },
    navbar__actions: {
-      width: '25rem',
+      width: '40rem',
       display: 'flex',
       justifyContent: 'flex-end',
       marginRight: theme.spacing(2),
@@ -62,7 +62,7 @@ function StyledAppBar() {
             {/* This is the page title: 'Foodernity' */}
             <div className={classes.heading__container}>
                <div className={classes.heading__container_wrap}>
-                  <Link to="/donations" className={classes.heading__link}>
+                  <Link to="/inventory" className={classes.heading__link}>
                      <Typography
                         variant="h4"
                         component="h1"
@@ -120,12 +120,7 @@ function NavigationButtons() {
    return (
       <Hidden smDown>
          <div className={classes.navbar__actions}>
-            <>
-               {isAdmin && (
-                  <Button component={Link} to="/admin">
-                     Admin Panel
-                  </Button>
-               )}
+            {/* <>
                <Button
                   ref={anchorRef}
                   aria-controls={open ? 'menu-list-grow' : undefined}
@@ -167,20 +162,22 @@ function NavigationButtons() {
                                  <MenuItem component={Link} to="/postdonation">
                                     Post a Donation
                                  </MenuItem>
-                                 {/* <MenuItem
-                                    component={Link}
-                                    to="/requestdonation"
-                                 >
-                                    Request a Donation
-                                 </MenuItem> */}
                               </MenuList>
                            </ClickAwayListener>
                         </Paper>
                      </Grow>
                   )}
                </Popper>
-            </>
-
+            </> */}
+            <Button component={Link} to="/inventory">
+               Inventory
+            </Button>
+            <Button component={Link} to="/callfordonations">
+               Call for donations
+            </Button>
+            {/* <Button component={Link} to="/postdonation">
+               Post a Donation
+            </Button> */}
             <Button component={Link} to="/faqsguidelines">
                FAQs &amp; Guidelines
             </Button>

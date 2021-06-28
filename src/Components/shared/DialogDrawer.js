@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Drawer, Hidden, makeStyles, Toolbar } from '@material-ui/core'
+import { useAdminStore } from '../../store/AdminStore'
 
 const useStyles = makeStyles((theme) => ({
    drawer__container: {
@@ -20,6 +21,7 @@ returns a dialog that is used as a replacement for the left drawer (e.g., filter
 when the website should use responsive layout
  */
 function DialogDrawer(props) {
+   const isAdmin = useAdminStore((state) => state.isAdmin)
    const classes = useStyles()
    const [toggle, setToggle] = useState(false)
 
@@ -35,7 +37,7 @@ function DialogDrawer(props) {
                margin: '1rem 1rem 0 0',
             }}
          >
-            <Toolbar />
+            {!isAdmin && <Toolbar />}
             <Button variant="text" color="primary" onClick={handleSetToggle}>
                {props.buttonName}
             </Button>

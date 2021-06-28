@@ -1,5 +1,15 @@
-import React from 'react'
-import { Grid, makeStyles, Paper, Typography, Divider } from '@material-ui/core'
+import React, { useState } from 'react'
+import {
+   Grid,
+   makeStyles,
+   Paper,
+   Typography,
+   Divider,
+   RadioGroup,
+   FormControlLabel,
+   Radio,
+   Box,
+} from '@material-ui/core'
 import { Controller, useForm } from 'react-hook-form'
 import MomentUtils from '@date-io/moment'
 import {
@@ -56,6 +66,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 // returns pickup details to be filled up by the user
 export default function PickupDetails() {
+   const [value, setValue] = useState('')
+
+   const handleChange = (event) => {
+      setValue(event.target.value)
+   }
+
    const { handleSubmit, control } = useForm()
    const classes = useStyles()
    const setPickupDate = usePostStore((state) => state.setPickupDate)
@@ -77,18 +93,36 @@ export default function PickupDetails() {
             Pickup Details
          </Typography>
          <Paper elevation={2} className={classes.container}>
-            <GoogleMap />
+            <Typography variant="body1" className={classes.text_bold}>
+               How do you want your donation to be claimed?
+            </Typography>
+            <RadioGroup value={value} onChange={handleChange}>
+               <FormControlLabel
+                  value="Pickup"
+                  control={<Radio />}
+                  label="Pickup"
+               />
+               <FormControlLabel
+                  value="Deliver"
+                  control={<Radio />}
+                  label="Deliver"
+               />
+            </RadioGroup>
+            <Box display={value === 'Pickup' ? 'block' : 'none'}>
+               <GoogleMap />
+            </Box>
+            <Box display={value === 'Deliver' ? 'block' : 'none'}>
+               <Typography>
+                  The address for deliver is{' '}
+                  <span style={{ color: '#2196F3' }}>
+                     National University-Manila, M.F. Jhocson Street, Sampaloc,
+                     Manila, Metro Manila
+                  </span>
+               </Typography>
+            </Box>
             <Divider className={classes.divider_margin} />
             <form onBlur={handleSubmit(onSubmit)}>
                <PickupDate control={control} />
-               <Grid container item spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                     {/* <PickupDate control={control} /> */}
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                     {/* <PickupTime control={control} /> */}
-                  </Grid>
-               </Grid>
             </form>
          </Paper>
       </Grid>

@@ -67,29 +67,50 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
    },
+   heading: {
+      textAlign: 'center',
+      fontFamily: 'Work Sans',
+      color: '#A6CB3C',
+   },
 }))
 
 const NavItems = [
    {
-      icon: <DashboardIcon />,
-      label: 'Reports',
-      link: '',
+      icon: <SupervisedUserCircleIcon />,
+      label: 'Donations',
+      link: '/donations',
    },
-   {
-      icon: <DesktopMacIcon />,
-      label: 'Monitor Donations',
-      link: '/monitor',
-   },
-   // {
-   //    icon: <ReportIcon />,
-   //    label: 'Reported Donations',
-   //    link: '/reporteddonations',
-   // },
    {
       icon: <SupervisedUserCircleIcon />,
-      label: 'Users',
-      link: '/users',
+      label: 'Call for Donations',
+      link: '/callfordonations',
    },
+   {
+      icon: <SupervisedUserCircleIcon />,
+      label: 'Inventory',
+      link: '/inventory',
+   },
+   {
+      icon: <SupervisedUserCircleIcon />,
+      label: 'Records',
+      link: '/records',
+   },
+   // {
+   //    icon: <DashboardIcon />,
+   //    label: 'Reports',
+   //    link: '',
+   // },
+   // {
+   //    icon: <DesktopMacIcon />,
+   //    label: 'Monitor Donations',
+   //    link: '/monitor',
+   // },
+
+   // {
+   //    icon: <SupervisedUserCircleIcon />,
+   //    label: 'Users',
+   //    link: '/users',
+   // },
 ]
 
 export default function PanelDrawer() {
@@ -114,13 +135,8 @@ function Title() {
    const classes = useStyles()
    return (
       <div>
-         <Typography
-            className={`${classes.title} ${classes.text_bold}`}
-            gutterBottom
-            variant="h5"
-            component="h2"
-         >
-            Admin Panel
+         <Typography variant="h4" component="h1" className={classes.heading}>
+            Foodernity
          </Typography>
       </div>
    )
@@ -143,10 +159,10 @@ function AdminAvatar() {
             style={{ width: '5rem', height: '5rem' }}
          />
          <Typography color="textPrimary" variant="h6">
-            Fhillip Bagsic
+            John Doe
          </Typography>
          <Typography color="textSecondary" variant="body2">
-            Super Admin
+            Staff
          </Typography>
       </div>
    )

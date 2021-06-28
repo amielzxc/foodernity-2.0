@@ -13,8 +13,6 @@ export default function AccountContainer() {
       <MainContainer>
          <Switch>
             <Route path={`${path}/`} exact component={Posted} />
-            <Route path={`${path}/receiveddonations`} component={Received} />
-            <Route path={`${path}/requesteddonations`} component={Requested} />
             <Route path={`${path}/myprofile`} component={Profile} />
             <Route path={`${path}/editprofile`} component={EditProfile} />
          </Switch>

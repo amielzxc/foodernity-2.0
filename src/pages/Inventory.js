@@ -5,14 +5,14 @@ import StyledAppBar from '../components/shared/StyledAppBar'
 import { CssBaseline, useMediaQuery, useTheme } from '@material-ui/core'
 import DonationsContainer from '../components/donations/DonationsContainer'
 
-export default function Donations() {
+export default function Inventory() {
    const theme = useTheme()
    const responsive = useMediaQuery(theme.breakpoints.down('sm'))
 
    return (
       <>
          <Helmet>
-            <title>Donations | Foodernity</title>
+            <title>Inventory | Foodernity</title>
          </Helmet>
          <div
             style={{
@@ -22,7 +22,7 @@ export default function Donations() {
          >
             <CssBaseline />
             <StyledAppBar />
-            <FilterDrawer />
+            {/* <FilterDrawer /> */}
             <DonationsContainer />
          </div>
       </>

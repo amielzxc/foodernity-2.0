@@ -13,7 +13,7 @@ export const useDonationStore = create((set) => ({
    setDistance: (distance) => {
       set((state) => ({ distance: (state.distance = distance) }))
    },
-   foodCategory: [true, true, true, true, true],
+   foodCategory: [true, true, true, true, true, true, true, true, true, true],
    setFoodCategory: (object) => {
       set((state) => ({ foodCategory: (state.foodCategory = object) }))
    },

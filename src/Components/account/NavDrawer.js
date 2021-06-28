@@ -13,16 +13,8 @@ import { Link, useRouteMatch } from 'react-router-dom'
 
 const DonationItems = [
    {
-      label: 'Posted Donations',
+      label: 'My Donations',
       link: '',
-   },
-   {
-      label: 'Received Donations',
-      link: '/receiveddonations',
-   },
-   {
-      label: 'Requested Donations',
-      link: '/requesteddonations',
    },
 ]
 const ProfileItems = [

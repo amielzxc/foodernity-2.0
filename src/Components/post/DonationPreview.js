@@ -225,7 +225,7 @@ function Pickup() {
                className={`${classes.icon_pickup} ${classes.icon__location_green}`}
             />
             <Typography>
-               Pick up location is around{' '}
+               Pick up location is at{' '}
                <span className={classes.text__address_highlighted}>
                   {' '}
                   {pickupLocation}
